@@ -1,0 +1,21 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg-start: #ffffff;
+  --bg-end: #eaf6ff;
+}
+
+html, body, #root {
+  height: 100%;
+}
+
+body {
+  background: radial-gradient(circle at 50% 40%, var(--bg-start), var(--bg-end));
+}
+
+/* Placeholder hooks for future integration */
+/* Supabase: store haikus and likes */
+/* API IA: generate haikus from selected emojis */
+/* Vote system: weekly themes and reset */
