@@ -8,9 +8,9 @@ export const STORAGE_KEYS = {
 }
 
 export const THEME_OF_WEEK = {
-  title: 'Sous la lune bleue',
-  emojis: ['🌬️', '❄️', '🐋'],
-  description: 'Vent, glace et baleine sous la lune. Cap au poème !',
+  title: 'Inuit Dream',
+  emojis: ['❄️', '🌌', '🐋'],
+  description: 'Glace, aurore et baleine. Cap au rêve inuit !',
 }
 
 export const SUBSCRIPTION_PLANS = [
