@@ -2,7 +2,16 @@ import { useEffect, useMemo, useRef, useState } from 'react'
 import { select, zoom as d3Zoom, drag as d3Drag, forceSimulation, forceLink, forceManyBody, forceCenter, forceCollide } from 'd3'
 
 // D3-based force-directed graph: nodes = occurrences, links = co-occurrences
-export default function EmojiNetwork({ stats, maxNodes = 24, maxLinks = 80, height = 460 }) {
+export default function EmojiNetwork({
+  stats,
+  maxNodes = 24,
+  maxLinks = 80,
+  height = 460,
+  selectable = false,
+  selected = [],
+  onToggle,
+  maxSelected = 3,
+}) {
   const containerRef = useRef(null)
   const svgRef = useRef(null)
   const gRef = useRef(null)
@@ -107,12 +116,16 @@ export default function EmojiNetwork({ stats, maxNodes = 24, maxLinks = 80, heig
       .attr('class', 'node')
       .style('cursor', 'grab')
 
+    const isSelected = (id) => Array.isArray(selected) && selected.includes(id)
+    const reachedMax = selectable && Array.isArray(selected) && selected.length >= maxSelected
+
     nodeSel.append('circle')
       .attr('r', d => nodeRadius(d.count))
-      .attr('fill', '#0ea5e9')
-      .attr('fill-opacity', 0.12)
-      .attr('stroke', '#0ea5e9')
-      .attr('stroke-opacity', 0.4)
+      .attr('fill', d => (selectable && isSelected(d.id) ? '#10b981' : '#0ea5e9'))
+      .attr('fill-opacity', d => (selectable && isSelected(d.id) ? 0.25 : 0.12))
+      .attr('stroke', d => (selectable && isSelected(d.id) ? '#059669' : '#0ea5e9'))
+      .attr('stroke-width', d => (selectable && isSelected(d.id) ? 2 : 1.2))
+      .attr('stroke-opacity', d => (selectable && isSelected(d.id) ? 0.7 : 0.4))
 
     nodeSel.append('text')
       .attr('text-anchor', 'middle')
@@ -121,6 +134,18 @@ export default function EmojiNetwork({ stats, maxNodes = 24, maxLinks = 80, heig
       .style('pointer-events', 'none')
       .style('font-size', d => `${Math.max(12, nodeRadius(d.count) * 0.9)}px`)
       .text(d => d.id)
+
+    if (selectable) {
+      // Dim unselected when selection cap reached
+      nodeSel
+        .style('opacity', d => (reachedMax && !isSelected(d.id) ? 0.45 : 1))
+        .on('click', (event, d) => {
+          // Prevent toggling if at cap and this node is not selected
+          const disabled = reachedMax && !isSelected(d.id)
+          if (disabled) return
+          onToggle && onToggle(d.id)
+        })
+    }
 
     // Drag handlers
     nodeSel.call(
@@ -162,7 +187,7 @@ export default function EmojiNetwork({ stats, maxNodes = 24, maxLinks = 80, heig
       simulationRef.current?.stop()
       svg.selectAll('*').remove()
     }
-  }, [nodes, links, width, height, linkWidth, nodeRadius, maxPair])
+  }, [nodes, links, width, height, linkWidth, nodeRadius, maxPair, selectable, selected, onToggle, maxSelected])
 
   return (
     <div ref={containerRef} className="w-full" style={{ height }}>

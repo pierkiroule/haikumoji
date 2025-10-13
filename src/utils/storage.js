@@ -1,5 +1,4 @@
-import { STORAGE_KEYS } from './config.js'
-import { MOCK_HAIKUS } from './mockData.js'
+import { STORAGE_KEYS, ALL_EMOJIS } from './config.js'
 
 function getJSON(key, fallback) {
   try {
@@ -20,9 +19,8 @@ function generateId() {
 
 export function seedIfEmpty() {
   const existing = getJSON(STORAGE_KEYS.HAIKUS, null)
-  if (!existing || existing.length === 0) {
-    setJSON(STORAGE_KEYS.HAIKUS, MOCK_HAIKUS)
-  }
+  // Start with an empty collection; no initial links in Cosmoji
+  if (!existing) setJSON(STORAGE_KEYS.HAIKUS, [])
   if (!getJSON(STORAGE_KEYS.LIKED_IDS, null)) {
     setJSON(STORAGE_KEYS.LIKED_IDS, [])
   }
@@ -85,6 +83,11 @@ export function computeEmojiStats() {
         }
       }
     }
+  }
+
+  // Ensure all catalog emojis exist in occurrences with zero counts
+  for (const e of ALL_EMOJIS) {
+    if (!occ.has(e)) occ.set(e, 0)
   }
 
   const toSortedArray = (map, split) => {
