@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { motion } from 'framer-motion'
 import { getDraft, saveDraft, clearDraft, seedIfEmpty, getUser, addHaiku } from '../utils/storage.js'
+import { generateSequenceSuggestions } from '../utils/aiMock.js'
 import { useNavigate } from 'react-router-dom'
 import EmojiBubble from '../components/EmojiBubble.jsx'
 import PantheonModal from '../components/PantheonModal.jsx'
@@ -16,6 +17,7 @@ export default function Create() {
   const [emojiSize, setEmojiSize] = useState(36)
   const [lines, setLines] = useState(['', '', ''])
   const [error, setError] = useState('')
+  const [suggestions, setSuggestions] = useState([])
   const [step, setStep] = useState('select') // 'select' | 'compose'
   const navigate = useNavigate()
   const composeRef = useRef(null)
@@ -47,6 +49,16 @@ export default function Create() {
     // persist draft as user selects/emits lines
     saveDraft({ emojis: selected, lines })
   }, [selected, lines])
+
+  // Refresh sequence-based suggestions when entering compose or changing selection
+  useEffect(() => {
+    if (step !== 'compose') return
+    if (selected.length < 3) {
+      setSuggestions([])
+      return
+    }
+    setSuggestions(generateSequenceSuggestions(selected.slice(0, 3)))
+  }, [step, selected])
 
   const canCompose = selected.length >= 3 && selected.length <= 5
 
@@ -137,6 +149,29 @@ export default function Create() {
         {step === 'compose' && canCompose && (
           <div id="compose-area" ref={composeRef} className="w-full max-w-sm rounded-2xl bg-white shadow p-4 space-y-3">
             <div className="text-lg select-none mb-1">{selected.join(' ')}</div>
+            {suggestions.length > 0 && (
+              <div className="rounded-xl border border-slate-200 p-3 bg-slate-50">
+                <div className="flex items-center justify-between mb-2">
+                  <div className="text-sm text-slate-600">Inspiration (séquence {selected.slice(0,3).join(' ')})</div>
+                  <button
+                    onClick={() => setSuggestions(generateSequenceSuggestions(selected.slice(0, 3)))}
+                    className="text-xs px-2 py-1 rounded-lg border bg-white hover:bg-slate-100"
+                  >↻ Refaire</button>
+                </div>
+                <ul className="space-y-2 max-h-56 overflow-auto pr-1">
+                  {suggestions.map((s, i) => (
+                    <li key={i} className="flex items-start gap-2">
+                      <pre className="flex-1 whitespace-pre-wrap text-sm text-slate-800">{s}</pre>
+                      <button
+                        onClick={() => setLines(s.split('\n').slice(0,3))}
+                        className="self-start text-xs px-2 py-1 rounded-lg bg-emerald-600 text-white hover:bg-emerald-700"
+                        aria-label="Utiliser cette suggestion"
+                      >Utiliser</button>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
             {[0,1,2].map((i) => (
               <div key={i} className="space-y-1">
                 <label className="block text-sm text-slate-600">L{i+1}</label>
