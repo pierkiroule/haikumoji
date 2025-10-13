@@ -13,6 +13,25 @@ export default function HaikuCard({ haiku, onLike }) {
           ❤️ {haiku.likes ?? 0}
         </button>
       </div>
+      <div className="mt-3 flex gap-2">
+        <button
+          onClick={() => {
+            const url = window.location.origin
+            const shareText = `${haiku.emojis?.join(' ')}\n\n${haiku.text}`
+            const data = { title: 'HaïkuMoji', text: shareText, url }
+            if (navigator.share) {
+              navigator.share(data).catch(() => {})
+            } else {
+              navigator.clipboard.writeText(`${shareText}\n${url}`)
+              alert('Lien copié !')
+            }
+          }}
+          className="rounded-xl bg-slate-900 text-white px-3 py-1 hover:bg-slate-800 transition"
+          aria-label="Partager ce haïku"
+        >
+          Partager
+        </button>
+      </div>
     </div>
   )
 }

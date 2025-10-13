@@ -5,6 +5,7 @@ export const STORAGE_KEYS = {
   USER: 'haikumoji_user',
   INSPIRATION_COUNT: 'haikumoji_inspiration_count',
   LIKED_IDS: 'haikumoji_liked_ids',
+  DRAFT: 'haikumoji_draft',
 }
 
 export const THEME_OF_WEEK = {
