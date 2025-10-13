@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from 'react'
 import PantheonModal from '../components/PantheonModal.jsx'
+import EmojiNetwork from '../components/EmojiNetwork.jsx'
 import { computeEmojiStats, seedIfEmpty } from '../utils/storage.js'
 
 export default function Cosmoji() {
@@ -13,6 +14,16 @@ export default function Cosmoji() {
 
   return (
     <div className="space-y-6">
+      <div className="relative rounded-2xl bg-white shadow-lg p-6">
+        <div className="flex items-center justify-between">
+          <h2 className="text-xl font-medium">Cosmojî – Réseau d'associations</h2>
+          <button onClick={() => setOpen(true)} className="rounded-xl bg-slate-900 text-white px-3 py-1">Panthéon</button>
+        </div>
+        <p className="mt-2 text-sm text-slate-600">Chaque nœud représente un émoji (taille = occurrences). Les liens indiquent les co‑occurrences (épaisseur = force).</p>
+        <div className="mt-4">
+          <EmojiNetwork stats={stats} />
+        </div>
+      </div>
       <div className="relative rounded-2xl bg-white shadow-lg p-6">
         <button
           className="absolute top-4 left-4 rounded-xl bg-white/80 backdrop-blur px-3 py-1 shadow border"

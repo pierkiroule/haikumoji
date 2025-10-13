@@ -4,11 +4,10 @@ import { getDraft, saveDraft, clearDraft, seedIfEmpty, getUser, addHaiku } from 
 import { generateSequenceSuggestions } from '../utils/aiMock.js'
 import { useNavigate } from 'react-router-dom'
 import EmojiBubble from '../components/EmojiBubble.jsx'
+import { ALL_EMOJIS } from '../utils/config.js'
 import PantheonModal from '../components/PantheonModal.jsx'
 
-const EMOJIS = [
-  "🌬️","❄️","🐋","🌊","🔥","🌙","🛶","🌌","🧊","🌈","🐚","🪶","🌞","💧","🌿","🐚","🍂","🌑","☁️","🌊","🦭","🪵","🌕","🌠","🌧️","🎵","🐦","🪞","🪷","💫"
-]
+const EMOJIS = ALL_EMOJIS
 
 export default function Create() {
   const [selected, setSelected] = useState([])
