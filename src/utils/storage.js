@@ -142,3 +142,16 @@ export function resetAppStorage() {
   clearAppStorage()
   seedIfEmpty()
 }
+
+// ---- Draft helpers ----
+export function getDraft() {
+  return getJSON(STORAGE_KEYS.DRAFT, null)
+}
+
+export function saveDraft(draft) {
+  setJSON(STORAGE_KEYS.DRAFT, draft)
+}
+
+export function clearDraft() {
+  localStorage.removeItem(STORAGE_KEYS.DRAFT)
+}
