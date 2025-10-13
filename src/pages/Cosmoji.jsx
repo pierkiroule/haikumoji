@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from 'react'
 import PantheonModal from '../components/PantheonModal.jsx'
+import CosmojiEmblem from '../components/CosmojiEmblem.jsx'
 import EmojiNetwork from '../components/EmojiNetwork.jsx'
 import { computeEmojiStats, seedIfEmpty, addHaiku, getUser } from '../utils/storage.js'
 
@@ -36,7 +37,13 @@ export default function Cosmoji() {
     <div className="space-y-6">
       <div className="relative rounded-2xl bg-white shadow-lg p-6">
         <div className="flex items-center justify-between">
-          <h2 className="text-xl font-medium">Cosmojî – Réseau d'associations</h2>
+          <h2 className="text-xl font-medium flex items-center gap-2">
+            <span className="relative inline-flex items-center">
+              <span className="text-2xl pr-2">○</span>
+              <CosmojiEmblem size={24} />
+            </span>
+            Cosmojî – Réseau d'associations
+          </h2>
           <button onClick={() => setOpen(true)} className="rounded-xl bg-slate-900 text-white px-3 py-1">Panthéon</button>
         </div>
         <p className="mt-2 text-sm text-slate-600">Chaque nœud représente un émoji (taille = occurrences). Les liens indiquent les co‑occurrences (épaisseur = force).</p>
@@ -71,7 +78,13 @@ export default function Cosmoji() {
           ← Retour
         </button>
         <div className="flex items-center justify-between">
-          <h2 className="text-xl font-medium">Cosmojî – Tendances</h2>
+          <h2 className="text-xl font-medium flex items-center gap-2">
+            <span className="relative inline-flex items-center">
+              <span className="text-2xl pr-2">○</span>
+              <CosmojiEmblem size={24} />
+            </span>
+            Cosmojî – Tendances
+          </h2>
           <button onClick={() => setOpen(true)} className="rounded-xl bg-slate-900 text-white px-3 py-1">Panthéon</button>
         </div>
         <div className="mt-4 grid grid-cols-2 gap-4 text-sm">
