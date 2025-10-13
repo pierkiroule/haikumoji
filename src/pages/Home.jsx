@@ -7,6 +7,7 @@ export default function Home() {
       <FloatingEmojis />
 
       <section className="text-center space-y-3 mb-8">
+        <div className="text-xl text-slate-300 font-semibold select-none">○•°nimoji</div>
         <h1 className="text-3xl md:text-4xl font-semibold tracking-tight">
           Onimoji — prendre soin de notre univers onirique
         </h1>
