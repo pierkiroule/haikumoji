@@ -87,7 +87,7 @@ export default function Cosmoji() {
           </h2>
           <button onClick={() => setOpen(true)} className="rounded-xl bg-slate-900 text-white px-3 py-1">Panthéon</button>
         </div>
-        <div className="mt-4 grid grid-cols-2 gap-4 text-sm">
+        <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 text-sm">
           <section>
             <h3 className="text-slate-600 mb-2">Top émojis</h3>
             <ul className="space-y-1">
@@ -103,6 +103,17 @@ export default function Cosmoji() {
             <h3 className="text-slate-600 mb-2">Top paires</h3>
             <ul className="space-y-1">
               {stats.pairs.slice(0, 8).map(({ items, count }, i) => (
+                <li key={i} className="flex items-center justify-between">
+                  <span className="select-none">{items.join(' ')}</span>
+                  <span className="text-slate-500">{count}</span>
+                </li>
+              ))}
+            </ul>
+          </section>
+          <section>
+            <h3 className="text-slate-600 mb-2">Top triplets</h3>
+            <ul className="space-y-1">
+              {stats.triples.slice(0, 8).map(({ items, count }, i) => (
                 <li key={i} className="flex items-center justify-between">
                   <span className="select-none">{items.join(' ')}</span>
                   <span className="text-slate-500">{count}</span>
