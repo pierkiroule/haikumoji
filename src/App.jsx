@@ -9,7 +9,7 @@ import Profile from './pages/Profile.jsx'
 
 export default function App() {
   return (
-    <div className="min-h-screen text-slate-800 selection:bg-blue-200">
+    <div className="min-h-screen text-slate-800 selection:bg-cyan-200">
       <Layout>
         <Routes>
           <Route path="/" element={<Home />} />
