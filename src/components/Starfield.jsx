@@ -1,8 +1,27 @@
 import { useEffect, useMemo, useRef } from 'react'
 
+function usePrefersReducedMotion() {
+  const mediaQuery = '(prefers-reduced-motion: reduce)'
+  const queryListRef = useRef(null)
+  const prefersRef = useRef(false)
+  useEffect(() => {
+    if (typeof window === 'undefined' || typeof window.matchMedia !== 'function') return
+    const list = window.matchMedia(mediaQuery)
+    queryListRef.current = list
+    prefersRef.current = Boolean(list.matches)
+    const handler = () => {
+      prefersRef.current = Boolean(queryListRef.current?.matches)
+    }
+    list.addEventListener?.('change', handler)
+    return () => list.removeEventListener?.('change', handler)
+  }, [])
+  return prefersRef
+}
+
 export default function Starfield({ density = 0.0018, speed = 0.06, twinkle = true, className = '' }) {
   const canvasRef = useRef(null)
   const animationRef = useRef(0)
+  const prefersReducedRef = usePrefersReducedMotion()
 
   const starsRef = useRef([])
   const params = useMemo(() => ({ density, speed, twinkle }), [density, speed, twinkle])
@@ -39,18 +58,21 @@ export default function Starfield({ density = 0.0018, speed = 0.06, twinkle = tr
     }
 
     function draw() {
+      const prefersReduced = Boolean(prefersReducedRef.current)
       ctx.clearRect(0, 0, width, height)
 
       for (const s of starsRef.current) {
         // twinkle by modulating alpha
-        const alpha = params.twinkle ? (0.6 + 0.4 * Math.sin((performance.now() * 0.002) + s.p * Math.PI * 2)) : 0.9
+        const alpha = prefersReduced ? 0.35 : (params.twinkle ? (0.6 + 0.4 * Math.sin((performance.now() * 0.002) + s.p * Math.PI * 2)) : 0.9)
         ctx.fillStyle = `rgba(226, 232, 240, ${alpha.toFixed(3)})` // slate-200-ish
         ctx.beginPath()
         ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2)
         ctx.fill()
 
         // slight drift towards left to mimic parallax
-        s.x -= s.v
+        if (!prefersReduced) {
+          s.x -= s.v
+        }
         if (s.x < -2) {
           s.x = width + 2
           s.y = Math.random() * height
@@ -60,7 +82,7 @@ export default function Starfield({ density = 0.0018, speed = 0.06, twinkle = tr
         }
       }
 
-      animationRef.current = requestAnimationFrame(draw)
+      animationRef.current = prefersReduced ? 0 : requestAnimationFrame(draw)
     }
 
     const ro = new ResizeObserver(resize)

@@ -1,25 +1,28 @@
 import { Routes, Route, Link } from 'react-router-dom'
+import { Suspense, lazy } from 'react'
 import Layout from './components/Layout.jsx'
-import Home from './pages/Home.jsx'
-import Create from './pages/Create.jsx'
-import Community from './pages/Community.jsx'
-import Cosmoji from './pages/Cosmoji.jsx'
-import Pantheon from './pages/Pantheon.jsx'
-import Profile from './pages/Profile.jsx'
+const Home = lazy(() => import('./pages/Home.jsx'))
+const Create = lazy(() => import('./pages/Create.jsx'))
+const Community = lazy(() => import('./pages/Community.jsx'))
+const Cosmoji = lazy(() => import('./pages/Cosmoji.jsx'))
+const Pantheon = lazy(() => import('./pages/Pantheon.jsx'))
+const Profile = lazy(() => import('./pages/Profile.jsx'))
 
 export default function App() {
   return (
     <div className="min-h-screen text-slate-100 selection:bg-midnight-400 selection:text-white">
       <Layout>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/create" element={<Create />} />
-          <Route path="/community" element={<Community />} />
-          <Route path="/cosmoji" element={<Cosmoji />} />
-          <Route path="/pantheon" element={<Pantheon />} />
-          <Route path="/profile" element={<Profile />} />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
+        <Suspense fallback={<Fallback /> }>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/create" element={<Create />} />
+            <Route path="/community" element={<Community />} />
+            <Route path="/cosmoji" element={<Cosmoji />} />
+            <Route path="/pantheon" element={<Pantheon />} />
+            <Route path="/profile" element={<Profile />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </Suspense>
       </Layout>
     </div>
   )
@@ -30,6 +33,14 @@ function NotFound() {
     <div className="min-h-[60vh] flex flex-col items-center justify-center gap-4">
       <p className="text-xl">Page not found.</p>
       <Link className="text-blue-600 underline" to="/">Back to Home</Link>
+    </div>
+  )
+}
+
+function Fallback() {
+  return (
+    <div className="min-h-[60vh] flex items-center justify-center">
+      <div className="animate-pulse text-slate-400">Chargement…</div>
     </div>
   )
 }
