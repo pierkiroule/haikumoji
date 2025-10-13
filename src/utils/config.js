@@ -29,10 +29,12 @@ export const ALL_EMOJIS = [
 
 // Prefer canonical URL in production; fall back to current origin in dev
 export function getShareUrlBase() {
+  // In dev, prefer current origin; in prod, use canonical APP_URL
   try {
-    const isProd = typeof import !== 'undefined' && import.meta && import.meta.env && import.meta.env.MODE === 'production'
-    if (isProd) return APP_URL
-    if (typeof window !== 'undefined' && window.location) return window.location.origin
+    const isProd = Boolean(import.meta?.env?.PROD || import.meta?.env?.MODE === 'production')
+    if (!isProd && typeof window !== 'undefined' && window.location) {
+      return window.location.origin
+    }
   } catch {
     // ignore
   }

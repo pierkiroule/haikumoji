@@ -1,15 +1,20 @@
+import { useEffect, useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import { getHaikus, seedIfEmpty } from '../utils/storage.js'
 
-const MOCK_HAIKUS = [
-  {id:1, emojis:["🌬️","🐋","🌙"], text:"Sous la lune bleue\nle chant glisse sur la glace\nle vent tient la barre.", author:"Aki", likes:142},
-  {id:2, emojis:["🔥","🌊","🌈"], text:"La mer respire\nentre deux éclats de feu\nun arc chante.", author:"Nora", likes:120},
-  {id:3, emojis:["🛶","🌌","❄️"], text:"Kayak de silence\nla voie lactée sous la glace\nun souffle ancien.", author:"Léo", likes:97},
-  {id:4, emojis:["🐚","🌕","💫"], text:"Coquillage d’or\nle ciel écoute en secret\nles rêves marins.", author:"Mika", likes:86},
-  {id:5, emojis:["🌑","☁️","🌊"], text:"L’ombre du vent dort\nla vague replie la nuit\nvers le dedans.", author:"Sia", likes:79}
-]
+export default function PantheonModal({ open, onClose }) {
+  const [items, setItems] = useState([])
 
-export default function PantheonModal({ open, onClose, haikus = MOCK_HAIKUS }) {
-  const items = [...haikus].sort((a, b) => b.likes - a.likes).slice(0, 5)
+  useEffect(() => {
+    if (!open) return
+    seedIfEmpty()
+    try {
+      const top = [...getHaikus()].sort((a, b) => (b.likes || 0) - (a.likes || 0)).slice(0, 5)
+      setItems(top)
+    } catch {
+      setItems([])
+    }
+  }, [open])
 
   return (
     <AnimatePresence>
