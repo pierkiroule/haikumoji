@@ -8,7 +8,7 @@ export default function Home() {
 
       <section className="text-center space-y-3 mb-8">
         <h1 className="text-3xl md:text-4xl font-semibold tracking-tight">
-          Onimoji — prendre soin de notre univers onirique
+          Onimoji — voyage dans l’Onivers Inuit
         </h1>
         <p className="mx-auto max-w-xl text-slate-300">
           Une pratique douce et inclusive : créer avec des émojis pour sensibiliser,
@@ -16,8 +16,8 @@ export default function Home() {
           au service du self‑care et du social‑care.
         </p>
         <div className="flex items-center justify-center gap-3 pt-2">
-          <Link to="/cosmoji" className="rounded-2xl bg-midnight-400 text-white px-6 py-3 hover:bg-midnight-300 active:bg-midnight-500 transition">
-            Ouvrir le Cosmojî
+          <Link to="/navette" className="rounded-2xl bg-midnight-400 text-white px-6 py-3 hover:bg-midnight-300 active:bg-midnight-500 transition">
+            Monter à bord du Cosmoniris 🚀
           </Link>
           <Link to="/community" className="rounded-2xl bg-white/10 text-white px-6 py-3 border border-white/10 hover:bg-white/20 transition">
             Voir la communauté
@@ -49,14 +49,14 @@ export default function Home() {
         </article>
       </section>
 
-      <section className="mt-8 rounded-2xl bg-white/5 border border-white/10 p-5">
-        <h3 className="font-medium">Comment ça marche ?</h3>
-        <ol className="mt-2 text-sm text-slate-300 list-decimal list-inside space-y-1">
-          <li>Choisissez 3 émojis dans le Cosmojî.</li>
-          <li>Composez un haïku en 3 lignes (5/7/5 ou libre).</li>
-          <li>Publiez, partagez, découvrez les créations des autres.</li>
-        </ol>
-      </section>
+        <section className="mt-8 rounded-2xl bg-white/5 border border-white/10 p-5">
+          <h3 className="font-medium">Parcours des 12 lunes</h3>
+          <ol className="mt-2 text-sm text-slate-300 list-decimal list-inside space-y-1">
+            <li>Montez à bord du Cosmoniris pour choisir 3 émojis.</li>
+            <li>Explorez la Lune en cours et découvrez sa ressource culturelle.</li>
+            <li>Générez un rêve et sauvegardez-le localement.</li>
+          </ol>
+        </section>
     </div>
   )
 }

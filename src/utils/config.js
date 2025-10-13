@@ -6,6 +6,9 @@ export const STORAGE_KEYS = {
   INSPIRATION_COUNT: 'haikumoji_inspiration_count',
   LIKED_IDS: 'haikumoji_liked_ids',
   DRAFT: 'haikumoji_draft',
+  DREAMS: 'haikumoji_dreams',
+  MOON_INDEX: 'haikumoji_moon_index',
+  SELECTED_TRIPLET: 'haikumoji_selected_triplet',
 }
 
 export const THEME_OF_WEEK = {

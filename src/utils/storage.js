@@ -19,13 +19,33 @@ function generateId() {
 
 export function seedIfEmpty() {
   const existing = getJSON(STORAGE_KEYS.HAIKUS, null)
-  // Start with an empty collection; no initial links in Cosmoji
-  if (!existing) setJSON(STORAGE_KEYS.HAIKUS, [])
+  if (!existing) {
+    // Seed a small set of neutral associations to reveal the Cosmoji graph
+    const samples = [
+      { emojis: ['❄️','🌌','🐋'], text: '', author: 'Anonyme', authorId: null },
+      { emojis: ['🌊','🐚','🌙'], text: '', author: 'Anonyme', authorId: null },
+      { emojis: ['🧊','🌬️','💫'], text: '', author: 'Anonyme', authorId: null },
+      { emojis: ['🪶','🎵','☁️'], text: '', author: 'Anonyme', authorId: null },
+      { emojis: ['🌕','🌠','🌑'], text: '', author: 'Anonyme', authorId: null },
+      { emojis: ['🛶','💧','🌿'], text: '', author: 'Anonyme', authorId: null },
+      { emojis: ['🔥','🍂','🌞'], text: '', author: 'Anonyme', authorId: null },
+      { emojis: ['🦭','🌊','🧊'], text: '', author: 'Anonyme', authorId: null },
+      { emojis: ['🪞','🌌','💫'], text: '', author: 'Anonyme', authorId: null },
+    ]
+    const seeded = samples.map(s => ({ id: generateId(), likes: 0, createdAt: Date.now(), ...s }))
+    setJSON(STORAGE_KEYS.HAIKUS, seeded)
+  }
   if (!getJSON(STORAGE_KEYS.LIKED_IDS, null)) {
     setJSON(STORAGE_KEYS.LIKED_IDS, [])
   }
   if (typeof getJSON(STORAGE_KEYS.INSPIRATION_COUNT, null) !== 'number') {
     setJSON(STORAGE_KEYS.INSPIRATION_COUNT, 0)
+  }
+  if (!getJSON(STORAGE_KEYS.DREAMS, null)) {
+    setJSON(STORAGE_KEYS.DREAMS, [])
+  }
+  if (typeof getJSON(STORAGE_KEYS.MOON_INDEX, null) !== 'number') {
+    setJSON(STORAGE_KEYS.MOON_INDEX, 1)
   }
 }
 
@@ -119,6 +139,44 @@ export function likeHaiku(id) {
   liked.add(id)
   setLikedIds(Array.from(liked))
   return haikus
+}
+
+// ----- Dreams (rêves) & progression -----
+export function getDreams() {
+  return getJSON(STORAGE_KEYS.DREAMS, [])
+}
+
+export function saveDream(dream) {
+  const dreams = getDreams()
+  const next = [{ id: generateId(), ...dream, createdAt: Date.now() }, ...dreams]
+  setJSON(STORAGE_KEYS.DREAMS, next)
+  return next[0]
+}
+
+export function getMoonIndex() {
+  const n = getJSON(STORAGE_KEYS.MOON_INDEX, 1)
+  if (typeof n !== 'number' || n < 1) return 1
+  if (n > 12) return 12
+  return n
+}
+
+export function setMoonIndex(n) {
+  const clamped = Math.max(1, Math.min(12, Number(n) || 1))
+  setJSON(STORAGE_KEYS.MOON_INDEX, clamped)
+  return clamped
+}
+
+export function nextMoon() {
+  return setMoonIndex(getMoonIndex() + 1)
+}
+
+export function setSelectedTriplet(emojis) {
+  const safe = Array.isArray(emojis) ? emojis.slice(0, 3) : []
+  setJSON(STORAGE_KEYS.SELECTED_TRIPLET, safe)
+}
+
+export function getSelectedTriplet() {
+  return getJSON(STORAGE_KEYS.SELECTED_TRIPLET, [])
 }
 
 export function getUser() {
