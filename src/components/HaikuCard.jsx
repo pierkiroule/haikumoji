@@ -1,3 +1,5 @@
+import { getShareUrlBase } from '../utils/config.js'
+
 export default function HaikuCard({ haiku, onLike }) {
   return (
     <div className="rounded-2xl bg-white shadow-lg p-5">
@@ -16,7 +18,7 @@ export default function HaikuCard({ haiku, onLike }) {
       <div className="mt-3 flex gap-2">
         <button
           onClick={() => {
-            const url = window.location.origin
+            const url = getShareUrlBase()
             const shareText = `${haiku.emojis?.join(' ')}\n\n${haiku.text}`
             const data = { title: 'HaïkuMoji', text: shareText, url }
             if (navigator.share) {

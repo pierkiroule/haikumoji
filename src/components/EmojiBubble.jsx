@@ -1,9 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { motion, useAnimationControls } from 'framer-motion'
-
-const DEFAULT_EMOJIS = [
-  "🌬️","❄️","🐋","🌊","🔥","🌙","🛶","🌌","🧊","🌈","🐚","🪶","🌞","💧","🌿","🐚","🍂","🌑","☁️","🌊","🦭","🪵","🌕","🌠","🌧️","🎵","🐦","🪞","🪷","💫"
-]
+import { ALL_EMOJIS } from '../utils/config.js'
 
 const BUBBLE_SIZE = 400
 const DEFAULT_EMOJI_SIZE = 36
@@ -88,7 +85,7 @@ function useFloatingPositions(count, containerSize, emojiSize) {
 }
 
 export default function EmojiBubble({
-  emojis = DEFAULT_EMOJIS,
+  emojis = ALL_EMOJIS,
   selected, // Set<string>
   setSelected,
   maxSelected = 5,
