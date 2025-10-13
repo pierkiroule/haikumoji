@@ -1,4 +1,4 @@
-export const APP_NAME = 'HaïkuMoji'
+export const APP_NAME = 'Onimoji'
 
 export const STORAGE_KEYS = {
   HAIKUS: 'haikumoji_haikus',
