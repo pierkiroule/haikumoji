@@ -3,7 +3,6 @@ import { resetAppStorage } from '../utils/storage.js'
 
 const navItems = [
   { to: '/', label: '🏠 Home' },
-  { to: '/create', label: '✏️ Créer' },
   { to: '/cosmoji', label: '🌐 Cosmoji' },
   { to: '/community', label: '💖 Communauté' },
   { to: '/profile', label: '👤 Profil' },

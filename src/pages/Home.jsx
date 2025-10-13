@@ -16,8 +16,8 @@ export default function Home() {
           des symboles rend la création inclusive, au service du self‑care et du social‑care.
         </p>
         <div className="flex items-center justify-center gap-3 pt-2">
-          <Link to="/create" className="rounded-2xl bg-midnight-400 text-white px-6 py-3 hover:bg-midnight-300 active:bg-midnight-500 transition">
-            Créer mon haïku
+          <Link to="/cosmoji" className="rounded-2xl bg-midnight-400 text-white px-6 py-3 hover:bg-midnight-300 active:bg-midnight-500 transition">
+            Ouvrir le Cosmojî
           </Link>
           <Link to="/community" className="rounded-2xl bg-white/10 text-white px-6 py-3 border border-white/10 hover:bg-white/20 transition">
             Voir la communauté
@@ -52,7 +52,7 @@ export default function Home() {
       <section className="mt-8 rounded-2xl bg-white/5 border border-white/10 p-5">
         <h3 className="font-medium">Comment ça marche ?</h3>
         <ol className="mt-2 text-sm text-slate-300 list-decimal list-inside space-y-1">
-          <li>Choisissez 3 à 5 émojis qui vous inspirent.</li>
+          <li>Choisissez 3 émojis dans le Cosmojî.</li>
           <li>Composez un haïku en 3 lignes (5/7/5 ou libre).</li>
           <li>Publiez, partagez, découvrez les créations des autres.</li>
         </ol>

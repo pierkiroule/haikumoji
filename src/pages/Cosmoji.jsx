@@ -1,16 +1,36 @@
 import { useEffect, useMemo, useState } from 'react'
 import PantheonModal from '../components/PantheonModal.jsx'
 import EmojiNetwork from '../components/EmojiNetwork.jsx'
-import { computeEmojiStats, seedIfEmpty } from '../utils/storage.js'
+import { computeEmojiStats, seedIfEmpty, addHaiku, getUser } from '../utils/storage.js'
 
 export default function Cosmoji() {
   const [open, setOpen] = useState(false)
   const [stats, setStats] = useState({ occurrences: [], pairs: [], triples: [] })
+  const [picked, setPicked] = useState([]) // up to 3
 
   useEffect(() => {
     seedIfEmpty()
     setStats(computeEmojiStats())
   }, [])
+
+  const handleToggle = (emoji) => {
+    setPicked(prev => {
+      const has = prev.includes(emoji)
+      if (has) return prev.filter(e => e !== emoji)
+      if (prev.length >= 3) return prev
+      return [...prev, emoji]
+    })
+  }
+
+  const handleCreateFromPicked = () => {
+    if (picked.length !== 3) return
+    const user = getUser() || { name: 'Anonyme', id: null }
+    const text = ''
+    addHaiku({ emojis: picked.slice(0, 3), text, author: user.name, authorId: user.id })
+    setPicked([])
+    setStats(computeEmojiStats())
+    alert('Triplet ajouté au Cosmojî.')
+  }
 
   return (
     <div className="space-y-6">
@@ -21,7 +41,26 @@ export default function Cosmoji() {
         </div>
         <p className="mt-2 text-sm text-slate-600">Chaque nœud représente un émoji (taille = occurrences). Les liens indiquent les co‑occurrences (épaisseur = force).</p>
         <div className="mt-4">
-          <EmojiNetwork stats={stats} />
+          <EmojiNetwork
+            stats={stats}
+            selectable
+            selected={picked}
+            onToggle={handleToggle}
+            maxNodes={30}
+            maxLinks={200}
+          />
+        </div>
+        <div className="mt-3 flex items-center justify-between">
+          <div className="text-sm text-slate-600 select-none">
+            Sélection: <span className="font-mono">{picked.join(' ') || '—'}</span>
+          </div>
+          <button
+            onClick={handleCreateFromPicked}
+            disabled={picked.length !== 3}
+            className={`rounded-xl px-3 py-1 text-sm font-medium transition ${picked.length === 3 ? 'bg-emerald-600 text-white hover:bg-emerald-700' : 'bg-slate-200 text-slate-500 cursor-not-allowed'}`}
+          >
+            Créer un haïku avec ces 3
+          </button>
         </div>
       </div>
       <div className="relative rounded-2xl bg-white shadow-lg p-6">
