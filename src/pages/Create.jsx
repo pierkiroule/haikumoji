@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { motion } from 'framer-motion'
 import { getDraft, saveDraft, clearDraft, seedIfEmpty, getUser, addHaiku } from '../utils/storage.js'
 import { useNavigate } from 'react-router-dom'
@@ -16,7 +16,9 @@ export default function Create() {
   const [emojiSize, setEmojiSize] = useState(36)
   const [lines, setLines] = useState(['', '', ''])
   const [error, setError] = useState('')
+  const [step, setStep] = useState('select') // 'select' | 'compose'
   const navigate = useNavigate()
+  const composeRef = useRef(null)
 
   useEffect(() => {
     seedIfEmpty()
@@ -49,6 +51,24 @@ export default function Create() {
   const canCompose = selected.length >= 3 && selected.length <= 5
 
   const buttonLabel = canCompose ? 'Composer mon Haïku' : 'Choisir 3–5 émojis'
+
+  // If the user deselects below threshold while composing, go back to select step
+  useEffect(() => {
+    if (!canCompose && step !== 'select') {
+      setStep('select')
+    }
+  }, [canCompose, step])
+
+  // When entering compose step, scroll the compose area into view
+  useEffect(() => {
+    if (step === 'compose') {
+      // delay to ensure the section is rendered before scrolling
+      setTimeout(() => {
+        const el = composeRef.current || document.getElementById('compose-area')
+        el?.scrollIntoView({ behavior: 'smooth', block: 'center' })
+      }, 0)
+    }
+  }, [step])
 
   const handlePublish = () => {
     if (!canCompose) return
@@ -107,18 +127,15 @@ export default function Create() {
             disabled={!canCompose}
             className={`w-full h-12 rounded-xl font-medium transition 
               ${canCompose ? 'bg-blue-600 text-white hover:bg-blue-700 active:bg-blue-800 shadow-lg shadow-blue-200' : 'bg-slate-200 text-slate-500 cursor-not-allowed'}`}
-            onClick={() => {
-              const el = document.getElementById('compose-area')
-              if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' })
-            }}
+            onClick={() => setStep('compose')}
           >
             {buttonLabel}
           </button>
         </div>
 
         {/* Compose area */}
-        {canCompose && (
-          <div id="compose-area" className="w-full max-w-sm rounded-2xl bg-white shadow p-4 space-y-3">
+        {step === 'compose' && canCompose && (
+          <div id="compose-area" ref={composeRef} className="w-full max-w-sm rounded-2xl bg-white shadow p-4 space-y-3">
             <div className="text-lg select-none mb-1">{selected.join(' ')}</div>
             {[0,1,2].map((i) => (
               <div key={i} className="space-y-1">
