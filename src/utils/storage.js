@@ -121,3 +121,24 @@ export function getMyHaikus(user) {
 export function isSubscribed(user) {
   return Boolean(user?.subscription?.active)
 }
+
+// Efface toutes les données de l'app (clés préfixées par 'haikumoji_')
+export function clearAppStorage() {
+  const prefix = 'haikumoji_'
+  try {
+    for (let i = localStorage.length - 1; i >= 0; i--) {
+      const key = localStorage.key(i)
+      if (key && key.startsWith(prefix)) {
+        localStorage.removeItem(key)
+      }
+    }
+  } catch {
+    // ignore
+  }
+}
+
+// Réinitialise les données: efface puis ré-initialise les seeds
+export function resetAppStorage() {
+  clearAppStorage()
+  seedIfEmpty()
+}

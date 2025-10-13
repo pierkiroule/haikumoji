@@ -1,4 +1,5 @@
 import { NavLink } from 'react-router-dom'
+import { resetAppStorage } from '../utils/storage.js'
 
 const navItems = [
   { to: '/', label: '🏠 Home' },
@@ -23,6 +24,24 @@ export default function Navbar() {
             {item.label}
           </NavLink>
         ))}
+        {import.meta.env?.MODE !== 'production' && (
+          <button
+            onClick={() => {
+              const ok = confirm('Réinitialiser les données locales ?')
+              if (ok) {
+                resetAppStorage()
+                alert('LocalStorage réinitialisé (seeds rechargés).')
+                // Recharge pour refléter l'état propre
+                window.location.reload()
+              }
+            }}
+            className="text-sm rounded-xl bg-slate-100 px-3 py-1 border hover:bg-slate-200 transition"
+            aria-label="Reset LocalStorage"
+            title="Reset LocalStorage (dev)"
+          >
+            🧹 Reset
+          </button>
+        )}
       </div>
     </nav>
   )
