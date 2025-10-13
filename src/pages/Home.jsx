@@ -8,12 +8,12 @@ export default function Home() {
 
       <section className="text-center space-y-3 mb-8">
         <h1 className="text-3xl md:text-4xl font-semibold tracking-tight">
-          HaïkuMoji — la poésie universelle par les émojis
+          Onimoji — prendre soin de notre univers onirique
         </h1>
         <p className="mx-auto max-w-xl text-slate-300">
-          Une pratique douce et accessible à toutes et tous: composer des haïkus
-          à partir d’émojis pour sensibiliser, apaiser et relier. L’universalité
-          des symboles rend la création inclusive, au service du self‑care et du social‑care.
+          Une pratique douce et inclusive : créer avec des émojis pour sensibiliser,
+          apaiser et relier. L’universalité des symboles rend la création accessible,
+          au service du self‑care et du social‑care.
         </p>
         <div className="flex items-center justify-center gap-3 pt-2">
           <Link to="/cosmoji" className="rounded-2xl bg-midnight-400 text-white px-6 py-3 hover:bg-midnight-300 active:bg-midnight-500 transition">
