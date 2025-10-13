@@ -7,6 +7,8 @@ const Community = lazy(() => import('./pages/Community.jsx'))
 const Cosmoji = lazy(() => import('./pages/Cosmoji.jsx'))
 const Pantheon = lazy(() => import('./pages/Pantheon.jsx'))
 const Profile = lazy(() => import('./pages/Profile.jsx'))
+const Navette = lazy(() => import('./pages/Navette.jsx'))
+const Lune = lazy(() => import('./pages/Lune.jsx'))
 
 export default function App() {
   return (
@@ -15,6 +17,8 @@ export default function App() {
         <Suspense fallback={<Fallback /> }>
           <Routes>
             <Route path="/" element={<Home />} />
+            <Route path="/navette" element={<Navette />} />
+            <Route path="/lune" element={<Lune />} />
             <Route path="/create" element={<Create />} />
             <Route path="/community" element={<Community />} />
             <Route path="/cosmoji" element={<Cosmoji />} />

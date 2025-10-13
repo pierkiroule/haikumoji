@@ -3,10 +3,13 @@
 @tailwind utilities;
 
 :root {
-  --bg-start: #0b1220; /* midnight-900 */
-  --bg-end: #132338;  /* midnight-700 */
+  --bg-start: #0a092e; /* requested */
+  --bg-end: #1b1548;  /* requested */
   --text-base: #e6eefc; /* near-white with cool tint */
   --text-muted: #9cb3cf; /* muted slate for secondary */
+  --pastel-a: #7AE1FF;
+  --pastel-b: #FFB3C6;
+  --pastel-c: #CABDFF;
 }
 
 html, body, #root {
@@ -14,8 +17,20 @@ html, body, #root {
 }
 
 body {
-  background: radial-gradient(circle at 50% 40%, var(--bg-start), var(--bg-end));
+  background: radial-gradient(120% 120% at 50% 40%, var(--bg-start) 0%, var(--bg-end) 70%);
   color: var(--text-base);
+  font-family: 'Poppins', 'Quicksand', ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, 'Helvetica Neue', Arial, 'Noto Sans', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+}
+
+/* Gentle emoji float */
+@keyframes float {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+  100% { transform: translateY(0); }
+}
+
+.emoji-float {
+  animation: float 6s ease-in-out infinite;
 }
 
 /* Placeholder hooks for future integration */
