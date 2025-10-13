@@ -3,8 +3,10 @@
 @tailwind utilities;
 
 :root {
-  --bg-start: #ffffff;
-  --bg-end: #e0f7ff;
+  --bg-start: #0b1220; /* midnight-900 */
+  --bg-end: #132338;  /* midnight-700 */
+  --text-base: #e6eefc; /* near-white with cool tint */
+  --text-muted: #9cb3cf; /* muted slate for secondary */
 }
 
 html, body, #root {
@@ -13,6 +15,7 @@ html, body, #root {
 
 body {
   background: radial-gradient(circle at 50% 40%, var(--bg-start), var(--bg-end));
+  color: var(--text-base);
 }
 
 /* Placeholder hooks for future integration */
