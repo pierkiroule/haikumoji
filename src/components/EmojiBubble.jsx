@@ -6,9 +6,9 @@ const DEFAULT_EMOJIS = [
 ]
 
 const BUBBLE_SIZE = 400
-const EMOJI_SIZE = 36
+const DEFAULT_EMOJI_SIZE = 36
 
-function useFloatingPositions(count, containerSize) {
+function useFloatingPositions(count, containerSize, emojiSize) {
   const [positions, setPositions] = useState(() => new Array(count).fill(0).map(() => ({ x: 0, y: 0 })))
   const velocitiesRef = useRef(new Array(count).fill(0).map(() => ({ vx: 0, vy: 0 })))
   const controlsRef = useRef(new Array(count).fill(null).map(() => useAnimationControls()))
@@ -16,7 +16,7 @@ function useFloatingPositions(count, containerSize) {
 
   useEffect(() => {
     // initialize random positions within circle
-    const radius = containerSize / 2 - EMOJI_SIZE
+    const radius = containerSize / 2 - emojiSize
     const next = positions.map(() => {
       const t = Math.random() * Math.PI * 2
       const r = Math.sqrt(Math.random()) * radius
@@ -33,7 +33,7 @@ function useFloatingPositions(count, containerSize) {
   }, [count, containerSize])
 
   useEffect(() => {
-    const radius = containerSize / 2 - EMOJI_SIZE
+    const radius = containerSize / 2 - emojiSize
     const damping = 0.995
     const wallBounce = 0.95
 
@@ -93,9 +93,10 @@ export default function EmojiBubble({
   setSelected,
   maxSelected = 5,
   size = BUBBLE_SIZE,
+  emojiSize = DEFAULT_EMOJI_SIZE,
 }) {
   const containerRef = useRef(null)
-  const { positions } = useFloatingPositions(emojis.length, size)
+  const { positions } = useFloatingPositions(emojis.length, size, emojiSize)
 
   const handleToggle = (emoji) => {
     const isSelected = selected.includes(emoji)
@@ -118,14 +119,14 @@ export default function EmojiBubble({
           const p = positions[i] || { x: 0, y: 0 }
           const center = size / 2
           const base = {
-            x: center + p.x - EMOJI_SIZE / 2,
-            y: center + p.y - EMOJI_SIZE / 2,
+            x: center + p.x - emojiSize / 2,
+            y: center + p.y - emojiSize / 2,
           }
           return (
             <motion.button
               key={i}
               className={`absolute flex items-center justify-center select-none`}
-              style={{ width: EMOJI_SIZE, height: EMOJI_SIZE }}
+              style={{ width: emojiSize, height: emojiSize }}
               animate={{
                 left: base.x,
                 top: base.y,
@@ -135,9 +136,10 @@ export default function EmojiBubble({
               transition={{ type: 'spring', stiffness: 120, damping: 16 }}
               onClick={() => handleToggle(emoji)}
             >
-              <span className={
-                `text-2xl transition-colors ${isSelected ? 'text-blue-600' : 'text-slate-700'}`
-              }>
+              <span
+                className={`transition-colors ${isSelected ? 'text-blue-600' : 'text-slate-700'}`}
+                style={{ fontSize: Math.round(emojiSize * 0.8) }}
+              >
                 {emoji}
               </span>
             </motion.button>

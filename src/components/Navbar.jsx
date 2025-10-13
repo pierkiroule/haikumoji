@@ -11,7 +11,7 @@ const navItems = [
 
 export default function Navbar() {
   return (
-    <nav className="fixed inset-x-0 bottom-0 lg:top-0 lg:bottom-auto h-16 bg-white/80 backdrop-blur border-t lg:border-b z-50">
+    <nav className="fixed inset-x-0 bottom-0 lg:top-0 lg:bottom-auto h-16 bg-white/80 backdrop-blur border-t lg:border-b z-50" style={{ paddingBottom: 'env(safe-area-inset-bottom)' }}>
       <div className="max-w-4xl mx-auto h-full flex items-center justify-around px-4">
         {navItems.map((item) => (
           <NavLink

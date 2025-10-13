@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { motion } from 'framer-motion'
 import EmojiBubble from '../components/EmojiBubble.jsx'
 import PantheonModal from '../components/PantheonModal.jsx'
@@ -10,6 +10,25 @@ const EMOJIS = [
 export default function Create() {
   const [selected, setSelected] = useState([])
   const [pantheonOpen, setPantheonOpen] = useState(false)
+  const [bubbleSize, setBubbleSize] = useState(360)
+  const [emojiSize, setEmojiSize] = useState(36)
+
+  useEffect(() => {
+    const computeSizes = () => {
+      const vw = Math.max(320, Math.min(window.innerWidth, 640))
+      const vh = Math.max(540, window.innerHeight)
+      // bubble takes ~82vw but clamped, and considers available height
+      const sizeFromWidth = Math.round(vw * 0.82)
+      const sizeFromHeight = Math.round(Math.max(260, Math.min(vh * 0.48, 460)))
+      const size = Math.min(sizeFromWidth, sizeFromHeight)
+      const eSize = Math.max(28, Math.round(size * 0.085)) // 8.5% of bubble, >=28px
+      setBubbleSize(size)
+      setEmojiSize(eSize)
+    }
+    computeSizes()
+    window.addEventListener('resize', computeSizes)
+    return () => window.removeEventListener('resize', computeSizes)
+  }, [])
 
   const canCompose = selected.length >= 3 && selected.length <= 5
 
@@ -23,8 +42,15 @@ export default function Create() {
       </header>
 
       <main className="flex-1 flex flex-col items-center justify-center gap-6 px-4">
-        <div className="relative">
-          <EmojiBubble emojis={EMOJIS} selected={selected} setSelected={setSelected} maxSelected={5} />
+        <div className="relative w-full flex items-center justify-center">
+          <EmojiBubble
+            emojis={EMOJIS}
+            selected={selected}
+            setSelected={setSelected}
+            maxSelected={5}
+            size={bubbleSize}
+            emojiSize={emojiSize}
+          />
 
           {/* Center glowing star */}
           <motion.button
