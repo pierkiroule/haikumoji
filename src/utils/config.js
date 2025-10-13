@@ -21,3 +21,20 @@ export const SUBSCRIPTION_PLANS = [
 
 export const MAX_AI_SUGGESTIONS = 5
 export const APP_URL = 'https://haikumoji.vercel.app'
+
+// Centralized emoji catalog (deduplicated)
+export const ALL_EMOJIS = [
+  '🌬️','❄️','🐋','🌊','🔥','🌙','🛶','🌌','🧊','🌈','🐚','🪶','🌞','💧','🌿','🍂','🌑','☁️','🦭','🪵','🌕','🌠','🌧️','🎵','🐦','🪞','🪷','💫'
+]
+
+// Prefer canonical URL in production; fall back to current origin in dev
+export function getShareUrlBase() {
+  try {
+    const isProd = typeof import !== 'undefined' && import.meta && import.meta.env && import.meta.env.MODE === 'production'
+    if (isProd) return APP_URL
+    if (typeof window !== 'undefined' && window.location) return window.location.origin
+  } catch {
+    // ignore
+  }
+  return APP_URL
+}
