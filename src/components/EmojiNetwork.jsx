@@ -19,6 +19,9 @@ export default function EmojiNetwork({
   const gRef = useRef(null)
   const simulationRef = useRef(null)
   const [width, setWidth] = useState(600)
+  const prefersReduced = typeof window !== 'undefined' && typeof window.matchMedia === 'function'
+    ? window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    : false
 
   const { nodes, links, maxOcc, maxPair } = useMemo(() => {
     const occ = Array.isArray(stats?.occurrences) ? stats.occurrences : []
@@ -155,6 +158,39 @@ export default function EmojiNetwork({
           // Prevent toggling if at cap and this node is not selected
           const disabled = reachedMax && !isSelected(d.id)
           if (disabled) return
+          // Gentle pulse on the clicked node circle
+          if (!prefersReduced) {
+            const circle = select(event.currentTarget).select('circle')
+            const baseR = nodeRadius(d.count)
+            circle
+              .interrupt()
+              .transition()
+              .duration(140)
+              .attr('r', baseR + 4)
+              .transition()
+              .duration(260)
+              .attr('r', baseR)
+          }
+          // Briefly highlight connected links
+          if (!prefersReduced && gRef.current) {
+            const isConnected = (l) => {
+              const sid = typeof l.source === 'object' ? l.source.id : l.source
+              const tid = typeof l.target === 'object' ? l.target.id : l.target
+              return sid === d.id || tid === d.id
+            }
+            select(gRef.current)
+              .selectAll('.links line')
+              .filter(isConnected)
+              .interrupt()
+              .transition()
+              .duration(200)
+              .attr('stroke-opacity', 0.9)
+              .attr('stroke-width', l => Math.min(linkWidth(l.count) + 2, 8))
+              .transition()
+              .duration(450)
+              .attr('stroke-opacity', 0.6)
+              .attr('stroke-width', l => linkWidth(l.count))
+          }
           onToggle && onToggle(d.id)
         })
     }

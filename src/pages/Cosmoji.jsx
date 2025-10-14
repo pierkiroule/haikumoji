@@ -1,8 +1,10 @@
 import { useEffect, useMemo, useState } from 'react'
+import { motion, useReducedMotion } from 'framer-motion'
 import { useNavigate } from 'react-router-dom'
 import PantheonModal from '../components/PantheonModal.jsx'
 import CosmojiEmblem from '../components/CosmojiEmblem.jsx'
 import EmojiNetwork from '../components/EmojiNetwork.jsx'
+import AuroraOverlay from '../components/AuroraOverlay.jsx'
 import guardians from '../data/guardiansInuit.json'
 import cosmojiData from '../data/cosmojiData.json'
 import { computeEmojiStats, seedIfEmpty, setSelectedTriplet, getMoonIndex } from '../utils/storage.js'
@@ -12,6 +14,7 @@ export default function Cosmoji() {
   const [stats, setStats] = useState({ occurrences: [], pairs: [], triples: [] })
   const [picked, setPicked] = useState([]) // up to 3
   const navigate = useNavigate()
+  const prefersReduced = useReducedMotion()
 
   useEffect(() => {
     seedIfEmpty()
@@ -39,6 +42,8 @@ export default function Cosmoji() {
   return (
     <div className="space-y-6">
       <div className="relative rounded-2xl bg-white text-slate-900 shadow-lg p-6">
+        {/* Calm aurora overlay appears when exactly 3 selected */}
+        <AuroraOverlay active={picked.length === 3} />
         <div className="flex items-center justify-between">
           <h2 className="text-xl font-medium flex items-center gap-2">
             <span className="relative inline-flex items-center">
@@ -86,13 +91,16 @@ export default function Cosmoji() {
           <div className="text-sm text-slate-600 select-none">
             Sélection: <span className="font-mono">{picked.join(' ') || '—'}</span>
           </div>
-          <button
+          <motion.button
             onClick={handleResonance}
             disabled={picked.length !== 3}
+            whileTap={{ scale: 0.98 }}
+            animate={picked.length === 3 && !prefersReduced ? { scale: [1, 1.04, 1] } : { scale: 1 }}
+            transition={picked.length === 3 && !prefersReduced ? { duration: 2.4, repeat: Infinity, ease: 'easeInOut' } : { duration: 0.2 }}
             className={`rounded-xl px-3 py-1 text-sm font-medium transition ${picked.length === 3 ? 'bg-emerald-600 text-white hover:bg-emerald-700' : 'bg-slate-200 text-slate-500 cursor-not-allowed'}`}
           >
             Entrer en résonance ✧
-          </button>
+          </motion.button>
         </div>
       </div>
       <div className="relative rounded-2xl bg-white text-slate-900 shadow-lg p-6">
