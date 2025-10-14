@@ -1,11 +1,126 @@
 import { Link } from 'react-router-dom'
-import { motion } from 'framer-motion'
+import { motion, AnimatePresence } from 'framer-motion'
+import { useState, useEffect } from 'react'
+import { getUser, saveUser } from '../utils/storage.js'
 import FloatingEmojis from '../components/FloatingEmojis.jsx'
 
 export default function Home() {
+  const [user, setUser] = useState(null)
+  const [showOnboarding, setShowOnboarding] = useState(false)
+
+  useEffect(() => {
+    const u = getUser()
+    setUser(u)
+    // Show onboarding if first visit (no user)
+    if (!u && !localStorage.getItem('haikumoji_onboarding_seen')) {
+      setShowOnboarding(true)
+    }
+  }, [])
+
+  const handleStartJourney = () => {
+    localStorage.setItem('haikumoji_onboarding_seen', 'true')
+    setShowOnboarding(false)
+  }
+
   return (
     <div className="relative">
       <FloatingEmojis />
+
+      {/* Onboarding Modal */}
+      <AnimatePresence>
+        {showOnboarding && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 bg-slate-900/95 backdrop-blur-lg z-50 flex items-center justify-center p-4"
+            onClick={handleStartJourney}
+          >
+            <motion.div
+              initial={{ scale: 0.9, y: 20 }}
+              animate={{ scale: 1, y: 0 }}
+              exit={{ scale: 0.9, y: 20 }}
+              onClick={(e) => e.stopPropagation()}
+              className="max-w-2xl w-full rounded-3xl bg-gradient-to-br from-slate-800 to-midnight-900 border-2 border-white/20 p-8 shadow-2xl"
+            >
+              <div className="text-center space-y-6">
+                <motion.div
+                  initial={{ scale: 0 }}
+                  animate={{ scale: 1 }}
+                  transition={{ delay: 0.2, type: "spring" }}
+                  className="text-6xl"
+                >
+                  🌌✨🌙
+                </motion.div>
+                
+                <div>
+                  <h1 className="text-3xl font-bold text-white mb-3">
+                    Bienvenue dans Onimoji
+                  </h1>
+                  <p className="text-slate-300 text-lg leading-relaxed">
+                    Un voyage poétique en 12 lunes pour cultiver votre univers onirique
+                  </p>
+                </div>
+
+                <div className="rounded-2xl bg-white/5 border border-white/10 p-6 text-left space-y-4">
+                  <div className="flex gap-4">
+                    <div className="text-3xl">🚀</div>
+                    <div>
+                      <h3 className="font-semibold text-white mb-1">Montez à bord</h3>
+                      <p className="text-sm text-slate-300">
+                        La navette Cosmoniris vous transportera à travers 12 lunes sacrées
+                      </p>
+                    </div>
+                  </div>
+                  
+                  <div className="flex gap-4">
+                    <div className="text-3xl">✨</div>
+                    <div>
+                      <h3 className="font-semibold text-white mb-1">Choisissez 3 émojis</h3>
+                      <p className="text-sm text-slate-300">
+                        Dans le hublot Cosmoji, sélectionnez 3 symboles qui résonnent avec vous
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="flex gap-4">
+                    <div className="text-3xl">✧</div>
+                    <div>
+                      <h3 className="font-semibold text-white mb-1">Rencontrez un gardien</h3>
+                      <p className="text-sm text-slate-300">
+                        Un chaman inuit vous guidera avec ses sagesses ancestrales
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="flex gap-4">
+                    <div className="text-3xl">📜</div>
+                    <div>
+                      <h3 className="font-semibold text-white mb-1">Recevez votre script onirique</h3>
+                      <p className="text-sm text-slate-300">
+                        Un texte régénérateur pour apaiser votre sommeil et vos rêves
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                <motion.button
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  onClick={handleStartJourney}
+                  className="w-full rounded-2xl bg-gradient-to-r from-emerald-500 to-cyan-500 text-white px-8 py-4 font-semibold text-lg shadow-lg hover:shadow-xl transition-all duration-300"
+                >
+                  ✨ Commencer mon voyage
+                </motion.button>
+
+                <p className="text-sm text-slate-400">
+                  Cliquez n'importe où pour continuer
+                </p>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       <motion.section 
         initial={{ opacity: 0, y: 20 }}
@@ -20,17 +135,17 @@ export default function Home() {
           className="inline-block px-4 py-2 rounded-full bg-gradient-to-r from-aurora-purple/20 to-aurora-blue/20 border border-white/10 mb-3"
         >
           <span className="text-sm font-medium bg-gradient-to-r from-aurora-purple to-aurora-blue bg-clip-text text-transparent">
-            ✨ Bienvenue dans l'univers Onimoji
+            {user ? `🌙 Bienvenue ${user.name}` : '✨ Bienvenue dans l\'univers Onimoji'}
           </span>
         </motion.div>
         
         <h1 className="text-4xl md:text-5xl font-bold tracking-tight bg-gradient-to-br from-white via-slate-100 to-slate-300 bg-clip-text text-transparent">
-          Choisissez votre<br/>voyage onirique
+          Cultivez votre<br/>univers onirique
         </h1>
         
         <p className="mx-auto max-w-xl text-slate-300 text-lg leading-relaxed">
-          Onimoji vous accompagne avec des symboles universels pour apaiser,
-          relier et cultiver votre activité onirique.
+          Onimoji vous accompagne avec des symboles universels et la sagesse chamanique inuite 
+          pour apaiser votre sommeil et enrichir vos rêves.
         </p>
         
         <motion.div 
@@ -44,7 +159,7 @@ export default function Home() {
             className="group relative rounded-2xl bg-gradient-to-r from-midnight-400 to-midnight-500 text-white px-8 py-4 hover:shadow-aurora transition-all duration-300 overflow-hidden"
           >
             <span className="relative z-10 flex items-center gap-2 font-medium">
-              Découvrir le voyage Inuit 🚀
+              {user ? '🚀 Continuer mon voyage' : '🚀 Commencer le voyage Inuit'}
             </span>
             <div className="absolute inset-0 bg-gradient-to-r from-midnight-300 to-midnight-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
           </Link>
