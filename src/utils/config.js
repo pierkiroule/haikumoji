@@ -11,6 +11,7 @@ export const STORAGE_KEYS = {
   SELECTED_TRIPLET: 'haikumoji_selected_triplet',
   STAR_SEEDS: 'haikumoji_star_seeds',
   COSMOJI_COUNTS: 'haikumoji_cosmoji_counts',
+  CURRENT_VOYAGE: 'haikumoji_current_voyage',
 }
 
 export const THEME_OF_WEEK = {
@@ -27,7 +28,9 @@ export const SUBSCRIPTION_PLANS = [
 export const MAX_AI_SUGGESTIONS = 5
 export const APP_URL = 'https://haikumoji.vercel.app'
 
-// Centralized emoji catalog (deduplicated)
+// Emoji catalog now loaded from JSON file
+// Import with: import { getAllEmojis } from './cosmojiLoader.js'
+// Kept for backward compatibility but deprecated
 export const ALL_EMOJIS = [
   '🌬️','❄️','🐋','🌊','🔥','🌙','🛶','🌌','🧊','🌈','🐚','🪶','🌞','💧','🌿','🍂','🌑','☁️','🦭','🪵','🌕','🌠','🌧️','🎵','🐦','🪞','🪷','💫','⭐','🏔️'
 ]

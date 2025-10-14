@@ -1,4 +1,8 @@
 import { STORAGE_KEYS, ALL_EMOJIS } from './config.js'
+import { getAllEmojis } from './cosmojiLoader.js'
+
+// Use JSON-loaded emojis if available, fallback to config
+const EMOJI_LIST = getAllEmojis().length > 0 ? getAllEmojis() : ALL_EMOJIS
 
 function getJSON(key, fallback) {
   try {
@@ -127,7 +131,7 @@ export function computeEmojiStats() {
   }
 
   // Ensure all catalog emojis exist in occurrences with zero counts
-  for (const e of ALL_EMOJIS) {
+  for (const e of EMOJI_LIST) {
     if (!occ.has(e)) occ.set(e, 0)
   }
 
