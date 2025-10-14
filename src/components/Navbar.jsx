@@ -4,8 +4,10 @@ import { resetAppStorage } from '../utils/storage.js'
 const navItems = [
   { to: '/', label: '🏠 Home' },
   { to: '/navette', label: '🚀 Navette' },
+  { to: '/cosmoji', label: '✨ Cosmoji' },
   { to: '/lune', label: '🌙 Lune' },
   { to: '/community', label: '💖 Communauté' },
+  { to: '/dreamgarden', label: '🌱 Jardin' },
 ]
 
 export default function Navbar() {

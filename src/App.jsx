@@ -6,6 +6,8 @@ const Create = lazy(() => import('./pages/Create.jsx'))
 const Community = lazy(() => import('./pages/Community.jsx'))
 const Cosmoji = lazy(() => import('./pages/Cosmoji.jsx'))
 const Pantheon = lazy(() => import('./pages/Pantheon.jsx'))
+const Guardian = lazy(() => import('./pages/Guardian.jsx'))
+const DreamGarden = lazy(() => import('./pages/DreamGarden.jsx'))
 const Profile = lazy(() => import('./pages/Profile.jsx'))
 const Navette = lazy(() => import('./pages/Navette.jsx'))
 const Lune = lazy(() => import('./pages/Lune.jsx'))
@@ -22,6 +24,8 @@ export default function App() {
             <Route path="/create" element={<Create />} />
             <Route path="/community" element={<Community />} />
             <Route path="/cosmoji" element={<Cosmoji />} />
+          <Route path="/guardian" element={<Guardian />} />
+          <Route path="/dreamgarden" element={<DreamGarden />} />
             <Route path="/pantheon" element={<Pantheon />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="*" element={<NotFound />} />
