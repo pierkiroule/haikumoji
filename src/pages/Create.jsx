@@ -96,14 +96,28 @@ export default function Create() {
   }
 
   return (
-    <div className="min-h-screen flex flex-col">
-      <header className="p-4 flex items-center justify-between">
-        <div className="font-medium text-slate-700">HaïkuMoji</div>
-        <div className="text-sm text-slate-600">{selected.length}/5</div>
-      </header>
+    <div className="min-h-screen flex flex-col bg-gradient-to-b from-midnight-900 to-midnight-800">
+      <motion.header 
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        className="p-6 flex items-center justify-between glass-strong border-b border-white/10"
+      >
+        <div className="font-semibold text-white flex items-center gap-2">
+          <span className="text-2xl">✨</span>
+          <span>HaïkuMoji</span>
+        </div>
+        <div className="px-3 py-1.5 rounded-full glass border border-white/20 text-sm font-medium text-white">
+          {selected.length}/5 émojis
+        </div>
+      </motion.header>
 
-      <main className="flex-1 flex flex-col items-center justify-center gap-6 px-4">
-        <div className="relative w-full flex items-center justify-center">
+      <main className="flex-1 flex flex-col items-center justify-center gap-8 px-4 py-8">
+        <motion.div 
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ delay: 0.2 }}
+          className="relative w-full flex items-center justify-center"
+        >
           <EmojiBubble
             emojis={EMOJIS}
             selected={selected}
@@ -116,87 +130,151 @@ export default function Create() {
           {/* Center glowing star */}
           <motion.button
             onClick={() => setPantheonOpen(true)}
-            className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-14 h-14 rounded-full flex items-center justify-center bg-white text-slate-900 shadow-glow border border-white/70"
+            className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-16 h-16 rounded-full flex items-center justify-center bg-gradient-to-br from-white to-slate-100 text-slate-900 shadow-glow-lg border-2 border-white/70 hover:scale-110 transition-transform duration-300"
             animate={{
               scale: [1, 1.08, 1],
               boxShadow: [
-                '0 0 20px rgba(59,130,246,0.25)',
-                '0 0 40px rgba(59,130,246,0.45)',
-                '0 0 20px rgba(59,130,246,0.25)'
+                '0 0 20px rgba(59,130,246,0.25), 0 0 40px rgba(147,51,234,0.15)',
+                '0 0 40px rgba(59,130,246,0.45), 0 0 60px rgba(147,51,234,0.25)',
+                '0 0 20px rgba(59,130,246,0.25), 0 0 40px rgba(147,51,234,0.15)'
               ],
             }}
             transition={{ duration: 2.4, repeat: Infinity, ease: 'easeInOut' }}
             aria-label="Open Panthéon"
             title="Voir le Panthéon"
           >
-            <span className="text-2xl">✨</span>
+            <span className="text-3xl">✨</span>
           </motion.button>
-        </div>
+        </motion.div>
 
-        <div className="w-full max-w-sm">
-          <button
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.4 }}
+          className="w-full max-w-sm"
+        >
+          <motion.button
             disabled={!canCompose}
-            className={`w-full h-12 rounded-xl font-medium transition 
-              ${canCompose ? 'bg-blue-600 text-white hover:bg-blue-700 active:bg-blue-800 shadow-lg shadow-blue-200' : 'bg-slate-200 text-slate-500 cursor-not-allowed'}`}
+            whileHover={canCompose ? { scale: 1.02 } : {}}
+            whileTap={canCompose ? { scale: 0.98 } : {}}
+            className={`w-full h-14 rounded-2xl font-semibold transition-all duration-300 ${
+              canCompose 
+                ? 'bg-gradient-to-r from-midnight-400 to-midnight-500 text-white hover:shadow-aurora shadow-lg' 
+                : 'glass text-slate-400 cursor-not-allowed border border-white/10'
+            }`}
             onClick={() => setStep('compose')}
           >
             {buttonLabel}
-          </button>
-        </div>
+          </motion.button>
+        </motion.div>
 
         {/* Compose area */}
         {step === 'compose' && canCompose && (
-          <div id="compose-area" ref={composeRef} className="w-full max-w-sm rounded-2xl bg-white text-slate-900 shadow p-4 space-y-3">
-            <div className="text-lg select-none mb-1">{selected.join(' ')}</div>
+          <motion.div 
+            id="compose-area" 
+            ref={composeRef} 
+            initial={{ opacity: 0, y: 20, scale: 0.95 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            transition={{ duration: 0.4 }}
+            className="w-full max-w-sm rounded-2xl bg-white text-slate-900 shadow-card-hover p-6 space-y-4"
+          >
+            <div className="text-3xl select-none mb-2 text-center">{selected.join(' ')}</div>
+            
             {suggestions.length > 0 && (
-              <div className="rounded-xl border border-slate-200 p-3 bg-slate-50">
-                <div className="flex items-center justify-between mb-2">
-                  <div className="text-sm text-slate-600">Inspiration (séquence {selected.slice(0,3).join(' ')})</div>
-                  <button
+              <motion.div 
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                className="rounded-xl border border-slate-200 p-4 bg-gradient-to-br from-slate-50 to-white"
+              >
+                <div className="flex items-center justify-between mb-3">
+                  <div className="text-sm font-medium text-slate-700 flex items-center gap-2">
+                    💡 Inspiration
+                  </div>
+                  <motion.button
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
                     onClick={() => setSuggestions(generateSequenceSuggestions(selected.slice(0, 3)))}
-                    className="text-xs px-2 py-1 rounded-lg border bg-white text-slate-900 hover:bg-slate-100"
-                  >↻ Refaire</button>
+                    className="text-xs px-3 py-1.5 rounded-lg border border-slate-300 bg-white text-slate-900 hover:bg-slate-50 font-medium shadow-sm"
+                  >
+                    ↻ Refaire
+                  </motion.button>
                 </div>
                 <ul className="space-y-2 max-h-56 overflow-auto pr-1">
                   {suggestions.map((s, i) => (
-                    <li key={i} className="flex items-start gap-2">
-                      <pre className="flex-1 whitespace-pre-wrap text-sm text-slate-800">{s}</pre>
-                      <button
+                    <motion.li 
+                      key={i} 
+                      initial={{ opacity: 0, x: -20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: i * 0.1 }}
+                      className="flex items-start gap-2 p-3 rounded-lg bg-white border border-slate-200 hover:border-slate-300 transition-colors"
+                    >
+                      <pre className="flex-1 whitespace-pre-wrap text-sm text-slate-800 leading-relaxed">{s}</pre>
+                      <motion.button
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
                         onClick={() => setLines(s.split('\n').slice(0,3))}
-                        className="self-start text-xs px-2 py-1 rounded-lg bg-emerald-600 text-white hover:bg-emerald-700"
+                        className="self-start text-xs px-3 py-1.5 rounded-lg bg-gradient-to-r from-emerald-600 to-emerald-500 text-white hover:from-emerald-700 hover:to-emerald-600 font-medium shadow-sm"
                         aria-label="Utiliser cette suggestion"
-                      >Utiliser</button>
-                    </li>
+                      >
+                        Utiliser
+                      </motion.button>
+                    </motion.li>
                   ))}
                 </ul>
-              </div>
+              </motion.div>
             )}
+            
             {[0,1,2].map((i) => (
-              <div key={i} className="space-y-1">
-                <label className="block text-sm text-slate-600">L{i+1}</label>
+              <motion.div 
+                key={i} 
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.2 + i * 0.1 }}
+                className="space-y-2"
+              >
+                <label className="block text-sm font-medium text-slate-700">
+                  Ligne {i+1} <span className="text-slate-400 font-normal">({i===1 ? '7' : '5'} syllabes)</span>
+                </label>
                 <textarea
                   value={lines[i]}
                   onChange={(e) => setLines(lines.map((v, idx) => idx === i ? e.target.value : v))}
                   rows={2}
-                  className="w-full rounded-xl border border-slate-200 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-300"
-                  placeholder={i===0 ? '5 syllabes…' : i===1 ? '7 syllabes…' : '5 syllabes…'}
+                  className="w-full rounded-xl border-2 border-slate-200 px-4 py-3 focus:outline-none focus:border-midnight-400 focus:ring-4 focus:ring-midnight-400/20 transition-all duration-300"
+                  placeholder={i===0 ? 'Un rêve commence...' : i===1 ? 'L\'émotion s\'éveille...' : 'Le voyage continue...'}
                 />
-              </div>
+              </motion.div>
             ))}
-            {error && <p className="text-sm text-red-600">{error}</p>}
-            <button
+            
+            {error && (
+              <motion.p 
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                className="text-sm text-red-600 bg-red-50 border border-red-200 rounded-lg px-3 py-2"
+              >
+                {error}
+              </motion.p>
+            )}
+            
+            <motion.button
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
               onClick={handlePublish}
-              className="w-full h-12 rounded-xl bg-emerald-600 text-white font-medium hover:bg-emerald-700 active:bg-emerald-800 transition"
+              className="w-full h-14 rounded-xl bg-gradient-to-r from-emerald-600 to-emerald-500 text-white font-semibold hover:from-emerald-700 hover:to-emerald-600 shadow-lg hover:shadow-xl transition-all duration-300"
             >
-              Publier
-            </button>
-          </div>
+              ✨ Publier mon haïku
+            </motion.button>
+          </motion.div>
         )}
       </main>
 
-      <footer className="p-4 text-center text-xs text-slate-500">
-        Prototype – animations <span className="font-mono">Framer Motion</span>, layout <span className="font-mono">Tailwind</span>
-      </footer>
+      <motion.footer 
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.6 }}
+        className="p-4 text-center text-xs text-slate-400 glass-strong border-t border-white/10"
+      >
+        Prototype – animations <span className="font-mono text-slate-300">Framer Motion</span>, layout <span className="font-mono text-slate-300">Tailwind</span>
+      </motion.footer>
 
       <PantheonModal open={pantheonOpen} onClose={() => setPantheonOpen(false)} />
     </div>

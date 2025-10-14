@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { motion } from 'framer-motion'
 import { getMoonIndex, nextMoon, getSelectedTriplet, saveDream, seedIfEmpty, getUser } from '../utils/storage.js'
 import corpus from '../data/corpus.json'
 import inuitLunes from '../data/inuit_lunes.json'
@@ -60,48 +61,107 @@ export default function Lune() {
 
   return (
     <div className="space-y-6">
-      <section className="rounded-2xl bg-white text-slate-900 shadow p-6">
-        <h2 className="text-2xl font-medium">{meta.titre}</h2>
-        <p className="text-slate-600 mt-1 text-sm">{meta.ressource}</p>
-        <div className="mt-3">
-          <button
+      {/* Moon Info */}
+      <motion.section 
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        className="rounded-2xl glass-strong border border-white/20 p-6 shadow-card relative overflow-hidden"
+      >
+        <div className="absolute top-0 right-0 text-8xl opacity-10">🌙</div>
+        <div className="relative z-10">
+          <div className="inline-block px-3 py-1.5 rounded-full bg-gradient-to-r from-aurora-purple/20 to-aurora-blue/20 border border-white/10 mb-3">
+            <span className="text-xs font-medium text-white">Lune {moon}/12</span>
+          </div>
+          <h2 className="text-2xl md:text-3xl font-bold text-white mb-2">{meta.titre}</h2>
+          <p className="text-slate-300 text-sm leading-relaxed mb-4">{meta.ressource}</p>
+          <motion.button
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
             onClick={() => navigate('/guardian')}
-            className="rounded-xl bg-indigo-600 text-white px-3 py-2 text-sm hover:bg-indigo-700"
+            className="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-midnight-400 to-midnight-500 text-white px-5 py-2.5 hover:shadow-aurora transition-all duration-300 font-medium"
           >
             Rencontrer le gardien ✧
-          </button>
+          </motion.button>
         </div>
-      </section>
+      </motion.section>
 
-      <section className="rounded-2xl bg-white text-slate-900 shadow p-6">
-        <div className="text-3xl select-none">{triplet.join(' ') || '—'}</div>
-        {!user && (
-          <div className="mt-3 rounded-xl bg-indigo-50 border border-indigo-200 text-indigo-800 p-3 text-sm">
-            Inscrivez-vous localement pour générer et sauvegarder un rêve.
-          </div>
+      {/* Dream Composition */}
+      <motion.section 
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.2 }}
+        className="rounded-2xl bg-white text-slate-900 shadow-card-hover p-6 space-y-4"
+      >
+        <div className="text-center">
+          <div className="text-4xl select-none mb-3">{triplet.join(' ') || '—'}</div>
+          {!user && (
+            <motion.div 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              className="rounded-xl bg-gradient-to-r from-indigo-50 to-purple-50 border border-indigo-200 text-indigo-800 p-4 text-sm"
+            >
+              <p className="font-medium mb-2">✨ Inscription requise</p>
+              <p className="text-xs text-indigo-700">
+                Inscrivez-vous localement pour générer et sauvegarder vos rêves.
+              </p>
+            </motion.div>
+          )}
+        </div>
+
+        {text && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            className="rounded-xl bg-gradient-to-br from-slate-50 to-white border border-slate-200 p-6"
+          >
+            <pre className="whitespace-pre-wrap leading-relaxed text-slate-800 text-center font-medium">
+              {text}
+            </pre>
+          </motion.div>
         )}
-        <pre className="mt-3 whitespace-pre-wrap leading-relaxed text-slate-800">{text}</pre>
-        <div className="mt-4 flex items-center gap-3">
-          <button
+
+        <div className="flex flex-wrap items-center gap-3 pt-2">
+          <motion.button
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
             onClick={() => {
               if (!user) { alert('Inscription locale requise.'); return }
               setText(generateDreamText(triplet, corpus))
             }}
             disabled={!user}
-            className={`rounded-xl px-3 py-2 ${user ? 'bg-slate-900 text-white' : 'bg-slate-200 text-slate-500 cursor-not-allowed'}`}
+            className={`flex-1 min-w-[120px] rounded-xl px-4 py-3 font-medium transition-all duration-300 ${
+              user 
+                ? 'bg-gradient-to-r from-slate-900 to-slate-800 text-white hover:from-slate-800 hover:to-slate-700 shadow-md hover:shadow-lg' 
+                : 'bg-slate-200 text-slate-400 cursor-not-allowed'
+            }`}
           >
-            Regénérer
-          </button>
-          <button
+            🔄 Regénérer
+          </motion.button>
+          
+          <motion.button
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
             onClick={handleSave}
             disabled={!user}
-            className={`rounded-xl px-3 py-2 ${user ? 'bg-emerald-600 text-white' : 'bg-slate-200 text-slate-500 cursor-not-allowed'}`}
+            className={`flex-1 min-w-[120px] rounded-xl px-4 py-3 font-medium transition-all duration-300 ${
+              user 
+                ? 'bg-gradient-to-r from-emerald-600 to-emerald-500 text-white hover:from-emerald-700 hover:to-emerald-600 shadow-md hover:shadow-lg' 
+                : 'bg-slate-200 text-slate-400 cursor-not-allowed'
+            }`}
           >
-            Sauvegarder
-          </button>
-          <button onClick={handleNext} className="rounded-xl bg-indigo-600 text-white px-3 py-2">Lune suivante →</button>
+            💾 Sauvegarder
+          </motion.button>
+          
+          <motion.button 
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
+            onClick={handleNext} 
+            className="flex-1 min-w-[140px] rounded-xl bg-gradient-to-r from-midnight-400 to-midnight-500 text-white px-4 py-3 hover:shadow-aurora transition-all duration-300 font-medium"
+          >
+            Lune suivante →
+          </motion.button>
         </div>
-      </section>
+      </motion.section>
     </div>
   )
 }
