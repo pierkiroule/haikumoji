@@ -8,16 +8,15 @@ export default function Home() {
 
       <section className="text-center space-y-3 mb-8">
         <h1 className="text-3xl md:text-4xl font-semibold tracking-tight">
-          Onimoji — voyage dans l’Onivers Inuit
+          Choisissez votre voyage onirique
         </h1>
         <p className="mx-auto max-w-xl text-slate-300">
-          Une pratique douce et inclusive : créer avec des émojis pour sensibiliser,
-          apaiser et relier. L’universalité des symboles rend la création accessible,
-          au service du self‑care et du social‑care.
+          Onimoji vous accompagne avec des symboles universels pour apaiser,
+          relier et cultiver votre activité onirique.
         </p>
         <div className="flex items-center justify-center gap-3 pt-2">
-          <Link to="/navette" className="rounded-2xl bg-midnight-400 text-white px-6 py-3 hover:bg-midnight-300 active:bg-midnight-500 transition">
-            Monter à bord du Cosmoniris 🚀
+          <Link to="/voyage/inuit" className="rounded-2xl bg-midnight-400 text-white px-6 py-3 hover:bg-midnight-300 active:bg-midnight-500 transition">
+            Découvrir le voyage Inuit 🚀
           </Link>
           <Link to="/community" className="rounded-2xl bg-white/10 text-white px-6 py-3 border border-white/10 hover:bg-white/20 transition">
             Voir la communauté
@@ -26,6 +25,68 @@ export default function Home() {
       </section>
 
       <section className="grid gap-4 md:gap-5 md:grid-cols-3">
+        {/* Inuit — déverrouillé */}
+        <article className="rounded-2xl bg-midnight-800/60 backdrop-blur-sm border border-white/10 p-5">
+          <div className="flex items-center justify-between">
+            <h2 className="text-lg font-medium">Voyage Inuit</h2>
+            <div className="text-xl select-none">❄️🌌🐋</div>
+          </div>
+          <p className="mt-1 text-slate-300 text-sm leading-relaxed">
+            12 lunes pour rencontrer des gardiens onimoji (Sila, Sedna, …)
+            et découvrir des ressources culturelles inuites.
+          </p>
+          <div className="mt-3">
+            <Link to="/voyage/inuit" className="inline-block rounded-xl bg-white/90 text-slate-900 px-4 py-2 text-sm font-medium hover:bg-white">
+              Entrer dans le voyage
+            </Link>
+          </div>
+        </article>
+
+        {/* Berbère — verrouillé (bêta) */}
+        <article className="rounded-2xl bg-midnight-800/30 backdrop-blur-sm border border-white/10 p-5 opacity-60">
+          <div className="flex items-center justify-between">
+            <h2 className="text-lg font-medium">Voyage Berbère</h2>
+            <div className="text-xl select-none">🏜️✨🪶</div>
+          </div>
+          <p className="mt-1 text-slate-300 text-sm leading-relaxed">
+            Bêta à venir — non accessible dans cette version.
+          </p>
+          <div className="mt-3">
+            <button disabled className="rounded-xl bg-white/10 text-white/70 px-4 py-2 text-sm border border-white/10 cursor-not-allowed">
+              Verrouillé
+            </button>
+          </div>
+        </article>
+
+        {/* Druidique — verrouillé (bêta) */}
+        <article className="rounded-2xl bg-midnight-800/30 backdrop-blur-sm border border-white/10 p-5 opacity-60">
+          <div className="flex items-center justify-between">
+            <h2 className="text-lg font-medium">Voyage Druidique</h2>
+            <div className="text-xl select-none">🌿🔥🌕</div>
+          </div>
+          <p className="mt-1 text-slate-300 text-sm leading-relaxed">
+            Bêta à venir — non accessible dans cette version.
+          </p>
+          <div className="mt-3">
+            <button disabled className="rounded-xl bg-white/10 text-white/70 px-4 py-2 text-sm border border-white/10 cursor-not-allowed">
+              Verrouillé
+            </button>
+          </div>
+        </article>
+      </section>
+
+      {/* Repères de parcours */}
+      <section className="mt-8 rounded-2xl bg-white/5 border border-white/10 p-5">
+        <h3 className="font-medium">Parcours Inuit — 12 lunes</h3>
+        <ol className="mt-2 text-sm text-slate-300 list-decimal list-inside space-y-1">
+          <li>Choisissez 3 émojis à bord de la Navette Cosmoniris.</li>
+          <li>Explorez la Lune en cours et sa ressource culturelle.</li>
+          <li>Rencontrez un gardien onimoji inuit pour un rituel d’apaisement.</li>
+        </ol>
+      </section>
+
+      {/* Principes */}
+      <section className="mt-4 grid gap-4 md:gap-5 md:grid-cols-3">
         <article className="rounded-2xl bg-midnight-800/60 backdrop-blur-sm border border-white/10 p-5">
           <h2 className="text-lg font-medium">Accessibilité & universalité</h2>
           <p className="mt-1 text-slate-300 text-sm leading-relaxed">
@@ -43,20 +104,11 @@ export default function Home() {
         <article className="rounded-2xl bg-midnight-800/60 backdrop-blur-sm border border-white/10 p-5">
           <h2 className="text-lg font-medium">Self‑care & social‑care</h2>
           <p className="mt-1 text-slate-300 text-sm leading-relaxed">
-            Se reconnecter à soi, puis partager avec la communauté: empathie,
+            Se reconnecter à soi, puis partager avec la communauté : empathie,
             écoute et entraide par la création courte et sensible.
           </p>
         </article>
       </section>
-
-        <section className="mt-8 rounded-2xl bg-white/5 border border-white/10 p-5">
-          <h3 className="font-medium">Parcours des 12 lunes</h3>
-          <ol className="mt-2 text-sm text-slate-300 list-decimal list-inside space-y-1">
-            <li>Montez à bord du Cosmoniris pour choisir 3 émojis.</li>
-            <li>Explorez la Lune en cours et découvrez sa ressource culturelle.</li>
-            <li>Générez un rêve et sauvegardez-le localement.</li>
-          </ol>
-        </section>
     </div>
   )
 }

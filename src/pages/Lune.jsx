@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { getMoonIndex, nextMoon, getSelectedTriplet, saveDream, seedIfEmpty, getUser } from '../utils/storage.js'
 import corpus from '../data/corpus.json'
 import inuitLunes from '../data/inuit_lunes.json'
@@ -17,6 +18,7 @@ export default function Lune() {
   const [triplet, setTriplet] = useState([])
   const [text, setText] = useState('')
   const [user, setUser] = useState(null)
+  const navigate = useNavigate()
 
   useEffect(() => {
     seedIfEmpty()
@@ -61,6 +63,14 @@ export default function Lune() {
       <section className="rounded-2xl bg-white shadow p-6">
         <h2 className="text-2xl font-light">{meta.titre}</h2>
         <p className="text-slate-600 mt-1 text-sm">{meta.ressource}</p>
+        <div className="mt-3">
+          <button
+            onClick={() => navigate('/guardian')}
+            className="rounded-xl bg-indigo-600 text-white px-3 py-2 text-sm hover:bg-indigo-700"
+          >
+            Rencontrer le gardien ✧
+          </button>
+        </div>
       </section>
 
       <section className="rounded-2xl bg-white shadow p-6">
