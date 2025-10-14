@@ -1,0 +1,67 @@
+{
+  "lune": 0,
+  "titre": "Nom du Gardien",
+  "gardien": {
+    "id": "id_unique",
+    "nom": "Nom du Gardien",
+    "titre": "Titre descriptif",
+    "emoji": "🌟",
+    "element": "air|water|fire|earth|ice|aurora|light|animal",
+    "description": "Description courte du gardien et de son rôle"
+  },
+  "sagesses": {
+    "message_accueil": "Message de bienvenue personnalisé du gardien",
+    "enseignement_principal": "L'enseignement principal que le gardien souhaite transmettre sur le sommeil et les rêves",
+    "sagesse_courte": "Une phrase courte et mémorable"
+  },
+  "rituel_de_nuit": {
+    "titre": "Nom du Rituel",
+    "etapes": [
+      "Étape 1 : description claire",
+      "Étape 2 : description claire",
+      "Étape 3 : description claire",
+      "etc."
+    ],
+    "duree": "X minutes",
+    "moment_ideal": "Quand utiliser ce rituel"
+  },
+  "script_onirique": {
+    "titre": "Titre poétique du script",
+    "texte": "Texte poétique régénérateur\nsur plusieurs lignes\ncomme un poème ou une méditation guidée.\n\nUtiliser des retours à la ligne pour le rythme.",
+    "instructions": "Comment utiliser ce script (à voix haute, en silence, nombre de répétitions...)",
+    "variation_avec_emojis": "Comment intégrer les 3 émojis choisis par l'utilisateur"
+  },
+  "astuces_chamaniques": [
+    {
+      "titre": "Nom de l'astuce 1",
+      "description": "Technique pratique pour améliorer le sommeil ou les rêves"
+    },
+    {
+      "titre": "Nom de l'astuce 2",
+      "description": "Technique pratique pour améliorer le sommeil ou les rêves"
+    },
+    {
+      "titre": "Nom de l'astuce 3",
+      "description": "Technique pratique pour améliorer le sommeil ou les rêves"
+    }
+  ],
+  "invitation_ecriture": {
+    "question": "Question ouverte pour inviter l'utilisateur à écrire ses sensations",
+    "guidance": "Mots-clés ou thèmes suggérés pour guider l'écriture",
+    "placeholder": "Exemple de texte pour inspirer l'utilisateur"
+  },
+  "ressources_culturelles": {
+    "concept": "Nom du concept inuit",
+    "explication": "Explication du concept dans la culture inuite traditionnelle",
+    "liens": [
+      {
+        "titre": "Titre de la ressource",
+        "url": "https://www.example.com/ressource",
+        "type": "article|video|audio|mythe"
+      }
+    ]
+  },
+  "emojis_associes": ["🌟", "✨", "💫", "⭐", "🌙"],
+  "couleur_theme": "#hexcolor",
+  "musique_suggeree": "Type de musique ou sons naturels suggérés pour accompagner"
+}

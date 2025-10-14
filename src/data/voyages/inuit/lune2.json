@@ -1,0 +1,69 @@
+{
+  "lune": 2,
+  "titre": "Sedna, Déesse de la Mer",
+  "gardien": {
+    "id": "sedna",
+    "nom": "Sedna",
+    "titre": "Gardienne des Profondeurs Marines",
+    "emoji": "🌊",
+    "element": "water",
+    "description": "Sedna règne sur les océans et leurs créatures. Elle enseigne la fluidité, l'acceptation et le lâcher-prise face aux courants de la vie."
+  },
+  "sagesses": {
+    "message_accueil": "Les vagues de l'océan t'accueillent, voyageur. Je suis Sedna, gardienne des eaux profondes où naissent les rêves.",
+    "enseignement_principal": "Comme l'eau épouse la forme de son contenant, apprends à t'adapter aux cycles du sommeil sans résistance. Les rêves coulent naturellement quand on cesse de nager à contre-courant.",
+    "sagesse_courte": "Laisse-toi porter par les marées du sommeil. Les profondeurs t'attendent avec douceur."
+  },
+  "rituel_de_nuit": {
+    "titre": "Rituel des Vagues Apaisantes",
+    "etapes": [
+      "Ferme les yeux et imagine que tu flottes sur l'océan",
+      "Sens ton corps se balancer doucement au rythme des vagues",
+      "À chaque inspiration, une vague te soulève",
+      "À chaque expiration, elle te berce vers le fond",
+      "Laisse-toi couler lentement dans les profondeurs paisibles",
+      "L'océan te porte, tu es en sécurité"
+    ],
+    "duree": "7 minutes",
+    "moment_ideal": "Lorsque ton esprit s'agite comme des vagues"
+  },
+  "script_onirique": {
+    "titre": "Le Chant de l'Océan",
+    "texte": "Je m'abandonne aux vagues du sommeil.\nMon corps flotte, léger comme l'écume.\n\nSedna m'accueille dans ses profondeurs,\nOù le calme règne, infini et bleu.\n\nChaque vague emporte mes pensées,\nChaque marée me rapproche du rêve.\n\nJe coule doucement vers le repos,\nBercé par l'océan de la nuit.",
+    "instructions": "Visualise un océan calme et laisse ce texte résonner comme le ressac des vagues.",
+    "variation_avec_emojis": "Mes émojis {emoji1} {emoji2} {emoji3} dansent à la surface, puis plongent dans les rêves."
+  },
+  "astuces_chamaniques": [
+    {
+      "titre": "La visualisation de l'eau",
+      "description": "Imagine une eau tiède qui coule dans ton corps, relâchant chaque muscle sur son passage."
+    },
+    {
+      "titre": "Le son des vagues",
+      "description": "Écoute (ou imagine) le son des vagues. Ce rythme régulier synchronise ton cerveau avec le sommeil."
+    },
+    {
+      "titre": "Le lâcher-prise aquatique",
+      "description": "L'eau n'a pas de forme fixe. Sois comme elle : adaptable, fluide, sans résistance."
+    }
+  ],
+  "invitation_ecriture": {
+    "question": "Que t'évoquent tes 3 symboles ? Quelles émotions fluides émergent ?",
+    "guidance": "Pense à l'eau : fluidité, douceur, profondeur, sérénité, purification...",
+    "placeholder": "Ex : L'océan qui berce, la pluie qui apaise, la rivière qui coule..."
+  },
+  "ressources_culturelles": {
+    "concept": "Sedna",
+    "explication": "Sedna est la déesse de la mer dans la mythologie inuite. Elle contrôle tous les animaux marins et enseigne le respect des ressources naturelles et l'équilibre avec la nature.",
+    "liens": [
+      {
+        "titre": "La légende de Sedna",
+        "url": "https://www.example.com/sedna-legend",
+        "type": "mythe"
+      }
+    ]
+  },
+  "emojis_associes": ["🌊", "🐋", "🐚", "💧", "🪸"],
+  "couleur_theme": "#60a5fa",
+  "musique_suggeree": "Sons d'océan, vagues douces, pluie légère"
+}
