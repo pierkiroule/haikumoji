@@ -11,6 +11,8 @@ export default function EmojiNetwork({
   selected = [],
   onToggle,
   maxSelected = 3,
+  getNodeColor, // optional: (id: string, selected: boolean) => { fill?: string, stroke?: string, fillOpacity?: number, strokeOpacity?: number }
+  glow = false,
 }) {
   const containerRef = useRef(null)
   const svgRef = useRef(null)
@@ -121,11 +123,21 @@ export default function EmojiNetwork({
 
     nodeSel.append('circle')
       .attr('r', d => nodeRadius(d.count))
-      .attr('fill', d => (selectable && isSelected(d.id) ? '#10b981' : '#0ea5e9'))
-      .attr('fill-opacity', d => (selectable && isSelected(d.id) ? 0.25 : 0.12))
-      .attr('stroke', d => (selectable && isSelected(d.id) ? '#059669' : '#0ea5e9'))
-      .attr('stroke-width', d => (selectable && isSelected(d.id) ? 2 : 1.2))
-      .attr('stroke-opacity', d => (selectable && isSelected(d.id) ? 0.7 : 0.4))
+      .each(function(d) {
+        const sel = selectable && isSelected(d.id)
+        const colors = typeof getNodeColor === 'function' ? (getNodeColor(d.id, sel) || {}) : {}
+        const fill = colors.fill || (sel ? '#10b981' : '#0ea5e9')
+        const stroke = colors.stroke || (sel ? '#059669' : '#0ea5e9')
+        const fo = typeof colors.fillOpacity === 'number' ? colors.fillOpacity : (sel ? 0.28 : 0.14)
+        const so = typeof colors.strokeOpacity === 'number' ? colors.strokeOpacity : (sel ? 0.75 : 0.45)
+        select(this)
+          .attr('fill', fill)
+          .attr('fill-opacity', fo)
+          .attr('stroke', stroke)
+          .attr('stroke-width', sel ? 2 : 1.2)
+          .attr('stroke-opacity', so)
+          .style('filter', glow ? `drop-shadow(0 0 6px ${stroke}60)` : null)
+      })
 
     nodeSel.append('text')
       .attr('text-anchor', 'middle')

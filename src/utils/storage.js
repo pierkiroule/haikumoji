@@ -47,6 +47,12 @@ export function seedIfEmpty() {
   if (typeof getJSON(STORAGE_KEYS.MOON_INDEX, null) !== 'number') {
     setJSON(STORAGE_KEYS.MOON_INDEX, 1)
   }
+  if (!getJSON(STORAGE_KEYS.STAR_SEEDS, null)) {
+    setJSON(STORAGE_KEYS.STAR_SEEDS, [])
+  }
+  if (!getJSON(STORAGE_KEYS.COSMOJI_COUNTS, null)) {
+    setJSON(STORAGE_KEYS.COSMOJI_COUNTS, { occurrence: {}, cooccurrence: {} })
+  }
 }
 
 export function getHaikus() {
@@ -76,6 +82,7 @@ export function addHaiku({ emojis, text, author, authorId }) {
 // Compute emoji statistics (occurrences and cooccurrences)
 export function computeEmojiStats() {
   const haikus = getHaikus()
+  const persistent = getJSON(STORAGE_KEYS.COSMOJI_COUNTS, { occurrence: {}, cooccurrence: {} })
   const occ = new Map() // emoji -> count
   const pair = new Map() // 'e1|e2' sorted -> count
   const triple = new Map() // 'e1|e2|e3' sorted -> count
@@ -105,6 +112,20 @@ export function computeEmojiStats() {
     }
   }
 
+  // Merge persistent counts (from selection resonance) into computed stats
+  try {
+    const addMap = (m, obj, split) => {
+      for (const [key, val] of Object.entries(obj || {})) {
+        const k = split ? key.split('|').sort().join('|') : key
+        m.set(k, (m.get(k) || 0) + (Number(val) || 0))
+      }
+    }
+    addMap(occ, persistent.occurrence || {}, false)
+    addMap(pair, persistent.cooccurrence || {}, true)
+  } catch {
+    // ignore merge errors
+  }
+
   // Ensure all catalog emojis exist in occurrences with zero counts
   for (const e of ALL_EMOJIS) {
     if (!occ.has(e)) occ.set(e, 0)
@@ -121,6 +142,25 @@ export function computeEmojiStats() {
     pairs: toSortedArray(pair, true),
     triples: toSortedArray(triple, true),
   }
+}
+
+export function strengthenCosmojiCounts(selected) {
+  const safe = Array.isArray(selected) ? selected.slice(0, 3) : []
+  const current = getJSON(STORAGE_KEYS.COSMOJI_COUNTS, { occurrence: {}, cooccurrence: {} })
+  const occ = { ...(current.occurrence || {}) }
+  const co = { ...(current.cooccurrence || {}) }
+  for (const e of safe) {
+    occ[e] = (occ[e] || 0) + 1
+  }
+  if (safe.length >= 2) {
+    for (let i = 0; i < safe.length; i++) {
+      for (let j = i + 1; j < safe.length; j++) {
+        const key = [safe[i], safe[j]].sort().join('|')
+        co[key] = (co[key] || 0) + 1
+      }
+    }
+  }
+  setJSON(STORAGE_KEYS.COSMOJI_COUNTS, { occurrence: occ, cooccurrence: co })
 }
 
 export function getLikedIds() {
@@ -177,6 +217,26 @@ export function setSelectedTriplet(emojis) {
 
 export function getSelectedTriplet() {
   return getJSON(STORAGE_KEYS.SELECTED_TRIPLET, [])
+}
+
+// ---- Star seeds & guardians progression ----
+export function getStarSeeds() {
+  return getJSON(STORAGE_KEYS.STAR_SEEDS, [])
+}
+
+export function addStarSeed({ moon, guardianId, emojis, element }) {
+  const seeds = getStarSeeds()
+  const entry = {
+    id: generateId(),
+    moon: Math.max(1, Math.min(12, Number(moon) || getMoonIndex())),
+    guardianId: guardianId || null,
+    emojis: Array.isArray(emojis) ? emojis.slice(0, 3) : [],
+    element: element || null,
+    createdAt: Date.now(),
+  }
+  const next = [entry, ...seeds]
+  setJSON(STORAGE_KEYS.STAR_SEEDS, next)
+  return entry
 }
 
 export function getUser() {

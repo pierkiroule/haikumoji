@@ -1,13 +1,17 @@
 import { useEffect, useMemo, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import PantheonModal from '../components/PantheonModal.jsx'
 import CosmojiEmblem from '../components/CosmojiEmblem.jsx'
 import EmojiNetwork from '../components/EmojiNetwork.jsx'
-import { computeEmojiStats, seedIfEmpty, addHaiku, getUser } from '../utils/storage.js'
+import guardians from '../data/guardiansInuit.json'
+import cosmojiData from '../data/cosmojiData.json'
+import { computeEmojiStats, seedIfEmpty, setSelectedTriplet, getMoonIndex } from '../utils/storage.js'
 
 export default function Cosmoji() {
   const [open, setOpen] = useState(false)
   const [stats, setStats] = useState({ occurrences: [], pairs: [], triples: [] })
   const [picked, setPicked] = useState([]) // up to 3
+  const navigate = useNavigate()
 
   useEffect(() => {
     seedIfEmpty()
@@ -23,14 +27,13 @@ export default function Cosmoji() {
     })
   }
 
-  const handleCreateFromPicked = () => {
+  // Pick 3 -> compute resonance and go to guardian encounter
+  const handleResonance = () => {
     if (picked.length !== 3) return
-    const user = getUser() || { name: 'Anonyme', id: null }
-    const text = ''
-    addHaiku({ emojis: picked.slice(0, 3), text, author: user.name, authorId: user.id })
-    setPicked([])
-    setStats(computeEmojiStats())
-    alert('Triplet ajouté au Cosmojî.')
+    // Save selection to storage so the Guardian page can read it
+    setSelectedTriplet(picked)
+    // Navigate to guardian encounter
+    navigate('/guardian')
   }
 
   return (
@@ -55,6 +58,28 @@ export default function Cosmoji() {
             onToggle={handleToggle}
             maxNodes={30}
             maxLinks={200}
+            glow
+            getNodeColor={(id, sel) => {
+              const node = cosmojiData.nodes.find(n => n.id === id)
+              if (!node) return undefined
+              const palette = {
+                air: { base: '#22d3ee', dark: '#0891b2' },
+                water: { base: '#60a5fa', dark: '#2563eb' },
+                fire: { base: '#f59e0b', dark: '#d97706' },
+                earth: { base: '#86efac', dark: '#16a34a' },
+                ice: { base: '#93c5fd', dark: '#3b82f6' },
+                aurora: { base: '#34d399', dark: '#10b981' },
+                light: { base: '#f5d0fe', dark: '#e879f9' },
+                animal: { base: '#fca5a5', dark: '#ef4444' },
+              }
+              const col = palette[node.element] || { base: '#0ea5e9', dark: '#0284c7' }
+              return {
+                fill: sel ? col.base : '#0ea5e9',
+                stroke: sel ? col.dark : '#0ea5e9',
+                fillOpacity: sel ? 0.28 : 0.12,
+                strokeOpacity: sel ? 0.75 : 0.45,
+              }
+            }}
           />
         </div>
         <div className="mt-3 flex items-center justify-between">
@@ -62,11 +87,11 @@ export default function Cosmoji() {
             Sélection: <span className="font-mono">{picked.join(' ') || '—'}</span>
           </div>
           <button
-            onClick={handleCreateFromPicked}
+            onClick={handleResonance}
             disabled={picked.length !== 3}
             className={`rounded-xl px-3 py-1 text-sm font-medium transition ${picked.length === 3 ? 'bg-emerald-600 text-white hover:bg-emerald-700' : 'bg-slate-200 text-slate-500 cursor-not-allowed'}`}
           >
-            Créer un haïku avec ces 3
+            Entrer en résonance ✧
           </button>
         </div>
       </div>

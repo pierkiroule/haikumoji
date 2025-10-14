@@ -1,0 +1,122 @@
+[
+  {
+    "id": 1,
+    "name": "Sila Qilak",
+    "emoji": "🌬️",
+    "element": "air",
+    "title": "Gardien du Souffle",
+    "message": "Écoute le vent polaire, il polit les bords du jour.",
+    "ritual": "Avant le sommeil, inspire 4 temps, retiens 4 temps, expire 6 temps. Trois cycles, en pensant à une plume qui retombe.",
+    "symbol": "🪶"
+  },
+  {
+    "id": 2,
+    "name": "Qinik",
+    "emoji": "❄️",
+    "element": "ice",
+    "title": "Gardienne du Silence",
+    "message": "Le givre scelle les mots inutiles.",
+    "ritual": "Refroidis tes pensées : pose-les une à une dans un bol imaginaire de neige, puis laisse-les fondre.",
+    "symbol": "🧊"
+  },
+  {
+    "id": 3,
+    "name": "Aqsarniit",
+    "emoji": "🌌",
+    "element": "aurora",
+    "title": "Gardienne des Aurores",
+    "message": "Les rubans du ciel cousent les rêves ensemble.",
+    "ritual": "Ferme les yeux : imagine trois rubans verts. Laisse-les traverser ton front, ta gorge, ton cœur.",
+    "symbol": "💫"
+  },
+  {
+    "id": 4,
+    "name": "Nanuq",
+    "emoji": "🏔️",
+    "element": "ice",
+    "title": "Gardien des Glaces",
+    "message": "Va lentement, comme sur la banquise, mais sans crainte.",
+    "ritual": "Ralentis la marche intérieure : compte 12 pas jusqu’à la couche, puis dépose le corps.",
+    "symbol": "🐾"
+  },
+  {
+    "id": 5,
+    "name": "Tariuq",
+    "emoji": "🌊",
+    "element": "water",
+    "title": "Gardien des Marées",
+    "message": "Le cœur suit la mer : il se retire, il revient.",
+    "ritual": "Allonge-toi la main sur le ventre ; accompagne 5 vagues de souffle du nombril à la gorge.",
+    "symbol": "💧"
+  },
+  {
+    "id": 6,
+    "name": "Arvik",
+    "emoji": "🐋",
+    "element": "animal",
+    "title": "Gardien des Animaux",
+    "message": "Sous la glace, un chant immense te porte.",
+    "ritual": "Écoute un son bas imaginé, comme une baleine. Prolonge l’expiration en murmurant ‘mmm’.",
+    "symbol": "🎵"
+  },
+  {
+    "id": 7,
+    "name": "Igalaaq",
+    "emoji": "🔥",
+    "element": "fire",
+    "title": "Gardien des Feux",
+    "message": "Une braise vigilante suffit pour réchauffer la nuit.",
+    "ritual": "Pose une couverture sur les épaules. Pense à une braise : garde-la douce, pas brûlante.",
+    "symbol": "✨"
+  },
+  {
+    "id": 8,
+    "name": "Tiriganiak",
+    "emoji": "🐦",
+    "element": "air",
+    "title": "Gardien des Oiseaux",
+    "message": "Apprends la carte des vents en suivant une plume.",
+    "ritual": "Imagine une plume qui décrit un cercle au-dessus du lit. Ferme-le avec un soupir léger.",
+    "symbol": "🪶"
+  },
+  {
+    "id": 9,
+    "name": "Qilauti",
+    "emoji": "🪞",
+    "element": "water",
+    "title": "Gardien des Reflets",
+    "message": "L’eau claire montre sans blesser.",
+    "ritual": "Regarde un reflet discret (fenêtre, écran en veille). Nommer 3 choses calmes de la journée.",
+    "symbol": "☁️"
+  },
+  {
+    "id": 10,
+    "name": "Qamutik",
+    "emoji": "🛶",
+    "element": "earth",
+    "title": "Gardien des Chemins",
+    "message": "Le traîneau connaît la piste invisible de l’entraide.",
+    "ritual": "Visualise une route neigeuse. Place trois lanternes pour marquer les étapes du sommeil.",
+    "symbol": "🌟"
+  },
+  {
+    "id": 11,
+    "name": "Uqaq",
+    "emoji": "☁️",
+    "element": "air",
+    "title": "Gardien de l’Écoute",
+    "message": "La nuit parle d’abord en sourdine.",
+    "ritual": "Reste 1 minute sans bouger. Écoute 3 sons lointains. Remercie-les mentalement.",
+    "symbol": "👂"
+  },
+  {
+    "id": 12,
+    "name": "Pinga",
+    "emoji": "🌕",
+    "element": "light",
+    "title": "Gardienne du Retour",
+    "message": "Le cercle se referme pour mieux s’ouvrir.",
+    "ritual": "Découvre la lune. Inspire-lui un vœu pour celles et ceux que tu aimes.",
+    "symbol": "🌠"
+  }
+]
