@@ -34,10 +34,12 @@ export default function Navette() {
     navigate('/lune')
   }
 
-  const handleSignup = () => {
-    const created = saveUser({ name: 'Voyageur' })
-    setUser(created)
-  }
+  // Redirect to VoyageInuit if no user
+  useEffect(() => {
+    if (!user) {
+      navigate('/voyage/inuit')
+    }
+  }, [user, navigate])
 
   const voyageSteps = [
     {
@@ -80,28 +82,8 @@ export default function Navette() {
           <h2 className="text-2xl md:text-3xl font-bold text-white mb-3">Hublot Cosmoji</h2>
           
           <p className="text-slate-300 text-sm leading-relaxed mb-4">
-            Bienvenue à bord ! Le voyage Inuit se déroule en 12 lunes. À chaque lune, vous suivrez ce parcours en 3 étapes pour cultiver votre jardin onirique.
+            🌙 Bienvenue à bord, {user?.name || 'Voyageur'} ! Le voyage Inuit se déroule en 12 lunes. À chaque lune, vous suivrez ce parcours en 3 étapes pour cultiver votre jardin onirique.
           </p>
-          
-          {!user && (
-            <motion.div 
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              className="rounded-xl bg-gradient-to-r from-indigo-500/20 to-purple-500/20 border border-white/20 p-4"
-            >
-              <p className="text-white text-sm font-medium mb-3">
-                ✨ Vous êtes en visite. Pour sélectionner et générer un rêve, inscrivez-vous localement.
-              </p>
-              <motion.button 
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                onClick={handleSignup} 
-                className="rounded-xl bg-gradient-to-r from-midnight-400 to-midnight-500 text-white px-5 py-2.5 font-medium hover:shadow-aurora transition-all duration-300"
-              >
-                S'inscrire localement
-              </motion.button>
-            </motion.div>
-          )}
         </div>
       </motion.section>
 
@@ -118,19 +100,17 @@ export default function Navette() {
       </motion.section>
 
       {/* Panneau de sélection amélioré */}
-      {user && (
-        <motion.section
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2 }}
-        >
-          <SelectionPanel 
-            selected={picked}
-            maxSelection={3}
-            onClear={() => setPicked([])}
-          />
-        </motion.section>
-      )}
+      <motion.section
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.2 }}
+      >
+        <SelectionPanel 
+          selected={picked}
+          maxSelection={3}
+          onClear={() => setPicked([])}
+        />
+      </motion.section>
 
       {/* Réseau d'émojis avec instructions */}
       <motion.section
@@ -147,16 +127,11 @@ export default function Navette() {
                 Cliquez sur 3 émojis. Taille = popularité • Liens = associations fréquentes
               </p>
             </div>
-            {!user && (
-              <div className="text-sm text-amber-600 bg-amber-50 px-4 py-2 rounded-xl border border-amber-200">
-                🔒 Inscription requise
-              </div>
-            )}
           </div>
 
           <EmojiNetwork
             stats={stats}
-            selectable={Boolean(user)}
+            selectable={true}
             selected={picked}
             onToggle={handleToggle}
             maxNodes={30}
@@ -185,11 +160,11 @@ export default function Navette() {
           </div>
           
           <motion.button
-            whileHover={user && picked.length === 3 ? { scale: 1.02 } : {}}
-            whileTap={user && picked.length === 3 ? { scale: 0.98 } : {}}
+            whileHover={picked.length === 3 ? { scale: 1.02 } : {}}
+            whileTap={picked.length === 3 ? { scale: 0.98 } : {}}
             onClick={goToLune}
-            disabled={!user || picked.length !== 3}
-            animate={user && picked.length === 3 ? {
+            disabled={picked.length !== 3}
+            animate={picked.length === 3 ? {
               boxShadow: [
                 '0 4px 6px rgba(6, 182, 212, 0.3)',
                 '0 8px 16px rgba(6, 182, 212, 0.5)',
@@ -198,7 +173,7 @@ export default function Navette() {
             } : {}}
             transition={{ duration: 2, repeat: Infinity }}
             className={`rounded-xl px-6 py-3 font-semibold transition-all duration-300 ${
-              user && picked.length === 3 
+              picked.length === 3 
                 ? 'bg-gradient-to-r from-emerald-500 to-cyan-500 text-white shadow-lg' 
                 : 'bg-slate-200 text-slate-400 cursor-not-allowed'
             }`}
