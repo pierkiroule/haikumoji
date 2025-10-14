@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { useState, useEffect } from 'react'
 import { getUser, saveUser } from '../utils/storage.js'
 import FloatingEmojis from '../components/FloatingEmojis.jsx'
+import AnimatedLogo from '../components/AnimatedLogo.jsx'
 
 export default function Home() {
   const [user, setUser] = useState(null)
@@ -126,8 +127,11 @@ export default function Home() {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
-        className="text-center space-y-4 mb-10"
+        className="text-center space-y-6 mb-10"
       >
+        {/* Logo animé */}
+        <AnimatedLogo className="mb-4" />
+        
         <motion.div
           initial={{ scale: 0.9, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
@@ -139,7 +143,7 @@ export default function Home() {
           </span>
         </motion.div>
         
-        <h1 className="text-4xl md:text-5xl font-bold tracking-tight bg-gradient-to-br from-white via-slate-100 to-slate-300 bg-clip-text text-transparent">
+        <h1 className="text-3xl md:text-4xl font-bold tracking-tight bg-gradient-to-br from-white via-slate-100 to-slate-300 bg-clip-text text-transparent">
           Cultivez votre<br/>univers onirique
         </h1>
         
