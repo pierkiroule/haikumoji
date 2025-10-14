@@ -38,7 +38,7 @@ export default function Cosmoji() {
 
   return (
     <div className="space-y-6">
-      <div className="relative rounded-2xl bg-white shadow-lg p-6">
+      <div className="relative rounded-2xl bg-white text-slate-900 shadow-lg p-6">
         <div className="flex items-center justify-between">
           <h2 className="text-xl font-medium flex items-center gap-2">
             <span className="relative inline-flex items-center">
@@ -95,9 +95,9 @@ export default function Cosmoji() {
           </button>
         </div>
       </div>
-      <div className="relative rounded-2xl bg-white shadow-lg p-6">
+      <div className="relative rounded-2xl bg-white text-slate-900 shadow-lg p-6">
         <button
-          className="absolute top-4 left-4 rounded-xl bg-white/80 backdrop-blur px-3 py-1 shadow border"
+          className="absolute top-4 left-4 rounded-xl bg-white/90 text-slate-900 backdrop-blur px-3 py-1 shadow border hover:bg-white"
           onClick={() => history.back()}
         >
           ← Retour

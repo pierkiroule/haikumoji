@@ -101,7 +101,7 @@ export default function PantheonModal({ open, onClose }) {
             role="dialog"
             aria-modal="true"
             aria-labelledby="pantheon-title"
-            className="relative z-10 w-[92vw] max-w-xl rounded-2xl bg-white shadow-2xl p-6 md:p-8"
+            className="relative z-10 w-[92vw] max-w-xl rounded-2xl bg-white text-slate-900 shadow-2xl p-6 md:p-8"
             initial={{ scale: 0.9, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0.97, opacity: 0 }}

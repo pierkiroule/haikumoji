@@ -73,7 +73,7 @@ export default function Guardian() {
 
   if (!guardian) {
     return (
-      <div className="rounded-2xl bg-white shadow p-6 text-center">Aucun gardien trouvé.</div>
+      <div className="rounded-2xl bg-white text-slate-900 shadow p-6 text-center">Aucun gardien trouvé.</div>
     )
   }
 
@@ -90,7 +90,7 @@ export default function Guardian() {
         />
       )}
 
-      <section className="relative rounded-2xl bg-white shadow p-6 overflow-hidden">
+      <section className="relative rounded-2xl bg-white text-slate-900 shadow p-6 overflow-hidden">
         <div className="flex items-center justify-between">
           <h2 className="text-xl font-medium">Rencontre — {guardian.title}</h2>
           <div className="text-2xl select-none">{guardian.emoji}</div>
@@ -104,7 +104,7 @@ export default function Guardian() {
         </div>
       </section>
 
-      <section className="rounded-2xl bg-white shadow p-6">
+      <section className="rounded-2xl bg-white text-slate-900 shadow p-6">
         <h3 className="text-lg font-medium">Rituel de nuit</h3>
         <p className="mt-2 text-slate-700">{guardian.ritual}</p>
       </section>

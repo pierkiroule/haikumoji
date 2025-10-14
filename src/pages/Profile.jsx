@@ -16,8 +16,8 @@ export default function Profile() {
 
   return (
     <div className="space-y-6">
-      <section className="rounded-2xl bg-white shadow-lg p-6 text-center">
-        <h2 className="text-2xl font-light">Mon Profil</h2>
+      <section className="rounded-2xl bg-white text-slate-900 shadow-lg p-6 text-center">
+        <h2 className="text-2xl font-medium">Mon Profil</h2>
         <p className="text-slate-600 mt-2">Pseudo: {user?.name || '—'}</p>
         <p className="text-slate-600">Abonnement: {subscribed ? 'Actif' : 'Free'}</p>
       </section>
@@ -27,7 +27,7 @@ export default function Profile() {
         <ul className="space-y-3">
           {myHaikus.length === 0 && <li className="text-slate-500">Aucun haïku pour l’instant.</li>}
           {myHaikus.map(h => (
-            <li key={h.id} className="rounded-xl bg-white p-4 shadow">
+            <li key={h.id} className="rounded-xl bg-white text-slate-900 p-4 shadow">
               <div className="text-xl mb-1 select-none">{h.emojis?.join(' ')}</div>
               <pre className="whitespace-pre-wrap leading-relaxed">{h.text}</pre>
             </li>
