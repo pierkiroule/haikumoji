@@ -88,15 +88,15 @@ export default function Cosmoji() {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.2 }}
-        className="relative rounded-2xl bg-white text-slate-900 shadow-lg p-6"
+        className="relative rounded-2xl bg-black text-white shadow-lg p-6"
       >
         {/* Calm aurora overlay appears when exactly 3 selected */}
         <AuroraOverlay active={picked.length === 3} />
         
         <div className="flex items-center justify-between mb-4">
           <div>
-            <h2 className="text-xl font-semibold text-slate-900 mb-1">Réseau d'associations</h2>
-            <p className="text-sm text-slate-600">
+            <h2 className="text-xl font-semibold text-white mb-1">Réseau d'associations</h2>
+            <p className="text-sm text-slate-300">
               Taille du cercle = popularité • Épaisseur des liens = co-occurrences
             </p>
           </div>
@@ -118,17 +118,17 @@ export default function Cosmoji() {
             { element: 'ice', color: '#93c5fd', label: 'Glace' },
             { element: 'aurora', color: '#34d399', label: 'Aurore' },
           ].map(({ element, color, label }) => (
-            <div key={element} className="flex items-center gap-1.5 px-2 py-1 rounded-lg bg-slate-100">
+            <div key={element} className="flex items-center gap-1.5 px-2 py-1 rounded-lg bg-slate-800 border border-slate-700">
               <div 
                 className="w-3 h-3 rounded-full" 
                 style={{ backgroundColor: color }}
               />
-              <span className="text-slate-700">{label}</span>
+              <span className="text-slate-200">{label}</span>
             </div>
           ))}
         </div>
 
-        <div className="rounded-xl border-2 border-slate-200 overflow-hidden mb-4">
+        <div className="rounded-xl border-2 border-slate-800 overflow-hidden mb-4">
           <EmojiNetwork
             stats={stats}
             selectable
@@ -161,8 +161,8 @@ export default function Cosmoji() {
           />
         </div>
         
-        <div className="flex items-center justify-between pt-4 border-t border-slate-200">
-          <div className="text-sm text-slate-600">
+        <div className="flex items-center justify-between pt-4 border-t border-slate-800">
+          <div className="text-sm text-slate-300">
             {picked.length === 0 ? (
               <span className="text-slate-400 italic">Cliquez sur 3 émojis pour créer votre trio cosmique</span>
             ) : (
@@ -190,7 +190,7 @@ export default function Cosmoji() {
             className={`rounded-xl px-6 py-3 font-semibold transition-all duration-300 ${
               picked.length === 3 
                 ? 'bg-gradient-to-r from-emerald-500 to-cyan-500 text-white shadow-lg' 
-                : 'bg-slate-200 text-slate-400 cursor-not-allowed'
+                : 'bg-slate-800 text-slate-500 cursor-not-allowed'
             }`}
           >
             {picked.length === 3 ? '✧ Entrer en résonance' : `Choisir ${3 - picked.length} émoji(s)`}
