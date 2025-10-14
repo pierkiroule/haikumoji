@@ -4,6 +4,7 @@ import { getDraft, saveDraft, clearDraft, seedIfEmpty, getUser, addHaiku } from 
 import { generateSequenceSuggestions } from '../utils/aiMock.js'
 import { useNavigate } from 'react-router-dom'
 import EmojiBubble from '../components/EmojiBubble.jsx'
+import BubbleParticles from '../components/BubbleParticles.jsx'
 import { ALL_EMOJIS } from '../utils/config.js'
 import PantheonModal from '../components/PantheonModal.jsx'
 
@@ -61,7 +62,7 @@ export default function Create() {
 
   const canCompose = selected.length >= 3 && selected.length <= 5
 
-  const buttonLabel = canCompose ? 'Composer mon Haïku' : 'Choisir 3–5 émojis'
+  const buttonLabel = canCompose ? 'Créer ma Suggestion Onirique' : 'Choisir 3–5 émojis'
 
   // If the user deselects below threshold while composing, go back to select step
   useEffect(() => {
@@ -104,7 +105,7 @@ export default function Create() {
       >
         <div className="font-semibold text-white flex items-center gap-2">
           <span className="text-2xl">✨</span>
-          <span>HaïkuMoji</span>
+<span>Souffleur de Rêves</span>
         </div>
         <div className="px-3 py-1.5 rounded-full glass border border-white/20 text-sm font-medium text-white">
           {selected.length}/5 émojis
@@ -118,6 +119,9 @@ export default function Create() {
           transition={{ delay: 0.2 }}
           className="relative w-full flex items-center justify-center"
         >
+          {/* Effet de particules de bulles - Souffleur de Rêve */}
+          <BubbleParticles active={canCompose} count={20} continuous={true} />
+          
           <EmojiBubble
             emojis={EMOJIS}
             selected={selected}
@@ -261,7 +265,7 @@ export default function Create() {
               onClick={handlePublish}
               className="w-full h-14 rounded-xl bg-gradient-to-r from-emerald-600 to-emerald-500 text-white font-semibold hover:from-emerald-700 hover:to-emerald-600 shadow-lg hover:shadow-xl transition-all duration-300"
             >
-              ✨ Publier mon haïku
+              ✨ Publier ma suggestion onirique
             </motion.button>
           </motion.div>
         )}

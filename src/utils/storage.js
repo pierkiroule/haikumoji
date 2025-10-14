@@ -68,6 +68,7 @@ export function saveHaikus(list) {
 }
 
 export function addHaiku({ emojis, text, author, authorId }) {
+  // Note: keeping function name for compatibility
   const haikus = getHaikus()
   const newHaiku = {
     id: generateId(),
@@ -176,6 +177,7 @@ export function setLikedIds(ids) {
 }
 
 export function likeHaiku(id) {
+  // Note: keeping function name for compatibility
   const liked = new Set(getLikedIds())
   if (liked.has(id)) return getHaikus()
   const haikus = getHaikus().map(h => h.id === id ? { ...h, likes: (h.likes || 0) + 1 } : h)

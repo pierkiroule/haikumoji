@@ -2,6 +2,7 @@ import { motion } from 'framer-motion'
 import { getShareUrlBase } from '../utils/config.js'
 
 export default function HaikuCard({ haiku, onLike }) {
+  // Note: keeping 'haiku' param name for compatibility but displaying as 'suggestion onirique'
   return (
     <motion.div 
       initial={{ opacity: 0, y: 20 }}
@@ -31,7 +32,7 @@ export default function HaikuCard({ haiku, onLike }) {
             whileTap={{ scale: 0.9 }}
             onClick={() => onLike?.(haiku)}
             className="rounded-xl bg-gradient-to-r from-pink-50 to-pink-100 text-pink-700 px-4 py-2 border border-pink-200 hover:from-pink-100 hover:to-pink-200 hover:border-pink-300 transition-all duration-300 shadow-sm hover:shadow-md"
-            aria-label="Aimer ce haïku"
+            aria-label="Aimer cette suggestion onirique"
           >
             <span className="flex items-center gap-2 font-medium">
               ❤️ {haiku.likes ?? 0}
@@ -46,7 +47,7 @@ export default function HaikuCard({ haiku, onLike }) {
             onClick={() => {
               const url = getShareUrlBase()
               const shareText = `${haiku.emojis?.join(' ')}\n\n${haiku.text}`
-              const data = { title: 'HaïkuMoji', text: shareText, url }
+              const data = { title: 'Onimoji - Suggestions Oniriques', text: shareText, url }
               if (navigator.share) {
                 navigator.share(data).catch(() => {})
               } else {
@@ -55,7 +56,7 @@ export default function HaikuCard({ haiku, onLike }) {
               }
             }}
             className="flex-1 rounded-xl bg-gradient-to-r from-slate-900 to-slate-800 text-white px-4 py-2.5 hover:from-slate-800 hover:to-slate-700 transition-all duration-300 font-medium shadow-sm hover:shadow-md"
-            aria-label="Partager ce haïku"
+            aria-label="Partager cette suggestion onirique"
           >
             📤 Partager
           </motion.button>
