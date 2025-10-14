@@ -31,7 +31,7 @@ export default function Community() {
           Haïkus partagés
         </h1>
         <p className="text-slate-300 max-w-2xl mx-auto">
-          Découvrez les créations oniriques de la communauté. Chaque haïku est une fenêtre vers l'univers intérieur de son auteur.
+          Découvrez les créations oniriques de la communauté. Chaque suggestion onirique est une fenêtre vers l'univers intérieur de son auteur.
         </p>
       </motion.div>
 
@@ -68,7 +68,7 @@ export default function Community() {
         </div>
       </motion.div>
 
-      {/* Haikus Grid */}
+      {/* Suggestions Oniriques Grid */}
       <motion.div 
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}

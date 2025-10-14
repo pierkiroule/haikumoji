@@ -25,8 +25,15 @@ export default function Cosmoji() {
   const handleToggle = (emoji) => {
     setPicked(prev => {
       const has = prev.includes(emoji)
-      if (has) return prev.filter(e => e !== emoji)
-      if (prev.length >= 3) return prev
+      if (has) {
+        // Déselectionner
+        return prev.filter(e => e !== emoji)
+      }
+      // Ne pas ajouter si déjà 3 sélectionnés
+      if (prev.length >= 3) {
+        return prev
+      }
+      // Ajouter le nouvel emoji
       return [...prev, emoji]
     })
   }
