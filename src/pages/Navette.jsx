@@ -40,7 +40,10 @@ export default function Navette() {
     <div className="space-y-6">
       <section className="rounded-2xl bg-white shadow-lg p-6">
         <h2 className="text-xl font-medium">Cosmoniris — Hublot Cosmoji</h2>
-        <p className="mt-1 text-slate-600 text-sm">Sélectionnez 3 émojis pour composer votre rêve.</p>
+        <p className="mt-1 text-slate-600 text-sm">
+          Voyage Inuit en 12 lunes : sélectionnez 3 émojis pour cette étape, puis explorez la Lune
+          en cours et rencontrez un gardien onimoji inuit.
+        </p>
         {!user && (
           <div className="mt-3 rounded-xl bg-indigo-50 border border-indigo-200 text-indigo-800 p-3 text-sm">
             Vous êtes en visite. Pour sélectionner et générer un rêve, inscrivez-vous localement.
@@ -68,7 +71,7 @@ export default function Navette() {
             disabled={!user || picked.length !== 3}
             className={`rounded-xl px-3 py-2 text-sm font-medium transition ${user && picked.length === 3 ? 'bg-indigo-600 text-white hover:bg-indigo-700' : 'bg-slate-200 text-slate-500 cursor-not-allowed'}`}
           >
-            Explorer la Lune suivante 🌙
+            Valider cette étape — Aller à la Lune 🌙
           </button>
         </div>
       </section>
