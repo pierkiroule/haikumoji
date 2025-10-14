@@ -17,7 +17,7 @@ export default function Pantheon() {
   return (
     <div className="space-y-4">
       {top.map((h) => (
-        <div key={h.id} className="rounded-2xl bg-white shadow-lg p-6 ring-1 ring-yellow-100">
+        <div key={h.id} className="rounded-2xl bg-white text-slate-900 shadow-lg p-6 ring-1 ring-yellow-100">
           <div className="text-xl mb-2 select-none">{h.emojis?.join(' ')}</div>
           <pre className="whitespace-pre-wrap leading-relaxed text-slate-800">{h.text}</pre>
           <div className="mt-2 text-sm text-slate-500">— {h.author}</div>

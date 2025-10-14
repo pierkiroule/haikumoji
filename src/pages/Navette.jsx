@@ -38,7 +38,7 @@ export default function Navette() {
 
   return (
     <div className="space-y-6">
-      <section className="rounded-2xl bg-white shadow-lg p-6">
+      <section className="rounded-2xl bg-white text-slate-900 shadow-lg p-6">
         <h2 className="text-xl font-medium">Cosmoniris — Hublot Cosmoji</h2>
         <p className="mt-1 text-slate-600 text-sm">
           Voyage Inuit en 12 lunes : sélectionnez 3 émojis pour cette étape, puis explorez la Lune

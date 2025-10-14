@@ -60,8 +60,8 @@ export default function Lune() {
 
   return (
     <div className="space-y-6">
-      <section className="rounded-2xl bg-white shadow p-6">
-        <h2 className="text-2xl font-light">{meta.titre}</h2>
+      <section className="rounded-2xl bg-white text-slate-900 shadow p-6">
+        <h2 className="text-2xl font-medium">{meta.titre}</h2>
         <p className="text-slate-600 mt-1 text-sm">{meta.ressource}</p>
         <div className="mt-3">
           <button
@@ -73,14 +73,14 @@ export default function Lune() {
         </div>
       </section>
 
-      <section className="rounded-2xl bg-white shadow p-6">
+      <section className="rounded-2xl bg-white text-slate-900 shadow p-6">
         <div className="text-3xl select-none">{triplet.join(' ') || '—'}</div>
         {!user && (
           <div className="mt-3 rounded-xl bg-indigo-50 border border-indigo-200 text-indigo-800 p-3 text-sm">
             Inscrivez-vous localement pour générer et sauvegarder un rêve.
           </div>
         )}
-        <pre className="mt-3 whitespace-pre-wrap leading-relaxed">{text}</pre>
+        <pre className="mt-3 whitespace-pre-wrap leading-relaxed text-slate-800">{text}</pre>
         <div className="mt-4 flex items-center gap-3">
           <button
             onClick={() => {

@@ -24,8 +24,8 @@ export default function DreamGarden() {
 
   return (
     <div className="space-y-6">
-      <section className="rounded-2xl bg-white shadow p-6">
-        <h2 className="text-2xl font-light">Jardin du Rêve</h2>
+      <section className="rounded-2xl bg-white text-slate-900 shadow p-6">
+        <h2 className="text-2xl font-medium">Jardin du Rêve</h2>
         <p className="text-slate-600 mt-1 text-sm">{seeds.length} graine(s) collectée(s) — Lune en cours : {moon}/12</p>
         {completed && (
           <div className="mt-3 rounded-xl bg-gradient-to-r from-emerald-200/60 via-sky-200/60 to-fuchsia-200/60 p-3 border border-white/50">
@@ -34,7 +34,7 @@ export default function DreamGarden() {
         )}
       </section>
 
-      <section className="rounded-2xl bg-white shadow p-6">
+      <section className="rounded-2xl bg-white text-slate-900 shadow p-6">
         <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
           {Array.from({ length: 12 }, (_, i) => i + 1).map((idx) => {
             const list = byMoon.get(String(idx)) || []

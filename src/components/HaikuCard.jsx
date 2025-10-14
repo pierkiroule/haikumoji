@@ -2,7 +2,7 @@ import { getShareUrlBase } from '../utils/config.js'
 
 export default function HaikuCard({ haiku, onLike }) {
   return (
-    <div className="rounded-2xl bg-white shadow-lg p-5">
+    <div className="rounded-2xl bg-white text-slate-900 shadow-lg p-5">
       <div className="text-2xl mb-2 select-none">{haiku.emojis?.join(' ')}</div>
       <pre className="text-slate-800 mb-3 whitespace-pre-wrap leading-relaxed">{haiku.text}</pre>
       <div className="flex items-center justify-between">

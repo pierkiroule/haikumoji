@@ -116,7 +116,7 @@ export default function Create() {
           {/* Center glowing star */}
           <motion.button
             onClick={() => setPantheonOpen(true)}
-            className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-14 h-14 rounded-full flex items-center justify-center bg-white shadow-glow border border-white/70"
+            className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-14 h-14 rounded-full flex items-center justify-center bg-white text-slate-900 shadow-glow border border-white/70"
             animate={{
               scale: [1, 1.08, 1],
               boxShadow: [
@@ -146,7 +146,7 @@ export default function Create() {
 
         {/* Compose area */}
         {step === 'compose' && canCompose && (
-          <div id="compose-area" ref={composeRef} className="w-full max-w-sm rounded-2xl bg-white shadow p-4 space-y-3">
+          <div id="compose-area" ref={composeRef} className="w-full max-w-sm rounded-2xl bg-white text-slate-900 shadow p-4 space-y-3">
             <div className="text-lg select-none mb-1">{selected.join(' ')}</div>
             {suggestions.length > 0 && (
               <div className="rounded-xl border border-slate-200 p-3 bg-slate-50">
@@ -154,7 +154,7 @@ export default function Create() {
                   <div className="text-sm text-slate-600">Inspiration (séquence {selected.slice(0,3).join(' ')})</div>
                   <button
                     onClick={() => setSuggestions(generateSequenceSuggestions(selected.slice(0, 3)))}
-                    className="text-xs px-2 py-1 rounded-lg border bg-white hover:bg-slate-100"
+                    className="text-xs px-2 py-1 rounded-lg border bg-white text-slate-900 hover:bg-slate-100"
                   >↻ Refaire</button>
                 </div>
                 <ul className="space-y-2 max-h-56 overflow-auto pr-1">
