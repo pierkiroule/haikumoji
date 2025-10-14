@@ -54,35 +54,71 @@ export default function AnimatedLogo({ className = "" }) {
           </filter>
         </defs>
         
-        {/* Grand O central animé */}
-        <motion.circle
-          cx="35"
-          cy="50"
-          r="28"
-          stroke="url(#gradientO)"
-          strokeWidth="4"
-          fill="none"
-          filter="url(#glow)"
-          initial={{ pathLength: 0, opacity: 0 }}
-          animate={{ 
-            pathLength: 1, 
-            opacity: 1,
-            rotate: [0, 360]
-          }}
-          transition={{ 
-            pathLength: { duration: 2, ease: "easeOut" },
-            opacity: { duration: 1 },
-            rotate: { duration: 20, repeat: Infinity, ease: "linear" }
-          }}
-          style={{ originX: '35px', originY: '50px' }}
-        />
+        {/* Grand O central animé avec lune croissante */}
+        <motion.g
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1 }}
+        >
+          {/* Cercle extérieur */}
+          <motion.circle
+            cx="35"
+            cy="50"
+            r="28"
+            stroke="url(#gradientO)"
+            strokeWidth="4"
+            fill="none"
+            filter="url(#glow)"
+            initial={{ pathLength: 0, opacity: 0 }}
+            animate={{ 
+              pathLength: 1, 
+              opacity: 1
+            }}
+            transition={{ 
+              pathLength: { duration: 2, ease: "easeOut" },
+              opacity: { duration: 1 }
+            }}
+          />
+          
+          {/* Lune croissante à l'intérieur du O */}
+          <motion.g
+            initial={{ scale: 0, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{ duration: 1.2, delay: 0.8 }}
+          >
+            {/* Corps de la lune (cercle plein) */}
+            <circle
+              cx="35"
+              cy="50"
+              r="18"
+              fill="#E2E8F0"
+              opacity="0.9"
+            />
+            {/* Ombre pour créer le croissant */}
+            <motion.circle
+              cx="42"
+              cy="50"
+              r="18"
+              fill="#1E293B"
+              animate={{
+                cx: [42, 28, 42],
+                opacity: [0.8, 0.6, 0.8]
+              }}
+              transition={{
+                duration: 8,
+                repeat: Infinity,
+                ease: "easeInOut"
+              }}
+            />
+            {/* Cratères */}
+            <circle cx="30" cy="45" r="2" fill="#CBD5E1" opacity="0.4" />
+            <circle cx="38" cy="52" r="1.5" fill="#CBD5E1" opacity="0.3" />
+            <circle cx="33" cy="55" r="1" fill="#CBD5E1" opacity="0.35" />
+          </motion.g>
+        </motion.g>
         
-        {/* Point médian • */}
-        <motion.circle
-          cx="75"
-          cy="35"
-          r="4"
-          fill="#8B5CF6"
+        {/* Point médian • - mini étoile/lune */}
+        <motion.g
           initial={{ scale: 0, opacity: 0 }}
           animate={{ 
             scale: [0, 1.2, 1],
@@ -94,22 +130,29 @@ export default function AnimatedLogo({ className = "" }) {
             times: [0, 0.6, 1]
           }}
         >
-          <animate
-            attributeName="opacity"
-            values="1; 0.5; 1"
-            dur="2s"
-            repeatCount="indefinite"
+          <circle
+            cx="75"
+            cy="35"
+            r="4"
+            fill="#8B5CF6"
+          >
+            <animate
+              attributeName="opacity"
+              values="1; 0.5; 1"
+              dur="2s"
+              repeatCount="indefinite"
+            />
+          </circle>
+          {/* Petit croissant de lune superposé */}
+          <path
+            d="M 76 33 A 3 3 0 1 1 76 37 A 2 2 0 1 0 76 33"
+            fill="#A78BFA"
+            opacity="0.6"
           />
-        </motion.circle>
+        </motion.g>
         
-        {/* Petit cercle ° */}
-        <motion.circle
-          cx="95"
-          cy="28"
-          r="6"
-          stroke="#06B6D4"
-          strokeWidth="2"
-          fill="none"
+        {/* Petit cercle ° - mini lune */}
+        <motion.g
           initial={{ scale: 0, opacity: 0 }}
           animate={{ 
             scale: [0, 1.2, 1],
@@ -121,13 +164,37 @@ export default function AnimatedLogo({ className = "" }) {
             times: [0, 0.6, 1]
           }}
         >
-          <animate
-            attributeName="opacity"
-            values="1; 0.6; 1"
-            dur="3s"
-            repeatCount="indefinite"
-          />
-        </motion.circle>
+          <circle
+            cx="95"
+            cy="28"
+            r="6"
+            stroke="#06B6D4"
+            strokeWidth="2"
+            fill="none"
+          >
+            <animate
+              attributeName="opacity"
+              values="1; 0.6; 1"
+              dur="3s"
+              repeatCount="indefinite"
+            />
+          </circle>
+          {/* Petite lune pleine à l'intérieur */}
+          <circle
+            cx="95"
+            cy="28"
+            r="4"
+            fill="#67E8F9"
+            opacity="0.4"
+          >
+            <animate
+              attributeName="opacity"
+              values="0.4; 0.7; 0.4"
+              dur="3s"
+              repeatCount="indefinite"
+            />
+          </circle>
+        </motion.g>
         
         {/* Texte ONIMOJIS */}
         <motion.text
