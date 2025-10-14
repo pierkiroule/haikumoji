@@ -1,0 +1,70 @@
+{
+  "lune": 3,
+  "titre": "Nanook, Maître de l'Ours Polaire",
+  "gardien": {
+    "id": "nanook",
+    "nom": "Nanook",
+    "titre": "Esprit de l'Ours et de la Force Tranquille",
+    "emoji": "🐻‍❄️",
+    "element": "ice",
+    "description": "Nanook incarne la force paisible, la patience et le repos profond de l'ours en hibernation. Il enseigne que la vraie puissance réside dans le repos."
+  },
+  "sagesses": {
+    "message_accueil": "Voyageur, entre dans ma tanière. Je suis Nanook, gardien du repos sacré. Tes symboles parlent d'une force qui cherche le calme.",
+    "enseignement_principal": "L'ours hiberne pour régénérer sa force. Le sommeil n'est pas une faiblesse, c'est le creuset de ta puissance. Honore-le comme l'ours honore l'hiver.",
+    "sagesse_courte": "Dans le silence glacé, la force se reconstruit. Repose-toi profondément."
+  },
+  "rituel_de_nuit": {
+    "titre": "Rituel de la Tanière Sacrée",
+    "etapes": [
+      "Installe-toi dans ton lit comme un ours dans sa tanière",
+      "Sens le poids de ton corps s'enfoncer dans le matelas",
+      "Visualise un cocon de chaleur qui t'entoure",
+      "Contracte tous tes muscles pendant 5 secondes",
+      "Relâche d'un coup et sens la détente profonde",
+      "Répète pour chaque partie du corps : pieds, jambes, ventre, bras, visage",
+      "Imagine-toi en hibernation paisible jusqu'au matin"
+    ],
+    "duree": "10 minutes",
+    "moment_ideal": "Quand tu te sens agité ou que ton corps est tendu"
+  },
+  "script_onirique": {
+    "titre": "L'Hibernation Régénératrice",
+    "texte": "Comme l'ours dans sa tanière,\nJe me retire du monde éveillé.\n\nMa force se régénère dans le silence,\nMon corps se répare dans l'obscurité.\n\nNanook veille sur mon repos,\nProtégeant mon sommeil sacré.\n\nJe m'abandonne à la nuit réparatrice,\nPour renaître au matin, renouvelé.",
+    "instructions": "Récite ce texte en sentant ton corps devenir lourd et chaud, prêt pour le repos profond.",
+    "variation_avec_emojis": "Mes symboles {emoji1} {emoji2} {emoji3} m'accompagnent dans la tanière des rêves."
+  },
+  "astuces_chamaniques": [
+    {
+      "titre": "La relaxation progressive",
+      "description": "Contracte puis relâche chaque groupe musculaire. L'ours ne garde aucune tension dans son corps."
+    },
+    {
+      "titre": "La respiration de l'ours",
+      "description": "Respire lentement et profondément, comme un ours endormi. 3 secondes d'inspiration, 7 secondes d'expiration."
+    },
+    {
+      "titre": "Le poids du repos",
+      "description": "Sens ton corps devenir lourd, très lourd. C'est le poids du repos profond qui t'ancre."
+    }
+  ],
+  "invitation_ecriture": {
+    "question": "Tes 3 symboles évoquent-ils la force, le calme ou le refuge ?",
+    "guidance": "Pense à la puissance tranquille : repos, régénération, force intérieure, protection, chaleur...",
+    "placeholder": "Ex : La tanière qui protège, la force qui se repose, le silence qui régénère..."
+  },
+  "ressources_culturelles": {
+    "concept": "Nanook",
+    "explication": "Nanook est le maître des ours polaires dans la tradition inuite. Il symbolise la force, la survie, le respect de la nature et l'importance du repos hivernal.",
+    "liens": [
+      {
+        "titre": "Nanook dans la culture inuite",
+        "url": "https://www.example.com/nanook",
+        "type": "article"
+      }
+    ]
+  },
+  "emojis_associes": ["🐻‍❄️", "❄️", "🧊", "🏔️", "🌨️"],
+  "couleur_theme": "#93c5fd",
+  "musique_suggeree": "Silence, vent glacé doux, battements de cœur lents"
+}

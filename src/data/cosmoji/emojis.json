@@ -1,0 +1,260 @@
+{
+  "version": "1.0.0",
+  "description": "Liste complète des émojis disponibles dans le Cosmoji. Modifier ce fichier pour ajouter/supprimer des émojis.",
+  "categories": {
+    "nature": {
+      "label": "Nature & Éléments",
+      "emojis": [
+        {
+          "emoji": "🌬️",
+          "name": "Vent",
+          "element": "air",
+          "keywords": ["souffle", "air", "légèreté"]
+        },
+        {
+          "emoji": "💨",
+          "name": "Rafale",
+          "element": "air",
+          "keywords": ["vent", "mouvement", "rapide"]
+        },
+        {
+          "emoji": "🌊",
+          "name": "Vague",
+          "element": "water",
+          "keywords": ["océan", "mer", "fluidité"]
+        },
+        {
+          "emoji": "💧",
+          "name": "Goutte",
+          "element": "water",
+          "keywords": ["eau", "pureté", "essence"]
+        },
+        {
+          "emoji": "🌧️",
+          "name": "Pluie",
+          "element": "water",
+          "keywords": ["eau", "apaisement", "nettoyage"]
+        },
+        {
+          "emoji": "❄️",
+          "name": "Flocon",
+          "element": "ice",
+          "keywords": ["neige", "hiver", "unique"]
+        },
+        {
+          "emoji": "🧊",
+          "name": "Glace",
+          "element": "ice",
+          "keywords": ["froid", "cristal", "calme"]
+        },
+        {
+          "emoji": "🔥",
+          "name": "Feu",
+          "element": "fire",
+          "keywords": ["chaleur", "énergie", "transformation"]
+        },
+        {
+          "emoji": "🌿",
+          "name": "Herbe",
+          "element": "earth",
+          "keywords": ["nature", "croissance", "vie"]
+        },
+        {
+          "emoji": "🍂",
+          "name": "Feuille",
+          "element": "earth",
+          "keywords": ["automne", "cycle", "changement"]
+        },
+        {
+          "emoji": "🪵",
+          "name": "Bois",
+          "element": "earth",
+          "keywords": ["ancrage", "solidité", "nature"]
+        },
+        {
+          "emoji": "🏔️",
+          "name": "Montagne",
+          "element": "ice",
+          "keywords": ["hauteur", "majesté", "permanence"]
+        }
+      ]
+    },
+    "celestial": {
+      "label": "Ciel & Astres",
+      "emojis": [
+        {
+          "emoji": "🌙",
+          "name": "Lune",
+          "element": "light",
+          "keywords": ["nuit", "cycle", "féminin"]
+        },
+        {
+          "emoji": "🌕",
+          "name": "Pleine Lune",
+          "element": "light",
+          "keywords": ["accomplissement", "clarté", "apogée"]
+        },
+        {
+          "emoji": "🌑",
+          "name": "Nouvelle Lune",
+          "element": "light",
+          "keywords": ["renouveau", "mystère", "commencement"]
+        },
+        {
+          "emoji": "⭐",
+          "name": "Étoile",
+          "element": "light",
+          "keywords": ["guidance", "espoir", "lumière"]
+        },
+        {
+          "emoji": "✨",
+          "name": "Étincelles",
+          "element": "light",
+          "keywords": ["magie", "brillance", "joie"]
+        },
+        {
+          "emoji": "💫",
+          "name": "Étoile Filante",
+          "element": "aurora",
+          "keywords": ["vœu", "chance", "rêve"]
+        },
+        {
+          "emoji": "🌠",
+          "name": "Météore",
+          "element": "aurora",
+          "keywords": ["événement", "transformation", "message"]
+        },
+        {
+          "emoji": "🌌",
+          "name": "Galaxie",
+          "element": "aurora",
+          "keywords": ["univers", "infini", "mystère"]
+        },
+        {
+          "emoji": "🌞",
+          "name": "Soleil",
+          "element": "fire",
+          "keywords": ["énergie", "vie", "chaleur"]
+        },
+        {
+          "emoji": "☁️",
+          "name": "Nuage",
+          "element": "air",
+          "keywords": ["douceur", "flottement", "rêverie"]
+        }
+      ]
+    },
+    "animals": {
+      "label": "Animaux & Créatures",
+      "emojis": [
+        {
+          "emoji": "🐋",
+          "name": "Baleine",
+          "element": "animal",
+          "keywords": ["océan", "profondeur", "sagesse"]
+        },
+        {
+          "emoji": "🦭",
+          "name": "Phoque",
+          "element": "animal",
+          "keywords": ["jeu", "adaptabilité", "joie"]
+        },
+        {
+          "emoji": "🐦",
+          "name": "Oiseau",
+          "element": "air",
+          "keywords": ["liberté", "vol", "légèreté"]
+        },
+        {
+          "emoji": "🪶",
+          "name": "Plume",
+          "element": "air",
+          "keywords": ["douceur", "légèreté", "message"]
+        }
+      ]
+    },
+    "objects": {
+      "label": "Objets & Symboles",
+      "emojis": [
+        {
+          "emoji": "🛶",
+          "name": "Canoë",
+          "element": "earth",
+          "keywords": ["voyage", "eau", "navigation"]
+        },
+        {
+          "emoji": "🐚",
+          "name": "Coquillage",
+          "element": "water",
+          "keywords": ["océan", "son", "protection"]
+        },
+        {
+          "emoji": "🪞",
+          "name": "Miroir",
+          "element": "water",
+          "keywords": ["réflexion", "vérité", "introspection"]
+        },
+        {
+          "emoji": "🪷",
+          "name": "Lotus",
+          "element": "water",
+          "keywords": ["pureté", "éveil", "beauté"]
+        },
+        {
+          "emoji": "🎵",
+          "name": "Note",
+          "element": "air",
+          "keywords": ["musique", "harmonie", "vibration"]
+        },
+        {
+          "emoji": "🌈",
+          "name": "Arc-en-ciel",
+          "element": "light",
+          "keywords": ["espoir", "beauté", "joie"]
+        }
+      ]
+    }
+  },
+  "elements": {
+    "air": {
+      "label": "Air",
+      "color": "#22d3ee",
+      "description": "Vent, souffle, légèreté, pensées"
+    },
+    "water": {
+      "label": "Eau",
+      "color": "#60a5fa",
+      "description": "Eau, fluidité, émotions, profondeur"
+    },
+    "fire": {
+      "label": "Feu",
+      "color": "#f59e0b",
+      "description": "Feu, chaleur, transformation, énergie"
+    },
+    "earth": {
+      "label": "Terre",
+      "color": "#86efac",
+      "description": "Terre, ancrage, stabilité, croissance"
+    },
+    "ice": {
+      "label": "Glace",
+      "color": "#93c5fd",
+      "description": "Glace, repos, hibernation, calme"
+    },
+    "aurora": {
+      "label": "Aurore",
+      "color": "#34d399",
+      "description": "Aurore, magie, mystère, beauté"
+    },
+    "light": {
+      "label": "Lumière",
+      "color": "#f5d0fe",
+      "description": "Lumière, clarté, guidance, éveil"
+    },
+    "animal": {
+      "label": "Animal",
+      "color": "#fca5a5",
+      "description": "Esprit animal, instinct, force, protection"
+    }
+  }
+}

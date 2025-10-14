@@ -5,6 +5,7 @@ import PantheonModal from '../components/PantheonModal.jsx'
 import CosmojiEmblem from '../components/CosmojiEmblem.jsx'
 import EmojiNetwork from '../components/EmojiNetwork.jsx'
 import AuroraOverlay from '../components/AuroraOverlay.jsx'
+import SelectionPanel from '../components/SelectionPanel.jsx'
 import guardians from '../data/guardiansInuit.json'
 import cosmojiData from '../data/cosmojiData.json'
 import { computeEmojiStats, seedIfEmpty, setSelectedTriplet, getMoonIndex } from '../utils/storage.js'
@@ -41,21 +42,86 @@ export default function Cosmoji() {
 
   return (
     <div className="space-y-6">
-      <div className="relative rounded-2xl bg-white text-slate-900 shadow-lg p-6">
+      {/* En-tête explicatif */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        className="rounded-2xl glass-strong border border-white/20 shadow-card p-6"
+      >
+        <div className="flex items-center gap-3 mb-3">
+          <CosmojiEmblem size={32} />
+          <div>
+            <h1 className="text-2xl font-bold text-white">Explorer le Cosmoji</h1>
+            <p className="text-slate-300 text-sm">Visualisation des tendances et associations d'émojis</p>
+          </div>
+        </div>
+        <div className="rounded-xl bg-white/10 border border-white/20 p-4">
+          <p className="text-slate-200 text-sm leading-relaxed">
+            💡 <strong>Mode exploration :</strong> Cette page vous permet de visualiser les connexions entre émojis de la communauté. 
+            Vous pouvez aussi sélectionner 3 émojis pour rencontrer directement un gardien.
+          </p>
+        </div>
+      </motion.div>
+
+      {/* Panneau de sélection */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.1 }}
+      >
+        <SelectionPanel 
+          selected={picked}
+          maxSelection={3}
+          onClear={() => setPicked([])}
+        />
+      </motion.div>
+
+      {/* Réseau interactif */}
+      <motion.div 
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.2 }}
+        className="relative rounded-2xl bg-white text-slate-900 shadow-lg p-6"
+      >
         {/* Calm aurora overlay appears when exactly 3 selected */}
         <AuroraOverlay active={picked.length === 3} />
-        <div className="flex items-center justify-between">
-          <h2 className="text-xl font-medium flex items-center gap-2">
-            <span className="relative inline-flex items-center">
-              <span className="text-2xl pr-2">○</span>
-              <CosmojiEmblem size={24} />
-            </span>
-            Cosmojî – Réseau d'associations
-          </h2>
-          <button onClick={() => setOpen(true)} className="rounded-xl bg-slate-900 text-white px-3 py-1">Panthéon</button>
+        
+        <div className="flex items-center justify-between mb-4">
+          <div>
+            <h2 className="text-xl font-semibold text-slate-900 mb-1">Réseau d'associations</h2>
+            <p className="text-sm text-slate-600">
+              Taille du cercle = popularité • Épaisseur des liens = co-occurrences
+            </p>
+          </div>
+          <button 
+            onClick={() => setOpen(true)} 
+            className="rounded-xl bg-slate-900 text-white px-4 py-2 hover:bg-slate-800 transition-colors duration-200"
+          >
+            Panthéon
+          </button>
         </div>
-        <p className="mt-2 text-sm text-slate-600">Chaque nœud représente un émoji (taille = occurrences). Les liens indiquent les co‑occurrences (épaisseur = force).</p>
-        <div className="mt-4">
+        
+        {/* Légende des couleurs */}
+        <div className="mb-4 flex flex-wrap gap-2 text-xs">
+          {[
+            { element: 'air', color: '#22d3ee', label: 'Air' },
+            { element: 'water', color: '#60a5fa', label: 'Eau' },
+            { element: 'fire', color: '#f59e0b', label: 'Feu' },
+            { element: 'earth', color: '#86efac', label: 'Terre' },
+            { element: 'ice', color: '#93c5fd', label: 'Glace' },
+            { element: 'aurora', color: '#34d399', label: 'Aurore' },
+          ].map(({ element, color, label }) => (
+            <div key={element} className="flex items-center gap-1.5 px-2 py-1 rounded-lg bg-slate-100">
+              <div 
+                className="w-3 h-3 rounded-full" 
+                style={{ backgroundColor: color }}
+              />
+              <span className="text-slate-700">{label}</span>
+            </div>
+          ))}
+        </div>
+
+        <div className="rounded-xl border-2 border-slate-200 overflow-hidden mb-4">
           <EmojiNetwork
             stats={stats}
             selectable
@@ -81,81 +147,116 @@ export default function Cosmoji() {
               return {
                 fill: sel ? col.base : '#0ea5e9',
                 stroke: sel ? col.dark : '#0ea5e9',
-                fillOpacity: sel ? 0.28 : 0.12,
-                strokeOpacity: sel ? 0.75 : 0.45,
+                fillOpacity: sel ? 0.85 : 0.12,
+                strokeOpacity: sel ? 1 : 0.45,
               }
             }}
           />
         </div>
-        <div className="mt-3 flex items-center justify-between">
-          <div className="text-sm text-slate-600 select-none">
-            Sélection: <span className="font-mono">{picked.join(' ') || '—'}</span>
+        
+        <div className="flex items-center justify-between pt-4 border-t border-slate-200">
+          <div className="text-sm text-slate-600">
+            {picked.length === 0 ? (
+              <span className="text-slate-400 italic">Cliquez sur 3 émojis pour créer votre trio cosmique</span>
+            ) : (
+              <>
+                <span className="font-medium">Sélection :</span>{' '}
+                <span className="font-mono text-xl ml-2">{picked.join(' ')}</span>
+                <span className="ml-2 text-xs text-slate-500">({picked.length}/3)</span>
+              </>
+            )}
           </div>
+          
           <motion.button
             onClick={handleResonance}
             disabled={picked.length !== 3}
-            whileTap={{ scale: 0.98 }}
-            animate={picked.length === 3 && !prefersReduced ? { scale: [1, 1.04, 1] } : { scale: 1 }}
+            whileHover={picked.length === 3 ? { scale: 1.02 } : {}}
+            whileTap={picked.length === 3 ? { scale: 0.98 } : {}}
+            animate={picked.length === 3 && !prefersReduced ? {
+              boxShadow: [
+                '0 4px 6px rgba(16, 185, 129, 0.3)',
+                '0 8px 16px rgba(16, 185, 129, 0.5)',
+                '0 4px 6px rgba(16, 185, 129, 0.3)',
+              ]
+            } : {}}
             transition={picked.length === 3 && !prefersReduced ? { duration: 2.4, repeat: Infinity, ease: 'easeInOut' } : { duration: 0.2 }}
-            className={`rounded-xl px-3 py-1 text-sm font-medium transition ${picked.length === 3 ? 'bg-emerald-600 text-white hover:bg-emerald-700' : 'bg-slate-200 text-slate-500 cursor-not-allowed'}`}
+            className={`rounded-xl px-6 py-3 font-semibold transition-all duration-300 ${
+              picked.length === 3 
+                ? 'bg-gradient-to-r from-emerald-500 to-cyan-500 text-white shadow-lg' 
+                : 'bg-slate-200 text-slate-400 cursor-not-allowed'
+            }`}
           >
-            Entrer en résonance ✧
+            {picked.length === 3 ? '✧ Entrer en résonance' : `Choisir ${3 - picked.length} émoji(s)`}
           </motion.button>
         </div>
-      </div>
-      <div className="relative rounded-2xl bg-white text-slate-900 shadow-lg p-6">
-        <button
-          className="absolute top-4 left-4 rounded-xl bg-white/90 text-slate-900 backdrop-blur px-3 py-1 shadow border hover:bg-white"
-          onClick={() => history.back()}
-        >
-          ← Retour
-        </button>
-        <div className="flex items-center justify-between">
-          <h2 className="text-xl font-medium flex items-center gap-2">
-            <span className="relative inline-flex items-center">
-              <span className="text-2xl pr-2">○</span>
-              <CosmojiEmblem size={24} />
-            </span>
-            Cosmojî – Tendances
-          </h2>
-          <button onClick={() => setOpen(true)} className="rounded-xl bg-slate-900 text-white px-3 py-1">Panthéon</button>
+      </motion.div>
+      {/* Statistiques et tendances */}
+      <motion.div 
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.3 }}
+        className="rounded-2xl bg-white text-slate-900 shadow-lg p-6"
+      >
+        <div className="flex items-center gap-3 mb-6">
+          <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center">
+            <span className="text-xl">📊</span>
+          </div>
+          <div>
+            <h2 className="text-xl font-semibold text-slate-900">Tendances de la communauté</h2>
+            <p className="text-sm text-slate-600">Les combinaisons les plus populaires</p>
+          </div>
         </div>
-        <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 text-sm">
-          <section>
-            <h3 className="text-slate-600 mb-2">Top émojis</h3>
-            <ul className="space-y-1">
+        
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <section className="rounded-xl bg-gradient-to-br from-blue-50 to-cyan-50 border border-blue-200 p-4">
+            <h3 className="text-sm font-semibold text-blue-700 mb-3 flex items-center gap-2">
+              <span>⭐</span> Top émojis
+            </h3>
+            <ul className="space-y-2">
               {stats.occurrences.slice(0, 8).map(({ items, count }, i) => (
-                <li key={i} className="flex items-center justify-between">
-                  <span className="select-none">{items[0]}</span>
-                  <span className="text-slate-500">{count}</span>
+                <li key={i} className="flex items-center justify-between text-sm">
+                  <span className="text-2xl select-none">{items[0]}</span>
+                  <span className="font-medium text-blue-600 bg-blue-100 px-2 py-0.5 rounded-full text-xs">
+                    {count}
+                  </span>
                 </li>
               ))}
             </ul>
           </section>
-          <section>
-            <h3 className="text-slate-600 mb-2">Top paires</h3>
-            <ul className="space-y-1">
+          
+          <section className="rounded-xl bg-gradient-to-br from-purple-50 to-pink-50 border border-purple-200 p-4">
+            <h3 className="text-sm font-semibold text-purple-700 mb-3 flex items-center gap-2">
+              <span>🔗</span> Top paires
+            </h3>
+            <ul className="space-y-2">
               {stats.pairs.slice(0, 8).map(({ items, count }, i) => (
-                <li key={i} className="flex items-center justify-between">
-                  <span className="select-none">{items.join(' ')}</span>
-                  <span className="text-slate-500">{count}</span>
+                <li key={i} className="flex items-center justify-between text-sm">
+                  <span className="text-xl select-none">{items.join(' ')}</span>
+                  <span className="font-medium text-purple-600 bg-purple-100 px-2 py-0.5 rounded-full text-xs">
+                    {count}
+                  </span>
                 </li>
               ))}
             </ul>
           </section>
-          <section>
-            <h3 className="text-slate-600 mb-2">Top triplets</h3>
-            <ul className="space-y-1">
+          
+          <section className="rounded-xl bg-gradient-to-br from-emerald-50 to-green-50 border border-emerald-200 p-4">
+            <h3 className="text-sm font-semibold text-emerald-700 mb-3 flex items-center gap-2">
+              <span>✨</span> Top triplets
+            </h3>
+            <ul className="space-y-2">
               {stats.triples.slice(0, 8).map(({ items, count }, i) => (
-                <li key={i} className="flex items-center justify-between">
-                  <span className="select-none">{items.join(' ')}</span>
-                  <span className="text-slate-500">{count}</span>
+                <li key={i} className="flex items-center justify-between text-sm">
+                  <span className="text-lg select-none">{items.join(' ')}</span>
+                  <span className="font-medium text-emerald-600 bg-emerald-100 px-2 py-0.5 rounded-full text-xs">
+                    {count}
+                  </span>
                 </li>
               ))}
             </ul>
           </section>
         </div>
-      </div>
+      </motion.div>
       <PantheonModal open={open} onClose={() => setOpen(false)} />
     </div>
   )
