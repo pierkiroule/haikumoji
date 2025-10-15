@@ -33,7 +33,10 @@ export default function Starfield({ density = 0.0018, speed = 0.06, twinkle = tr
 
     let width = 0
     let height = 0
-    let pixelRatio = Math.max(1, Math.min(2, window.devicePixelRatio || 1))
+    let pixelRatio = 1
+    if (typeof window !== 'undefined') {
+      pixelRatio = Math.max(1, Math.min(2, window.devicePixelRatio || 1))
+    }
 
     function resize() {
       width = canvas.clientWidth
@@ -85,14 +88,21 @@ export default function Starfield({ density = 0.0018, speed = 0.06, twinkle = tr
       animationRef.current = prefersReduced ? 0 : requestAnimationFrame(draw)
     }
 
-    const ro = new ResizeObserver(resize)
-    ro.observe(canvas)
+    let cleanupObserver = () => {}
+    if (typeof ResizeObserver !== 'undefined') {
+      const ro = new ResizeObserver(resize)
+      ro.observe(canvas)
+      cleanupObserver = () => ro.disconnect()
+    } else if (typeof window !== 'undefined') {
+      window.addEventListener('resize', resize)
+      cleanupObserver = () => window.removeEventListener('resize', resize)
+    }
     resize()
     draw()
 
     return () => {
       cancelAnimationFrame(animationRef.current)
-      ro.disconnect()
+      cleanupObserver()
     }
   }, [params])
 

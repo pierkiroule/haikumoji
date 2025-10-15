@@ -14,7 +14,14 @@ function getJSON(key, fallback) {
 }
 
 function setJSON(key, value) {
-  localStorage.setItem(key, JSON.stringify(value))
+  try {
+    localStorage.setItem(key, JSON.stringify(value))
+  } catch (err) {
+    // Gracefully degrade when storage is unavailable (private mode, quota, iframes)
+    // No throw: avoid crashing the app on first load
+    // Optionally, could fallback to an in-memory cache if needed later
+    console.warn('Storage write failed for key', key, err)
+  }
 }
 
 function generateId() {
