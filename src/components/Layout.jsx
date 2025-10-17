@@ -1,5 +1,4 @@
 import { motion } from 'framer-motion'
-import Navbar from './Navbar.jsx'
 import Starfield from './Starfield.jsx'
 
 export default function Layout({ children }) {
@@ -13,8 +12,8 @@ export default function Layout({ children }) {
         <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-aurora-blue/10 rounded-full blur-3xl animate-pulse-soft" style={{ animationDelay: '1s' }} />
       </div>
 
-      <div className="pb-16 lg:pb-0 lg:pt-16" style={{ paddingBottom: 'calc(env(safe-area-inset-bottom) + 4rem)' }}>
-        <main className="min-h-[calc(100vh-4rem)] flex items-center justify-center">
+      <div className="pt-4" style={{ paddingTop: 'max(1rem, env(safe-area-inset-top))' }}>
+        <main className="min-h-screen flex items-center justify-center">
           <motion.div 
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -29,8 +28,6 @@ export default function Layout({ children }) {
           </motion.div>
         </main>
       </div>
-      
-      <Navbar />
     </div>
   )
 }
