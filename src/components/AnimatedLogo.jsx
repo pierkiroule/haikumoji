@@ -196,7 +196,7 @@ export default function AnimatedLogo({ className = "" }) {
           </circle>
         </motion.g>
         
-        {/* Texte ONIMOJIS */}
+        {/* Texte ONIMOJI */}
         <motion.text
           x="115"
           y="58"
@@ -209,7 +209,7 @@ export default function AnimatedLogo({ className = "" }) {
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 1, delay: 0.3 }}
         >
-          nimojis
+          nimoji
         </motion.text>
         
         {/* Particules flottantes autour du O */}
