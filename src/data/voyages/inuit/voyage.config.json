@@ -56,7 +56,7 @@
         "description": "Réception du texte régénérateur personnalisé",
         "route": "/guardian",
         "icon": "📜"
-      },
+      }
     ]
   },
   "lunes": {
