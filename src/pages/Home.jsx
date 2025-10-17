@@ -144,12 +144,12 @@ export default function Home() {
         </motion.div>
         
         <h1 className="text-3xl md:text-4xl font-bold tracking-tight bg-gradient-to-br from-white via-slate-100 to-slate-300 bg-clip-text text-transparent">
-          Cultivez votre<br/>univers onirique
+          Entrez dans le<br/>hublot Cosmoji
         </h1>
         
         <p className="mx-auto max-w-xl text-slate-300 text-lg leading-relaxed">
-          Onimoji vous accompagne avec des symboles universels et la sagesse chamanique inuite 
-          pour apaiser votre sommeil et enrichir vos rêves.
+          Sélectionnez 3 émojis dans le réseau collectif pour générer votre énergie onirique 
+          et rencontrer les gardiens chamaniques inuits.
         </p>
         
         <motion.div 
@@ -197,14 +197,14 @@ export default function Home() {
               <div className="text-2xl select-none transform group-hover:scale-110 transition-transform duration-300">❄️🌌🐋</div>
             </div>
             <p className="text-slate-300 text-sm leading-relaxed mb-4">
-              12 lunes pour rencontrer des gardiens onimoji (Sila, Sedna, …)
-              et découvrir des ressources culturelles inuites.
+              Mission Inuit : 12 lunes pour explorer le hublot Cosmoji, 
+              sélectionner des émojis et rencontrer des gardiens chamaniques.
             </p>
             <Link 
-              to="/voyage/inuit" 
+              to="/cosmoji" 
               className="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-white/90 to-white/80 text-slate-900 px-5 py-2.5 text-sm font-semibold hover:from-white hover:to-white shadow-lg hover:shadow-xl transition-all duration-300"
             >
-              Entrer dans le voyage
+              Entrer dans le hublot
               <span className="group-hover:translate-x-1 transition-transform duration-300">→</span>
             </Link>
           </div>
