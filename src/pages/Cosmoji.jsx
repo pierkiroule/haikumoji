@@ -48,7 +48,7 @@ export default function Cosmoji() {
 
   return (
     <div className="space-y-6">
-      {/* En-tête du hublot Cosmoji */}
+      {/* En-tête du radar Cosmoji */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -59,15 +59,15 @@ export default function Cosmoji() {
           <div className="flex items-center gap-3 mb-3">
             <CosmojiEmblem size={32} />
             <div>
-              <h1 className="text-2xl font-bold text-white">Hublot Cosmoji</h1>
-              <p className="text-slate-300 text-sm">Le cœur de votre mission - Sélectionnez 3 émojis pour générer votre énergie onirique</p>
+              <h1 className="text-2xl font-bold text-white">Radar Cosmoji</h1>
+              <p className="text-slate-300 text-sm">Constellation d'émojis - Sélectionnez 3 émojis pour générer votre énergie onirique</p>
             </div>
           </div>
           <div className="rounded-xl bg-white/10 border border-white/20 p-4">
             <p className="text-slate-200 text-sm leading-relaxed">
-              🌟 <strong>Réseau collectif évolutif :</strong> Ce hublot affiche 22 émojis de base. Au début, ils sont tous isolés. 
+              🌟 <strong>Radar à constellation :</strong> Ce radar affiche 22 émojis de base. Au début, ils sont tous isolés. 
               À chaque sélection de trio par un voyageur, les connexions se créent et se renforcent. 
-              Plus la communauté sélectionne, plus le réseau se densifie !
+              Plus la communauté sélectionne, plus la constellation se densifie !
             </p>
           </div>
         </div>
@@ -100,7 +100,7 @@ export default function Cosmoji() {
           <div>
             <h2 className="text-xl font-semibold text-white mb-1">Réseau d'associations</h2>
             <p className="text-sm text-slate-300">
-              Taille du cercle = popularité • Épaisseur des liens = co-occurrences ≥ 3 • Nœuds isolés = pas encore sélectionnés
+              Taille = popularité • Épaisseur = co-occurrences ≥ 3 • Nœuds isolés = pas encore sélectionnés • Pincez pour zoomer
             </p>
           </div>
           <button 
@@ -132,7 +132,7 @@ export default function Cosmoji() {
         </div>
 
         <div className="rounded-xl border-2 border-slate-800 overflow-hidden mb-4">
-          <EmojiNetwork
+          <RadarCosmoji
             stats={stats}
             selectable
             selected={picked}

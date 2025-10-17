@@ -79,7 +79,7 @@ export default function Home() {
                     <div>
                       <h3 className="font-semibold text-white mb-1">Choisissez 3 émojis</h3>
                       <p className="text-sm text-slate-300">
-                        Dans le hublot Cosmoji, sélectionnez 3 symboles qui résonnent avec vous
+                        Dans le radar Cosmoji, sélectionnez 3 symboles qui résonnent avec vous
                       </p>
                     </div>
                   </div>
@@ -144,7 +144,7 @@ export default function Home() {
         </motion.div>
         
         <h1 className="text-3xl md:text-4xl font-bold tracking-tight bg-gradient-to-br from-white via-slate-100 to-slate-300 bg-clip-text text-transparent">
-          Entrez dans le<br/>hublot Cosmoji
+          Entrez dans le<br/>radar Cosmoji
         </h1>
         
         <p className="mx-auto max-w-xl text-slate-300 text-lg leading-relaxed">
@@ -197,7 +197,7 @@ export default function Home() {
               <div className="text-2xl select-none transform group-hover:scale-110 transition-transform duration-300">❄️🌌🐋</div>
             </div>
             <p className="text-slate-300 text-sm leading-relaxed mb-4">
-              Mission Inuit : 12 lunes pour explorer le hublot Cosmoji, 
+              Mission Inuit : 12 lunes pour explorer le radar Cosmoji, 
               sélectionner des émojis et rencontrer des gardiens chamaniques.
             </p>
             <Link 
@@ -265,7 +265,7 @@ export default function Home() {
         <ol className="space-y-3 text-sm text-slate-300">
           <li className="flex items-start gap-3 p-3 rounded-xl bg-white/5 hover:bg-white/10 transition-colors">
             <span className="flex-shrink-0 w-6 h-6 rounded-full bg-midnight-400 flex items-center justify-center text-xs font-bold">1</span>
-            <span>Entrez dans le hublot Cosmoji et sélectionnez 3 émojis du réseau collectif.</span>
+            <span>Entrez dans le radar Cosmoji et sélectionnez 3 émojis de la constellation collective.</span>
           </li>
           <li className="flex items-start gap-3 p-3 rounded-xl bg-white/5 hover:bg-white/10 transition-colors">
             <span className="flex-shrink-0 w-6 h-6 rounded-full bg-midnight-400 flex items-center justify-center text-xs font-bold">2</span>

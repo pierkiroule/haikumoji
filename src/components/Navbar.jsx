@@ -3,7 +3,7 @@ import { motion } from 'framer-motion'
 import { resetAppStorage } from '../utils/storage.js'
 
 const navItems = [
-  { to: '/cosmoji', label: '✨ Cosmoji', ariaLabel: 'Hublot Cosmoji - Cœur de la mission' },
+        { to: '/cosmoji', label: '✨ Cosmoji', ariaLabel: 'Radar Cosmoji - Constellation d\'émojis' },
   { to: '/lune', label: '🌙 Ma Lune', ariaLabel: 'Ma lune actuelle' },
   { to: '/community', label: '💖 Communauté', ariaLabel: 'Communauté' },
   { to: '/', label: '🏠 Home', ariaLabel: 'Accueil' },
