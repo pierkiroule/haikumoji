@@ -5,6 +5,8 @@ import { addStarSeed, getMoonIndex, getSelectedTriplet, nextMoon, seedIfEmpty, s
 import { getLuneData } from '../utils/voyageLoader.js'
 import { getCurrentVoyage } from '../utils/voyageConfig.js'
 import { getEmojiMetadata } from '../utils/cosmojiLoader.js'
+import { generateShortScript } from '../utils/hypnonirisGenerator.js'
+import MoonProgressWidget from '../components/MoonProgressWidget.jsx'
 
 export default function Guardian() {
   const [triplet, setTriplet] = useState([])
@@ -48,11 +50,14 @@ export default function Guardian() {
       sensations: sensations
     })
     
+    // Mark guardian as met
+    localStorage.setItem(`guardian_met_moon_${current}`, 'true')
+    
     // Progress to next moon
     try { nextMoon() } catch {}
     
-    // Navigate to next moon or home
-    navigate('/')
+    // Navigate to home or dreamgarden
+    navigate('/dreamgarden')
   }
 
   if (!luneData) {
@@ -77,14 +82,13 @@ export default function Guardian() {
   const astuces = luneData.astuces_chamaniques || []
   const invitation = luneData.invitation_ecriture
 
-  // Personnaliser le script avec les émojis
-  const scriptPersonnalise = script?.variation_avec_emojis
-    ?.replace('{emoji1}', triplet[0] || '')
-    ?.replace('{emoji2}', triplet[1] || '')
-    ?.replace('{emoji3}', triplet[2] || '')
+  // Générer le script court personnalisé avec les émojis
+  const scriptPersonnalise = generateShortScript(triplet, guardian.nom)
 
   return (
     <div className="relative space-y-6 pb-20">
+      <MoonProgressWidget />
+      
       {/* Aurora overlay */}
       <AnimatePresence>
         {showAurora && (
@@ -332,15 +336,15 @@ export default function Guardian() {
                   </pre>
                 </div>
 
-                {/* Variation personnalisée */}
+                {/* Script court personnalisé */}
                 {scriptPersonnalise && (
                   <div className="rounded-xl bg-gradient-to-r from-emerald-500/20 to-cyan-500/20 border border-emerald-400/30 p-6 mb-6">
-                    <div className="text-sm font-medium text-emerald-200 mb-2 text-center">
-                      ✨ Version personnalisée avec vos émojis
+                    <div className="text-sm font-medium text-emerald-200 mb-3 text-center">
+                      ✨ Script court pour l'endormissement
                     </div>
-                    <p className="text-white leading-relaxed text-center">
+                    <pre className="text-white leading-relaxed whitespace-pre-wrap text-center">
                       {scriptPersonnalise}
-                    </p>
+                    </pre>
                   </div>
                 )}
 
