@@ -1,41 +1,38 @@
 import { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
-import EmojiNetwork from '../components/EmojiNetwork.jsx'
+import EmojiBubble from '../components/EmojiBubble.jsx'
 import StepGuide from '../components/StepGuide.jsx'
 import SelectionPanel from '../components/SelectionPanel.jsx'
-import { computeEmojiStats, seedIfEmpty, setSelectedTriplet, getUser, addOnimoji } from '../utils/storage.js'
+import { seedIfEmpty, setSelectedTriplet, getUser, addOnimoji } from '../utils/storage.js'
 import { useNavigate } from 'react-router-dom'
 import TagInputChips from '../components/TagInputChips.jsx'
 import OnimojiFeed from '../components/OnimojiFeed.jsx'
+import CosmojiBubbleModal from '../components/CosmojiBubbleModal.jsx'
+import { getAllEmojis } from '../utils/cosmojiLoader.js'
 
 export default function Navette() {
-  const [stats, setStats] = useState({ occurrences: [], pairs: [], triples: [] })
   const [picked, setPicked] = useState([])
   const [user, setUser] = useState(null)
   const [tags, setTags] = useState([])
   const [feedKey, setFeedKey] = useState(0)
+  const [open, setOpen] = useState(false)
   const navigate = useNavigate()
 
   useEffect(() => {
     seedIfEmpty()
-    setStats(computeEmojiStats())
     setUser(getUser())
   }, [])
 
-  const handleToggle = (emoji) => {
-    if (!user) return
-    setPicked(prev => {
-      const has = prev.includes(emoji)
-      if (has) return prev.filter(e => e !== emoji)
-      if (prev.length >= 3) return prev
-      return [...prev, emoji]
-    })
+  const handleOpenGuide = () => {
+    if (picked.length !== 3) return
+    setOpen(true)
   }
 
-  const goToLune = () => {
+  const continueToGuardian = () => {
     if (picked.length !== 3) return
     setSelectedTriplet(picked)
-    navigate('/lune')
+    setOpen(false)
+    navigate('/guardian')
   }
 
   const emitOnimoji = () => {
@@ -59,8 +56,8 @@ export default function Navette() {
       id: 'select',
       icon: '✨',
       title: 'Choisir 3 émojis',
-      description: 'Sélectionnez 3 émojis qui résonnent avec votre état onirique du moment. Ces symboles cosmiques formeront la base de votre rêve.',
-      tips: 'Cliquez sur les émojis dans le réseau ci-dessous. Les émojis sélectionnés apparaîtront en vert brillant avec un halo lumineux.'
+      description: 'Sélectionnez 3 émojis dans le hublot Cosmoji. Ils formeront la base de votre rêve.',
+      tips: 'Cliquez dans le cercle effervescent (hublot) pour choisir vos 3 symboles.'
     },
     {
       id: 'lune',
@@ -72,7 +69,7 @@ export default function Navette() {
     {
       id: 'guardian',
       icon: '✧',
-      title: 'Rencontrer le gardien',
+      title: 'Rencontrer le guide',
       description: 'Un gardien onimoji inuit (Sila, Sedna, Nanook...) vous accueillera pour un rituel d\'apaisement.',
       tips: 'Le gardien est choisi en fonction des émojis que vous avez sélectionnés et de la lune en cours.'
     }
@@ -112,51 +109,24 @@ export default function Navette() {
         />
       </motion.section>
 
-      {/* Panneau de sélection amélioré */}
-      <motion.section
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.2 }}
-      >
-        <SelectionPanel 
-          selected={picked}
-          maxSelection={3}
-          onClear={() => setPicked([])}
-        />
-      </motion.section>
-
-      {/* Réseau d'émojis avec instructions */}
+      {/* Hublot Cosmoji central */}
       <motion.section
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.3 }}
         className="rounded-2xl bg-white text-slate-900 shadow-card-hover p-6"
       >
-        <div className="mb-4">
-          <div className="flex items-center justify-between mb-4">
-            <div>
-              <h3 className="text-lg font-semibold text-slate-900 mb-1">Réseau Cosmoji</h3>
-              <p className="text-sm text-slate-600">
-                Cliquez sur 3 émojis. Taille = popularité • Liens = associations fréquentes
-              </p>
-            </div>
+        <div className="mb-6">
+          <div className="flex items-center justify-center">
+            <EmojiBubble 
+              emojis={getAllEmojis()}
+              selected={picked}
+              setSelected={setPicked}
+              maxSelected={3}
+              size={380}
+              emojiSize={34}
+            />
           </div>
-
-          <EmojiNetwork
-            stats={stats}
-            selectable={true}
-            selected={picked}
-            onToggle={handleToggle}
-            maxNodes={30}
-            maxLinks={200}
-            glow
-            getNodeColor={(id, sel) => ({
-              fill: sel ? '#10b981' : '#0ea5e9',
-              stroke: sel ? '#059669' : '#0284c7',
-              fillOpacity: sel ? 0.85 : 0.12,
-              strokeOpacity: sel ? 1 : 0.45,
-            })}
-          />
         </div>
         
         <div className="flex flex-col gap-4 pt-4 border-t border-slate-200">
@@ -192,7 +162,7 @@ export default function Navette() {
             <motion.button
               whileHover={picked.length === 3 ? { scale: 1.02 } : {}}
               whileTap={picked.length === 3 ? { scale: 0.98 } : {}}
-              onClick={goToLune}
+              onClick={handleOpenGuide}
               disabled={picked.length !== 3}
               className={`flex-1 rounded-xl px-6 py-3 font-semibold transition-all duration-300 ${
                 picked.length === 3 
@@ -200,22 +170,43 @@ export default function Navette() {
                   : 'bg-slate-200 text-slate-400 cursor-not-allowed'
               }`}
             >
-              🌙 Continuer vers la Lune
+              ✧ Rencontrer le Guide
             </motion.button>
           </div>
         </div>
+      </motion.section>
+
+      {/* Panneau de sélection visuel */}
+      <motion.section
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.35 }}
+      >
+        <SelectionPanel 
+          selected={picked}
+          maxSelection={3}
+          onClear={() => setPicked([])}
+        />
       </motion.section>
 
       {/* Flux des onimojis */}
       <motion.section
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.35 }}
+        transition={{ delay: 0.4 }}
         className="rounded-2xl glass-strong border border-white/20 p-6"
       >
         <h3 className="text-white font-semibold mb-3">Flux des onimojis</h3>
         <OnimojiFeed refreshKey={feedKey} />
       </motion.section>
+
+      {/* Modal bulle onirique */}
+      <CosmojiBubbleModal 
+        open={open} 
+        onClose={() => setOpen(false)} 
+        emojis={picked} 
+        onContinue={continueToGuardian}
+      />
     </div>
   )
 }
