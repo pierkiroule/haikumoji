@@ -8,7 +8,6 @@ const navItems = [
   { to: '/cosmoji', label: '✨ Cosmoji', ariaLabel: 'Cosmoji' },
   { to: '/lune', label: '🌙 Lune', ariaLabel: 'Lune actuelle' },
   { to: '/community', label: '💖 Communauté', ariaLabel: 'Communauté' },
-  { to: '/dreamgarden', label: '🌱 Jardin', ariaLabel: 'Jardin de rêves' },
 ]
 
 export default function Navbar() {
