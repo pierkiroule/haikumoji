@@ -28,17 +28,20 @@ export default function EmojiNetwork({
     const occ = Array.isArray(stats?.occurrences) ? stats.occurrences : []
     const pairs = Array.isArray(stats?.pairs) ? stats.pairs : []
 
-    const topNodes = occ.slice(0, maxNodes)
-    const allowed = new Set(topNodes.map(n => n.items[0]))
+    // Take all nodes (including those with 0 occurrences - isolated nodes)
+    const allNodes = occ.slice(0, maxNodes)
+    const allowed = new Set(allNodes.map(n => n.items[0]))
 
+    // Filter links: only show cooccurrences >= minCooccurrence
     const filteredLinks = pairs
       .filter(p => p.items.length === 2 && allowed.has(p.items[0]) && allowed.has(p.items[1]) && p.count >= minCooccurrence)
       .slice(0, maxLinks)
 
-    const maxOccCount = topNodes.reduce((m, n) => Math.max(m, n.count || 0), 1)
-    const maxPairCount = filteredLinks.reduce((m, e) => Math.max(m, e.count || 0), 1)
+    // Calculate max counts for scaling (handle case where all counts are 0)
+    const maxOccCount = Math.max(1, allNodes.reduce((m, n) => Math.max(m, n.count || 0), 0))
+    const maxPairCount = Math.max(1, filteredLinks.reduce((m, e) => Math.max(m, e.count || 0), 0))
 
-    const nodes = topNodes.map(n => ({ id: n.items[0], count: n.count }))
+    const nodes = allNodes.map(n => ({ id: n.items[0], count: n.count }))
     const links = filteredLinks.map(l => ({ source: l.items[0], target: l.items[1], count: l.count }))
 
     return { nodes, links, maxOcc: maxOccCount, maxPair: maxPairCount }
@@ -47,7 +50,7 @@ export default function EmojiNetwork({
   const nodeRadius = useMemo(() => {
     const minR = 12, maxR = 30
     return (count) => {
-      if (!maxOcc) return minR
+      if (!maxOcc || count === 0) return minR // Isolated nodes have minimum radius
       return Math.round(minR + (maxR - minR) * (count / maxOcc))
     }
   }, [maxOcc])

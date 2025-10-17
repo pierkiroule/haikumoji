@@ -65,8 +65,9 @@ export default function Cosmoji() {
           </div>
           <div className="rounded-xl bg-white/10 border border-white/20 p-4">
             <p className="text-slate-200 text-sm leading-relaxed">
-              🌟 <strong>Réseau collectif :</strong> Ce hublot affiche le réseau d'émojis partagé par tous les voyageurs de la mission Inuit. 
-              Sélectionnez 3 émojis pour créer votre triangle d'énergie et rencontrer votre gardien chamanique.
+              🌟 <strong>Réseau collectif évolutif :</strong> Ce hublot affiche 22 émojis de base. Au début, ils sont tous isolés. 
+              À chaque sélection de trio par un voyageur, les connexions se créent et se renforcent. 
+              Plus la communauté sélectionne, plus le réseau se densifie !
             </p>
           </div>
         </div>
@@ -99,7 +100,7 @@ export default function Cosmoji() {
           <div>
             <h2 className="text-xl font-semibold text-white mb-1">Réseau d'associations</h2>
             <p className="text-sm text-slate-300">
-              Taille du cercle = popularité • Épaisseur des liens = co-occurrences
+              Taille du cercle = popularité • Épaisseur des liens = co-occurrences ≥ 3 • Nœuds isolés = pas encore sélectionnés
             </p>
           </div>
           <button 
@@ -167,7 +168,7 @@ export default function Cosmoji() {
         <div className="flex items-center justify-between pt-4 border-t border-slate-800">
           <div className="text-sm text-slate-300">
             {picked.length === 0 ? (
-              <span className="text-slate-400 italic">Cliquez sur 3 émojis pour créer votre trio cosmique</span>
+              <span className="text-slate-400 italic">Cliquez sur 3 émojis pour créer votre trio cosmique et enrichir le réseau</span>
             ) : (
               <>
                 <span className="font-medium">Sélection :</span>{' '}
@@ -196,7 +197,7 @@ export default function Cosmoji() {
                 : 'bg-slate-800 text-slate-500 cursor-not-allowed'
             }`}
           >
-            {picked.length === 3 ? '✧ Entrer en résonance' : `Choisir ${3 - picked.length} émoji${3 - picked.length > 1 ? 's' : ''}`}
+            {picked.length === 3 ? '✧ Générer l\'énergie onirique' : `Choisir ${3 - picked.length} émoji${3 - picked.length > 1 ? 's' : ''}`}
           </motion.button>
         </div>
       </motion.div>
