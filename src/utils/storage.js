@@ -46,6 +46,29 @@ export function seedIfEmpty() {
     const seeded = samples.map(s => ({ id: generateId(), likes: 0, createdAt: Date.now(), ...s }))
     setJSON(STORAGE_KEYS.HAIKUS, seeded)
   }
+  // Seed Onimoji feed if empty (triads only, tags optional)
+  if (!getJSON(STORAGE_KEYS.ONIMOJIS, null)) {
+    const samplesOnimoji = [
+      { emojis: ['❄️','🌌','🐋'], tags: ['glace','aurore','baleine'], author: 'Anonyme', authorId: null },
+      { emojis: ['🌊','🐚','🌙'], tags: ['marée','écoute'], author: 'Anonyme', authorId: null },
+      { emojis: ['🧊','🌬️','💫'], tags: ['souffle'], author: 'Anonyme', authorId: null },
+      { emojis: ['🪶','🎵','☁️'], tags: ['plume','chant'], author: 'Anonyme', authorId: null },
+      { emojis: ['🌕','🌠','🌑'], tags: ['cycle'], author: 'Anonyme', authorId: null }
+    ]
+    const seededOnimojis = samplesOnimoji.map(s => ({ id: generateId(), createdAt: Date.now(), ...s }))
+    setJSON(STORAGE_KEYS.ONIMOJIS, seededOnimojis)
+  }
+  // Seed Tag catalog if empty
+  if (!getJSON(STORAGE_KEYS.TAGS, null)) {
+    const tags = [
+      { id: generateId(), label: 'glace', createdAt: Date.now(), createdByUserId: null },
+      { id: generateId(), label: 'aurore', createdAt: Date.now(), createdByUserId: null },
+      { id: generateId(), label: 'baleine', createdAt: Date.now(), createdByUserId: null },
+      { id: generateId(), label: 'souffle', createdAt: Date.now(), createdByUserId: null },
+      { id: generateId(), label: 'cycle', createdAt: Date.now(), createdByUserId: null },
+    ]
+    setJSON(STORAGE_KEYS.TAGS, tags)
+  }
   if (!getJSON(STORAGE_KEYS.LIKED_IDS, null)) {
     setJSON(STORAGE_KEYS.LIKED_IDS, [])
   }
@@ -333,4 +356,89 @@ export function saveDraft(draft) {
 
 export function clearDraft() {
   localStorage.removeItem(STORAGE_KEYS.DRAFT)
+}
+
+// ---- Onimoji feed (triads + tags) ----
+export function getOnimojis() {
+  return getJSON(STORAGE_KEYS.ONIMOJIS, [])
+}
+
+export function saveOnimojis(list) {
+  setJSON(STORAGE_KEYS.ONIMOJIS, list)
+}
+
+export function addOnimoji({ emojis, tags = [], author, authorId }) {
+  const triad = Array.isArray(emojis) ? emojis.slice(0, 3) : []
+  if (triad.length !== 3) throw new Error('Onimoji requires exactly 3 emojis')
+  const user = getUser() || { name: author || 'Anonyme', id: authorId || null }
+  const normalizedTags = normalizeTags(tags)
+
+  // upsert tags into catalog
+  normalizedTags.forEach(label => upsertTag(label, user.id))
+
+  // strengthen network counts with this triad
+  try { strengthenCosmojiCounts(triad) } catch {}
+
+  const onimojis = getOnimojis()
+  const entry = {
+    id: generateId(),
+    emojis: triad,
+    tags: normalizedTags,
+    author: user.name,
+    authorId: user.id,
+    createdAt: Date.now(),
+  }
+  const next = [entry, ...onimojis]
+  saveOnimojis(next)
+  return entry
+}
+
+// ---- Tag catalog ----
+export function getAllTags() {
+  return getJSON(STORAGE_KEYS.TAGS, [])
+}
+
+export function saveAllTags(tags) {
+  setJSON(STORAGE_KEYS.TAGS, tags)
+}
+
+export function normalizeTag(label) {
+  return String(label || '')
+    .normalize('NFKC')
+    .toLowerCase()
+    .trim()
+    .replace(/\s+/g, ' ')
+}
+
+export function normalizeTags(tags) {
+  const set = new Set()
+  for (const t of Array.isArray(tags) ? tags : []) {
+    const n = normalizeTag(t)
+    if (n) set.add(n)
+  }
+  return Array.from(set)
+}
+
+export function upsertTag(label, createdByUserId = null) {
+  const n = normalizeTag(label)
+  if (!n) return null
+  const tags = getAllTags()
+  const existing = tags.find(t => t.label === n)
+  if (existing) return existing
+  const created = { id: generateId(), label: n, createdByUserId, createdAt: Date.now() }
+  saveAllTags([created, ...tags])
+  return created
+}
+
+export function suggestTags(query, limit = 8) {
+  const q = normalizeTag(query)
+  if (!q) return getAllTags().slice(0, limit)
+  const tags = getAllTags()
+  const startsWith = []
+  const contains = []
+  for (const t of tags) {
+    if (t.label.startsWith(q)) startsWith.push(t)
+    else if (t.label.includes(q)) contains.push(t)
+  }
+  return [...startsWith, ...contains].slice(0, limit)
 }
