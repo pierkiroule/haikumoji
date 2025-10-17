@@ -209,7 +209,7 @@ export default function AnimatedLogo({ className = "" }) {
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 1, delay: 0.3 }}
         >
-          nimoji
+          Onimoji
         </motion.text>
         
         {/* Particules flottantes autour du O */}
