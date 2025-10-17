@@ -1,26 +1,32 @@
 import { useEffect, useMemo, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
-import { getMoonIndex, nextMoon, getSelectedTriplet, saveDream, seedIfEmpty, getUser } from '../utils/storage.js'
-import corpus from '../data/corpus.json'
+import { getMoonIndex, getSelectedTriplet, saveDream, seedIfEmpty, getUser } from '../utils/storage.js'
 import { getLuneData } from '../utils/voyageLoader.js'
 import { getCurrentVoyage } from '../utils/voyageConfig.js'
-
-function generateDreamText(selected, c) {
-  const pick = (arr) => arr[Math.floor(Math.random() * arr.length)]
-  const [e1, e2, e3] = (selected || []).slice(0, 3)
-  const line1 = `${pick(c.openings)} — ${e1 || ''}`.trim()
-  const line2 = `${pick(c.middles)} — ${e2 || ''}`.trim()
-  const line3 = `${pick(c.closings)} — ${e3 || ''}`.trim()
-  return `${line1}\n${line2}\n${line3}`
-}
+import { generateHypnoniris } from '../utils/hypnonirisGenerator.js'
+import MoonProgressWidget from '../components/MoonProgressWidget.jsx'
 
 export default function Lune() {
   const [moon, setMoon] = useState(1)
   const [triplet, setTriplet] = useState([])
-  const [text, setText] = useState('')
+  const [hypnoniris, setHypnoniris] = useState('')
   const [user, setUser] = useState(null)
   const navigate = useNavigate()
+
+  const meta = useMemo(() => {
+    const v = getCurrentVoyage()
+    const lune = getLuneData(v, moon)
+    if (lune) {
+      return { 
+        titre: lune?.gardien?.titre || `Lune ${moon}`, 
+        gardianName: lune?.gardien?.nom || 'Sila',
+        element: lune?.element || 'air',
+        ressource: lune?.ressources_culturelles?.explication || '' 
+      }
+    }
+    return { titre: `Lune ${moon}`, gardianName: 'Sila', element: 'air', ressource: '' }
+  }, [moon])
 
   useEffect(() => {
     seedIfEmpty()
@@ -30,45 +36,56 @@ export default function Lune() {
     setTriplet(t)
     const u = getUser()
     setUser(u)
-    if (u) {
-      setText(generateDreamText(t, corpus))
+    
+    // Redirect if no emojis selected
+    if (!t || t.length < 3) {
+      navigate('/navette')
+      return
+    }
+    
+    if (u && t && t.length === 3) {
+      const savedHypnoniris = localStorage.getItem(`hypnoniris_moon_${m}`)
+      if (savedHypnoniris) {
+        setHypnoniris(savedHypnoniris)
+      } else {
+        const newHypnoniris = generateHypnoniris(t, meta.gardianName, meta.element)
+        setHypnoniris(newHypnoniris)
+        localStorage.setItem(`hypnoniris_moon_${m}`, newHypnoniris)
+      }
     } else {
-      setText('')
+      setHypnoniris('')
     }
-  }, [])
+  }, [meta.gardianName, meta.element])
 
-  const meta = useMemo(() => {
-    const v = getCurrentVoyage()
-    const lune = getLuneData(v, moon)
-    if (lune) {
-      return { titre: lune?.gardien?.titre || `Lune ${moon}`, ressource: lune?.ressources_culturelles?.explication || '' }
-    }
-    return { titre: `Lune ${moon}`, ressource: '' }
-  }, [moon])
+  const handleRegenerate = () => {
+    if (!user || triplet.length < 3) return
+    const newHypnoniris = generateHypnoniris(triplet, meta.gardianName, meta.element)
+    setHypnoniris(newHypnoniris)
+    localStorage.setItem(`hypnoniris_moon_${moon}`, newHypnoniris)
+  }
 
   const handleSave = () => {
     const user = getUser()
     if (!user) {
-      alert('Inscription locale requise pour sauvegarder un rêve.')
+      alert('Inscription locale requise pour sauvegarder.')
       return
     }
-    saveDream({ moon, emojis: triplet, text, author: user.name, authorId: user.id })
-    alert('Rêve sauvegardé dans la mémoire locale.')
+    saveDream({ moon, emojis: triplet, text: hypnoniris, author: user.name, authorId: user.id })
+    alert('Hypnoniris sauvegardé dans la mémoire locale.')
   }
 
-  const handleNext = () => {
-    const nm = nextMoon()
-    setMoon(nm)
-    const t = getSelectedTriplet()
-    if (user) {
-      setText(generateDreamText(t, corpus))
-    } else {
-      setText('')
+  const handleContinueToGuardian = () => {
+    if (!hypnoniris) {
+      alert('Veuillez générer votre hypnoniris d\'abord.')
+      return
     }
+    navigate('/guardian')
   }
 
   return (
     <div className="space-y-6">
+      <MoonProgressWidget />
+
       {/* Moon Info */}
       <motion.section 
         initial={{ opacity: 0, y: 20 }}
@@ -81,19 +98,11 @@ export default function Lune() {
             <span className="text-xs font-medium text-white">Lune {moon}/12</span>
           </div>
           <h2 className="text-2xl md:text-3xl font-bold text-white mb-2">{meta.titre}</h2>
-          <p className="text-slate-300 text-sm leading-relaxed mb-4">{meta.ressource}</p>
-          <motion.button
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
-            onClick={() => navigate('/guardian')}
-            className="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-midnight-400 to-midnight-500 text-white px-5 py-2.5 hover:shadow-aurora transition-all duration-300 font-medium"
-          >
-            Rencontrer le gardien ✧
-          </motion.button>
+          <p className="text-slate-300 text-sm leading-relaxed">{meta.ressource}</p>
         </div>
       </motion.section>
 
-      {/* Dream Composition */}
+      {/* Hypnoniris Creation */}
       <motion.section 
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -101,6 +110,7 @@ export default function Lune() {
         className="rounded-2xl bg-white text-slate-900 shadow-card-hover p-6 space-y-4"
       >
         <div className="text-center">
+          <h3 className="text-lg font-bold text-slate-900 mb-2">Votre Hypnoniris</h3>
           <div className="text-4xl select-none mb-3">{triplet.join(' ') || '—'}</div>
           {!user && (
             <motion.div 
@@ -110,20 +120,20 @@ export default function Lune() {
             >
               <p className="font-medium mb-2">✨ Inscription requise</p>
               <p className="text-xs text-indigo-700">
-                Inscrivez-vous localement pour générer et sauvegarder vos rêves.
+                Inscrivez-vous localement pour générer et sauvegarder vos hypnoniris.
               </p>
             </motion.div>
           )}
         </div>
 
-        {text && (
+        {hypnoniris && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            className="rounded-xl bg-gradient-to-br from-slate-50 to-white border border-slate-200 p-6"
+            className="rounded-xl bg-gradient-to-br from-midnight-50 via-slate-50 to-indigo-50 border border-slate-200 p-6"
           >
-            <pre className="whitespace-pre-wrap leading-relaxed text-slate-800 text-center font-medium">
-              {text}
+            <pre className="whitespace-pre-wrap leading-relaxed text-slate-800 font-medium text-sm">
+              {hypnoniris}
             </pre>
           </motion.div>
         )}
@@ -132,10 +142,7 @@ export default function Lune() {
           <motion.button
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
-            onClick={() => {
-              if (!user) { alert('Inscription locale requise.'); return }
-              setText(generateDreamText(triplet, corpus))
-            }}
+            onClick={handleRegenerate}
             disabled={!user}
             className={`flex-1 min-w-[120px] rounded-xl px-4 py-3 font-medium transition-all duration-300 ${
               user 
@@ -163,10 +170,15 @@ export default function Lune() {
           <motion.button 
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
-            onClick={handleNext} 
-            className="flex-1 min-w-[140px] rounded-xl bg-gradient-to-r from-midnight-400 to-midnight-500 text-white px-4 py-3 hover:shadow-aurora transition-all duration-300 font-medium"
+            onClick={handleContinueToGuardian} 
+            disabled={!hypnoniris}
+            className={`flex-1 min-w-[140px] rounded-xl px-4 py-3 transition-all duration-300 font-medium ${
+              hypnoniris
+                ? 'bg-gradient-to-r from-midnight-400 to-midnight-500 text-white hover:shadow-aurora'
+                : 'bg-slate-200 text-slate-400 cursor-not-allowed'
+            }`}
           >
-            Lune suivante →
+            Rencontrer le gardien ✧
           </motion.button>
         </div>
       </motion.section>
