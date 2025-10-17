@@ -44,10 +44,10 @@ export default function Navette() {
     } catch {}
   }
 
-  // Redirect to VoyageInuit if no user
+  // Redirect to Cosmoji if no user
   useEffect(() => {
     if (!user) {
-      navigate('/voyage/inuit')
+      navigate('/cosmoji')
     }
   }, [user, navigate])
 

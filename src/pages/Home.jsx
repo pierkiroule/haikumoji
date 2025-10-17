@@ -260,20 +260,20 @@ export default function Home() {
           <div className="w-10 h-10 rounded-full bg-gradient-to-br from-aurora-purple to-aurora-blue flex items-center justify-center text-xl">
             🌕
           </div>
-          <h3 className="text-lg font-semibold">Parcours Inuit — 12 lunes</h3>
+          <h3 className="text-lg font-semibold">Mission Inuit — 12 lunes</h3>
         </div>
         <ol className="space-y-3 text-sm text-slate-300">
           <li className="flex items-start gap-3 p-3 rounded-xl bg-white/5 hover:bg-white/10 transition-colors">
             <span className="flex-shrink-0 w-6 h-6 rounded-full bg-midnight-400 flex items-center justify-center text-xs font-bold">1</span>
-            <span>Choisissez 3 émojis à bord de la Navette Cosmoniris.</span>
+            <span>Entrez dans le hublot Cosmoji et sélectionnez 3 émojis du réseau collectif.</span>
           </li>
           <li className="flex items-start gap-3 p-3 rounded-xl bg-white/5 hover:bg-white/10 transition-colors">
             <span className="flex-shrink-0 w-6 h-6 rounded-full bg-midnight-400 flex items-center justify-center text-xs font-bold">2</span>
-            <span>Explorez la Lune en cours et sa ressource culturelle.</span>
+            <span>Générez votre énergie onirique et explorez la Lune en cours.</span>
           </li>
           <li className="flex items-start gap-3 p-3 rounded-xl bg-white/5 hover:bg-white/10 transition-colors">
             <span className="flex-shrink-0 w-6 h-6 rounded-full bg-midnight-400 flex items-center justify-center text-xs font-bold">3</span>
-            <span>Rencontrez un gardien onimoji inuit pour un rituel d'apaisement.</span>
+            <span>Rencontrez un gardien chamanique inuit pour recevoir votre script onirique.</span>
           </li>
         </ol>
       </motion.section>
