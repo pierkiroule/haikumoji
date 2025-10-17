@@ -31,7 +31,7 @@ export default function SelectionPanel({
             <p className="text-slate-300 text-sm">
               {isComplete 
                 ? '✓ Sélection complète' 
-                : `${remainingSlots} ${remainingSlots === 1 ? 'emoji restant' : 'émojis restants'}`}
+                : `${remainingSlots} ${remainingSlots === 1 ? 'émoji restant' : 'émojis restants'}`}
             </p>
           </div>
         </div>
