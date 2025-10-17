@@ -3,7 +3,7 @@ import { motion } from 'framer-motion'
 import EmojiBubble from '../components/EmojiBubble.jsx'
 import StepGuide from '../components/StepGuide.jsx'
 import SelectionPanel from '../components/SelectionPanel.jsx'
-import { seedIfEmpty, setSelectedTriplet, getUser, addOnimoji } from '../utils/storage.js'
+import { seedIfEmpty, confirmTriplet, getUser, addOnimoji } from '../utils/storage.js'
 import { useNavigate } from 'react-router-dom'
 import TagInputChips from '../components/TagInputChips.jsx'
 import OnimojiFeed from '../components/OnimojiFeed.jsx'
@@ -30,7 +30,8 @@ export default function Navette() {
 
   const continueToGuardian = () => {
     if (picked.length !== 3) return
-    setSelectedTriplet(picked)
+    // Confirme le trio (persist + réseau) pour cohérence avec Cosmoji
+    confirmTriplet(picked)
     setOpen(false)
     navigate('/guardian')
   }

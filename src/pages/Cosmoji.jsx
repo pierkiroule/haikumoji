@@ -6,7 +6,7 @@ import CosmojiEmblem from '../components/CosmojiEmblem.jsx'
 import RadarCosmoji from '../components/RadarCosmoji.jsx'
 import AuroraOverlay from '../components/AuroraOverlay.jsx'
 import SelectionPanel from '../components/SelectionPanel.jsx'
-import { computeEmojiStats, seedIfEmpty, setSelectedTriplet, getMoonIndex } from '../utils/storage.js'
+import { computeEmojiStats, seedIfEmpty, confirmTriplet, getMoonIndex } from '../utils/storage.js'
 import { getEmojiMetadata } from '../utils/cosmojiLoader.js'
 
 export default function Cosmoji() {
@@ -40,8 +40,10 @@ export default function Cosmoji() {
   // Pick 3 -> compute resonance and go to guardian encounter
   const handleResonance = () => {
     if (picked.length !== 3) return
-    // Save selection to storage so the Guardian page can read it
-    setSelectedTriplet(picked)
+    // Confirme le trio et enrichit immédiatement le réseau
+    confirmTriplet(picked)
+    // (Optionnel) rafraîchir les stats locales si on reste sur la page
+    try { setStats(computeEmojiStats()) } catch {}
     // Navigate to guardian encounter
     navigate('/guardian')
   }
