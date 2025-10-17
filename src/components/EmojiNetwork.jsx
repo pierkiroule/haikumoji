@@ -4,7 +4,7 @@ import { select, zoom as d3Zoom, drag as d3Drag, forceSimulation, forceLink, for
 // D3-based force-directed graph: nodes = occurrences, links = co-occurrences
 export default function EmojiNetwork({
   stats,
-  maxNodes = 24,
+  maxNodes = 22,
   maxLinks = 80,
   height = 460,
   selectable = false,
@@ -13,6 +13,7 @@ export default function EmojiNetwork({
   maxSelected = 3,
   getNodeColor, // optional: (id: string, selected: boolean) => { fill?: string, stroke?: string, fillOpacity?: number, strokeOpacity?: number }
   glow = false,
+  minCooccurrence = 3, // Filtrer les cooccurrences inférieures à cette valeur
 }) {
   const containerRef = useRef(null)
   const svgRef = useRef(null)
@@ -31,7 +32,7 @@ export default function EmojiNetwork({
     const allowed = new Set(topNodes.map(n => n.items[0]))
 
     const filteredLinks = pairs
-      .filter(p => p.items.length === 2 && allowed.has(p.items[0]) && allowed.has(p.items[1]))
+      .filter(p => p.items.length === 2 && allowed.has(p.items[0]) && allowed.has(p.items[1]) && p.count >= minCooccurrence)
       .slice(0, maxLinks)
 
     const maxOccCount = topNodes.reduce((m, n) => Math.max(m, n.count || 0), 1)
@@ -41,7 +42,7 @@ export default function EmojiNetwork({
     const links = filteredLinks.map(l => ({ source: l.items[0], target: l.items[1], count: l.count }))
 
     return { nodes, links, maxOcc: maxOccCount, maxPair: maxPairCount }
-  }, [stats, maxNodes, maxLinks])
+  }, [stats, maxNodes, maxLinks, minCooccurrence])
 
   const nodeRadius = useMemo(() => {
     const minR = 12, maxR = 30

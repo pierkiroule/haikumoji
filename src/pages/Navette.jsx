@@ -170,7 +170,7 @@ export default function Navette() {
                   : 'bg-slate-200 text-slate-400 cursor-not-allowed'
               }`}
             >
-              ✧ Rencontrer le Guide
+              ✧ Générer l'énergie onirique
             </motion.button>
           </div>
         </div>

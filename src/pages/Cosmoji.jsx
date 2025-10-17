@@ -136,8 +136,9 @@ export default function Cosmoji() {
             selectable
             selected={picked}
             onToggle={handleToggle}
-            maxNodes={30}
-            maxLinks={200}
+            maxNodes={22}
+            maxLinks={100}
+            minCooccurrence={3}
             glow
             getNodeColor={(id, sel) => {
               const meta = getEmojiMetadata(id)
