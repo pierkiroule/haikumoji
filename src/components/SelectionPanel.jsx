@@ -27,7 +27,7 @@ export default function SelectionPanel({
             <span className="text-white font-bold text-sm">{selected.length}</span>
           </div>
           <div>
-            <h3 className="text-white font-bold text-lg">Vos 3 émojis oniriques</h3>
+            <h3 className="text-white font-bold text-lg">Vos émojis oniriques</h3>
             <p className="text-slate-300 text-sm">
               {isComplete 
                 ? '✓ Sélection complète' 
