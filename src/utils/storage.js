@@ -278,6 +278,18 @@ export function getSelectedTriplet() {
   return getJSON(STORAGE_KEYS.SELECTED_TRIPLET, [])
 }
 
+/**
+ * Confirme un trio sélectionné: le persiste et enrichit le réseau Cosmoji.
+ * Utiliser cette fonction lorsqu'un utilisateur valide son trio (Cosmoji/Navette).
+ */
+export function confirmTriplet(emojis) {
+  const safe = Array.isArray(emojis) ? emojis.slice(0, 3) : []
+  setJSON(STORAGE_KEYS.SELECTED_TRIPLET, safe)
+  // Renforce les occurrences et cooccurrences pour refléter immédiatement l'impact
+  try { strengthenCosmojiCounts(safe) } catch {}
+  return safe
+}
+
 // ---- Star seeds & guardians progression ----
 export function getStarSeeds() {
   return getJSON(STORAGE_KEYS.STAR_SEEDS, [])
