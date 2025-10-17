@@ -105,7 +105,7 @@ export default function RadarCosmoji({
     const svg = select(svgEl)
     svg.selectAll('*').remove()
 
-    if (!nodes.length) return
+    if (!nodes.length || !width || !height) return
 
     const g = svg.append('g').attr('class', 'viz')
     gRef.current = g
