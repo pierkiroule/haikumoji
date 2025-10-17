@@ -192,7 +192,7 @@ export default function Cosmoji() {
                 : 'bg-slate-800 text-slate-500 cursor-not-allowed'
             }`}
           >
-            {picked.length === 3 ? '✧ Entrer en résonance' : `Choisir ${3 - picked.length} émoji(s)`}
+            {picked.length === 3 ? '✧ Entrer en résonance' : `Choisir ${3 - picked.length} émoji${3 - picked.length > 1 ? 's' : ''}`}
           </motion.button>
         </div>
       </motion.div>
