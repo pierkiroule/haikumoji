@@ -8,13 +8,14 @@ import { generateHypnoniris } from '../utils/hypnonirisGenerator.js'
 import MoonProgressWidget from '../components/MoonProgressWidget.jsx'
 
 export default function Lune() {
-  const [moon, setMoon] = useState(1)
+  const [moon, setMoon] = useState(null)
   const [triplet, setTriplet] = useState([])
   const [hypnoniris, setHypnoniris] = useState('')
   const [user, setUser] = useState(null)
   const navigate = useNavigate()
 
   const meta = useMemo(() => {
+    if (!moon) return null
     const v = getCurrentVoyage()
     const lune = getLuneData(v, moon)
     if (lune) {
@@ -28,6 +29,7 @@ export default function Lune() {
     return { titre: `Lune ${moon}`, gardianName: 'Sila', element: 'air', ressource: '' }
   }, [moon])
 
+  // Initialize moon and triplet
   useEffect(() => {
     seedIfEmpty()
     const m = getMoonIndex()
@@ -42,23 +44,24 @@ export default function Lune() {
       navigate('/navette')
       return
     }
+  }, [navigate])
+
+  // Generate hypnoniris only when moon and meta are ready
+  useEffect(() => {
+    if (!moon || !meta || !user || !triplet || triplet.length < 3) return
     
-    if (u && t && t.length === 3) {
-      const savedHypnoniris = localStorage.getItem(`hypnoniris_moon_${m}`)
-      if (savedHypnoniris) {
-        setHypnoniris(savedHypnoniris)
-      } else {
-        const newHypnoniris = generateHypnoniris(t, meta.gardianName, meta.element)
-        setHypnoniris(newHypnoniris)
-        localStorage.setItem(`hypnoniris_moon_${m}`, newHypnoniris)
-      }
+    const savedHypnoniris = localStorage.getItem(`hypnoniris_moon_${moon}`)
+    if (savedHypnoniris) {
+      setHypnoniris(savedHypnoniris)
     } else {
-      setHypnoniris('')
+      const newHypnoniris = generateHypnoniris(triplet, meta.gardianName, meta.element)
+      setHypnoniris(newHypnoniris)
+      localStorage.setItem(`hypnoniris_moon_${moon}`, newHypnoniris)
     }
-  }, [meta.gardianName, meta.element])
+  }, [moon, meta, user, triplet])
 
   const handleRegenerate = () => {
-    if (!user || triplet.length < 3) return
+    if (!user || !moon || !meta || triplet.length < 3) return
     const newHypnoniris = generateHypnoniris(triplet, meta.gardianName, meta.element)
     setHypnoniris(newHypnoniris)
     localStorage.setItem(`hypnoniris_moon_${moon}`, newHypnoniris)
@@ -80,6 +83,21 @@ export default function Lune() {
       return
     }
     navigate('/guardian')
+  }
+
+  if (!moon || !meta) {
+    return (
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        className="min-h-[60vh] flex items-center justify-center"
+      >
+        <div className="text-center">
+          <div className="text-6xl mb-4">🌙</div>
+          <p className="text-slate-300">Chargement de la lune...</p>
+        </div>
+      </motion.div>
+    )
   }
 
   return (
