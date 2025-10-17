@@ -3,13 +3,17 @@ import { motion } from 'framer-motion'
 import EmojiNetwork from '../components/EmojiNetwork.jsx'
 import StepGuide from '../components/StepGuide.jsx'
 import SelectionPanel from '../components/SelectionPanel.jsx'
-import { computeEmojiStats, seedIfEmpty, setSelectedTriplet, getUser, saveUser } from '../utils/storage.js'
+import { computeEmojiStats, seedIfEmpty, setSelectedTriplet, getUser, addOnimoji } from '../utils/storage.js'
 import { useNavigate } from 'react-router-dom'
+import TagInputChips from '../components/TagInputChips.jsx'
+import OnimojiFeed from '../components/OnimojiFeed.jsx'
 
 export default function Navette() {
   const [stats, setStats] = useState({ occurrences: [], pairs: [], triples: [] })
   const [picked, setPicked] = useState([])
   const [user, setUser] = useState(null)
+  const [tags, setTags] = useState([])
+  const [feedKey, setFeedKey] = useState(0)
   const navigate = useNavigate()
 
   useEffect(() => {
@@ -32,6 +36,15 @@ export default function Navette() {
     if (picked.length !== 3) return
     setSelectedTriplet(picked)
     navigate('/lune')
+  }
+
+  const emitOnimoji = () => {
+    if (!user || picked.length !== 3) return
+    try {
+      addOnimoji({ emojis: picked, tags, author: user.name, authorId: user.id })
+      setTags([])
+      setFeedKey(k => k + 1)
+    } catch {}
   }
 
   // Redirect to VoyageInuit if no user
@@ -146,7 +159,7 @@ export default function Navette() {
           />
         </div>
         
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-4 border-t border-slate-200">
+        <div className="flex flex-col gap-4 pt-4 border-t border-slate-200">
           <div className="text-sm text-slate-600">
             {picked.length === 0 ? (
               <span className="text-slate-400 italic">Aucun émoji sélectionné</span>
@@ -158,29 +171,50 @@ export default function Navette() {
               </>
             )}
           </div>
-          
-          <motion.button
-            whileHover={picked.length === 3 ? { scale: 1.02 } : {}}
-            whileTap={picked.length === 3 ? { scale: 0.98 } : {}}
-            onClick={goToLune}
-            disabled={picked.length !== 3}
-            animate={picked.length === 3 ? {
-              boxShadow: [
-                '0 4px 6px rgba(6, 182, 212, 0.3)',
-                '0 8px 16px rgba(6, 182, 212, 0.5)',
-                '0 4px 6px rgba(6, 182, 212, 0.3)',
-              ]
-            } : {}}
-            transition={{ duration: 2, repeat: Infinity }}
-            className={`rounded-xl px-6 py-3 font-semibold transition-all duration-300 ${
-              picked.length === 3 
-                ? 'bg-gradient-to-r from-emerald-500 to-cyan-500 text-white shadow-lg' 
-                : 'bg-slate-200 text-slate-400 cursor-not-allowed'
-            }`}
-          >
-            {picked.length === 3 ? '✨ Valider et continuer' : `Sélectionnez ${3 - picked.length} émoji(s)`}
-          </motion.button>
+
+          {/* Tags + actions */}
+          <TagInputChips value={tags} onChange={setTags} placeholder="Ajouter vos mots-clés (optionnel)" />
+
+          <div className="flex flex-col sm:flex-row gap-3">
+            <motion.button
+              whileHover={picked.length === 3 ? { scale: 1.02 } : {}}
+              whileTap={picked.length === 3 ? { scale: 0.98 } : {}}
+              onClick={emitOnimoji}
+              disabled={picked.length !== 3}
+              className={`flex-1 rounded-xl px-6 py-3 font-semibold transition-all duration-300 ${
+                picked.length === 3 
+                  ? 'bg-gradient-to-r from-emerald-600 to-emerald-500 text-white shadow-lg' 
+                  : 'bg-slate-200 text-slate-400 cursor-not-allowed'
+              }`}
+            >
+              ✨ Émettre mon onimoji
+            </motion.button>
+            <motion.button
+              whileHover={picked.length === 3 ? { scale: 1.02 } : {}}
+              whileTap={picked.length === 3 ? { scale: 0.98 } : {}}
+              onClick={goToLune}
+              disabled={picked.length !== 3}
+              className={`flex-1 rounded-xl px-6 py-3 font-semibold transition-all duration-300 ${
+                picked.length === 3 
+                  ? 'bg-gradient-to-r from-midnight-400 to-midnight-500 text-white shadow-lg' 
+                  : 'bg-slate-200 text-slate-400 cursor-not-allowed'
+              }`}
+            >
+              🌙 Continuer vers la Lune
+            </motion.button>
+          </div>
         </div>
+      </motion.section>
+
+      {/* Flux des onimojis */}
+      <motion.section
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.35 }}
+        className="rounded-2xl glass-strong border border-white/20 p-6"
+      >
+        <h3 className="text-white font-semibold mb-3">Flux des onimojis</h3>
+        <OnimojiFeed refreshKey={feedKey} />
       </motion.section>
     </div>
   )

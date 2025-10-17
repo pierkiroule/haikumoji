@@ -12,6 +12,9 @@ export const STORAGE_KEYS = {
   STAR_SEEDS: 'haikumoji_star_seeds',
   COSMOJI_COUNTS: 'haikumoji_cosmoji_counts',
   CURRENT_VOYAGE: 'haikumoji_current_voyage',
+  // New: Onimoji feed (triads) and tag catalog
+  ONIMOJIS: 'haikumoji_onimojis',
+  TAGS: 'haikumoji_tags',
 }
 
 export const THEME_OF_WEEK = {
