@@ -3,7 +3,7 @@ import { motion, useReducedMotion } from 'framer-motion'
 import { useNavigate } from 'react-router-dom'
 import PantheonModal from '../components/PantheonModal.jsx'
 import CosmojiEmblem from '../components/CosmojiEmblem.jsx'
-import EmojiNetwork from '../components/EmojiNetwork.jsx'
+import RadarCosmoji from '../components/RadarCosmoji.jsx'
 import AuroraOverlay from '../components/AuroraOverlay.jsx'
 import SelectionPanel from '../components/SelectionPanel.jsx'
 import { computeEmojiStats, seedIfEmpty, setSelectedTriplet, getMoonIndex } from '../utils/storage.js'
@@ -48,24 +48,28 @@ export default function Cosmoji() {
 
   return (
     <div className="space-y-6">
-      {/* En-tête explicatif */}
+      {/* En-tête du radar Cosmoji */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="rounded-2xl glass-strong border border-white/20 shadow-card p-6"
+        className="rounded-2xl glass-strong border border-white/20 shadow-card p-6 relative overflow-hidden"
       >
-        <div className="flex items-center gap-3 mb-3">
-          <CosmojiEmblem size={32} />
-          <div>
-            <h1 className="text-2xl font-bold text-white">Explorer le Cosmoji</h1>
-            <p className="text-slate-300 text-sm">Visualisation des tendances et associations d'émojis</p>
+        <div className="absolute top-0 right-0 text-8xl opacity-10">🌌</div>
+        <div className="relative z-10">
+          <div className="flex items-center gap-3 mb-3">
+            <CosmojiEmblem size={32} />
+            <div>
+              <h1 className="text-2xl font-bold text-white">Radar Cosmoji</h1>
+              <p className="text-slate-300 text-sm">Constellation d'émojis - Sélectionnez 3 émojis pour générer votre énergie onirique</p>
+            </div>
           </div>
-        </div>
-        <div className="rounded-xl bg-white/10 border border-white/20 p-4">
-          <p className="text-slate-200 text-sm leading-relaxed">
-            💡 <strong>Mode exploration :</strong> Cette page vous permet de visualiser les connexions entre émojis de la communauté. 
-            Vous pouvez aussi sélectionner 3 émojis pour rencontrer directement un gardien.
-          </p>
+          <div className="rounded-xl bg-white/10 border border-white/20 p-4">
+            <p className="text-slate-200 text-sm leading-relaxed">
+              🌟 <strong>Radar à constellation :</strong> Ce radar affiche 22 émojis de base. Au début, ils sont tous isolés. 
+              À chaque sélection de trio par un voyageur, les connexions se créent et se renforcent. 
+              Plus la communauté sélectionne, plus la constellation se densifie !
+            </p>
+          </div>
         </div>
       </motion.div>
 
@@ -96,7 +100,7 @@ export default function Cosmoji() {
           <div>
             <h2 className="text-xl font-semibold text-white mb-1">Réseau d'associations</h2>
             <p className="text-sm text-slate-300">
-              Taille du cercle = popularité • Épaisseur des liens = co-occurrences
+              Taille = popularité • Épaisseur = co-occurrences ≥ 3 • Nœuds isolés = pas encore sélectionnés • Pincez pour zoomer
             </p>
           </div>
           <button 
@@ -128,13 +132,14 @@ export default function Cosmoji() {
         </div>
 
         <div className="rounded-xl border-2 border-slate-800 overflow-hidden mb-4">
-          <EmojiNetwork
+          <RadarCosmoji
             stats={stats}
             selectable
             selected={picked}
             onToggle={handleToggle}
-            maxNodes={30}
-            maxLinks={200}
+            maxNodes={22}
+            maxLinks={100}
+            minCooccurrence={3}
             glow
             getNodeColor={(id, sel) => {
               const meta = getEmojiMetadata(id)
@@ -163,7 +168,7 @@ export default function Cosmoji() {
         <div className="flex items-center justify-between pt-4 border-t border-slate-800">
           <div className="text-sm text-slate-300">
             {picked.length === 0 ? (
-              <span className="text-slate-400 italic">Cliquez sur 3 émojis pour créer votre trio cosmique</span>
+              <span className="text-slate-400 italic">Cliquez sur 3 émojis pour créer votre trio cosmique et enrichir le réseau</span>
             ) : (
               <>
                 <span className="font-medium">Sélection :</span>{' '}
@@ -192,7 +197,7 @@ export default function Cosmoji() {
                 : 'bg-slate-800 text-slate-500 cursor-not-allowed'
             }`}
           >
-            {picked.length === 3 ? '✧ Entrer en résonance' : `Choisir ${3 - picked.length} émoji${3 - picked.length > 1 ? 's' : ''}`}
+            {picked.length === 3 ? '✧ Générer l\'énergie onirique' : `Choisir ${3 - picked.length} émoji${3 - picked.length > 1 ? 's' : ''}`}
           </motion.button>
         </div>
       </motion.div>

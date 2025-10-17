@@ -44,10 +44,10 @@ export default function Navette() {
     } catch {}
   }
 
-  // Redirect to VoyageInuit if no user
+  // Redirect to Cosmoji if no user
   useEffect(() => {
     if (!user) {
-      navigate('/voyage/inuit')
+      navigate('/cosmoji')
     }
   }, [user, navigate])
 
@@ -92,7 +92,7 @@ export default function Navette() {
           <h2 className="text-2xl md:text-3xl font-bold text-white mb-3">Hublot Cosmoji</h2>
           
           <p className="text-slate-300 text-sm leading-relaxed mb-4">
-            🌙 Bienvenue à bord, {user?.name || 'Voyageur'} ! Le voyage Inuit se déroule en 12 lunes. À chaque lune, vous suivrez ce parcours en 3 étapes pour cultiver votre jardin onirique.
+            🌙 Bienvenue à bord, {user?.name || 'Voyageur'} ! Le voyage Inuit se déroule en 12 lunes. À chaque lune, vous suivrez ce parcours en 3 étapes pour enrichir votre univers onirique.
           </p>
         </div>
       </motion.section>
@@ -170,7 +170,7 @@ export default function Navette() {
                   : 'bg-slate-200 text-slate-400 cursor-not-allowed'
               }`}
             >
-              ✧ Rencontrer le Guide
+              ✧ Générer l'énergie onirique
             </motion.button>
           </div>
         </div>

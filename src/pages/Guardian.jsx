@@ -51,8 +51,8 @@ export default function Guardian() {
     // Progress to next moon
     try { nextMoon() } catch {}
     
-    // Navigate to dream garden
-    navigate('/dreamgarden')
+    // Navigate to next moon or home
+    navigate('/')
   }
 
   if (!luneData) {
@@ -473,7 +473,7 @@ export default function Guardian() {
                 <h3 className="text-2xl font-bold mb-2">Graine d'Étoile Prête</h3>
                 <p className="text-emerald-100 mb-6">
                   Votre rencontre avec {guardian.nom} a produit une graine d'étoile unique. 
-                  Elle rejoindra votre Jardin du Rêve et marquera votre progression dans ce voyage.
+                  Elle marquera votre progression dans ce voyage et enrichira votre collection de graines d'étoiles.
                 </p>
                 
                 <div className="flex gap-3">

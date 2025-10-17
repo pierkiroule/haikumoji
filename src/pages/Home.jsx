@@ -79,7 +79,7 @@ export default function Home() {
                     <div>
                       <h3 className="font-semibold text-white mb-1">Choisissez 3 émojis</h3>
                       <p className="text-sm text-slate-300">
-                        Dans le hublot Cosmoji, sélectionnez 3 symboles qui résonnent avec vous
+                        Dans le radar Cosmoji, sélectionnez 3 symboles qui résonnent avec vous
                       </p>
                     </div>
                   </div>
@@ -144,12 +144,12 @@ export default function Home() {
         </motion.div>
         
         <h1 className="text-3xl md:text-4xl font-bold tracking-tight bg-gradient-to-br from-white via-slate-100 to-slate-300 bg-clip-text text-transparent">
-          Cultivez votre<br/>univers onirique
+          Entrez dans le<br/>radar Cosmoji
         </h1>
         
         <p className="mx-auto max-w-xl text-slate-300 text-lg leading-relaxed">
-          Onimoji vous accompagne avec des symboles universels et la sagesse chamanique inuite 
-          pour apaiser votre sommeil et enrichir vos rêves.
+          Sélectionnez 3 émojis dans le réseau collectif pour générer votre énergie onirique 
+          et rencontrer les gardiens chamaniques inuits.
         </p>
         
         <motion.div 
@@ -159,11 +159,11 @@ export default function Home() {
           className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-4"
         >
           <Link 
-            to="/voyage/inuit" 
+            to="/cosmoji" 
             className="group relative rounded-2xl bg-gradient-to-r from-midnight-400 to-midnight-500 text-white px-8 py-4 hover:shadow-aurora transition-all duration-300 overflow-hidden"
           >
             <span className="relative z-10 flex items-center gap-2 font-medium">
-              {user ? '🚀 Continuer mon voyage' : '🚀 Commencer le voyage Inuit'}
+              {user ? '✨ Entrer dans le hublot' : '✨ Commencer la mission Inuit'}
             </span>
             <div className="absolute inset-0 bg-gradient-to-r from-midnight-300 to-midnight-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
           </Link>
@@ -197,14 +197,14 @@ export default function Home() {
               <div className="text-2xl select-none transform group-hover:scale-110 transition-transform duration-300">❄️🌌🐋</div>
             </div>
             <p className="text-slate-300 text-sm leading-relaxed mb-4">
-              12 lunes pour rencontrer des gardiens onimoji (Sila, Sedna, …)
-              et découvrir des ressources culturelles inuites.
+              Mission Inuit : 12 lunes pour explorer le radar Cosmoji, 
+              sélectionner des émojis et rencontrer des gardiens chamaniques.
             </p>
             <Link 
-              to="/voyage/inuit" 
+              to="/cosmoji" 
               className="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-white/90 to-white/80 text-slate-900 px-5 py-2.5 text-sm font-semibold hover:from-white hover:to-white shadow-lg hover:shadow-xl transition-all duration-300"
             >
-              Entrer dans le voyage
+              Entrer dans le hublot
               <span className="group-hover:translate-x-1 transition-transform duration-300">→</span>
             </Link>
           </div>
@@ -260,20 +260,20 @@ export default function Home() {
           <div className="w-10 h-10 rounded-full bg-gradient-to-br from-aurora-purple to-aurora-blue flex items-center justify-center text-xl">
             🌕
           </div>
-          <h3 className="text-lg font-semibold">Parcours Inuit — 12 lunes</h3>
+          <h3 className="text-lg font-semibold">Mission Inuit — 12 lunes</h3>
         </div>
         <ol className="space-y-3 text-sm text-slate-300">
           <li className="flex items-start gap-3 p-3 rounded-xl bg-white/5 hover:bg-white/10 transition-colors">
             <span className="flex-shrink-0 w-6 h-6 rounded-full bg-midnight-400 flex items-center justify-center text-xs font-bold">1</span>
-            <span>Choisissez 3 émojis à bord de la Navette Cosmoniris.</span>
+            <span>Entrez dans le radar Cosmoji et sélectionnez 3 émojis de la constellation collective.</span>
           </li>
           <li className="flex items-start gap-3 p-3 rounded-xl bg-white/5 hover:bg-white/10 transition-colors">
             <span className="flex-shrink-0 w-6 h-6 rounded-full bg-midnight-400 flex items-center justify-center text-xs font-bold">2</span>
-            <span>Explorez la Lune en cours et sa ressource culturelle.</span>
+            <span>Générez votre énergie onirique et explorez la Lune en cours.</span>
           </li>
           <li className="flex items-start gap-3 p-3 rounded-xl bg-white/5 hover:bg-white/10 transition-colors">
             <span className="flex-shrink-0 w-6 h-6 rounded-full bg-midnight-400 flex items-center justify-center text-xs font-bold">3</span>
-            <span>Rencontrez un gardien onimoji inuit pour un rituel d'apaisement.</span>
+            <span>Rencontrez un gardien chamanique inuit pour recevoir votre script onirique.</span>
           </li>
         </ol>
       </motion.section>

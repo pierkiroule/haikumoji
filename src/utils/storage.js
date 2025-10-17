@@ -28,6 +28,25 @@ function generateId() {
   return `${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 8)}`
 }
 
+// Initialize 22 base emojis for the mission (isolated nodes at start)
+export function initializeBaseEmojis() {
+  const current = getJSON(STORAGE_KEYS.COSMOJI_COUNTS, { occurrence: {}, cooccurrence: {} })
+  
+  // Only initialize if no emojis exist yet
+  if (Object.keys(current.occurrence || {}).length === 0) {
+    const baseEmojis = EMOJI_LIST.slice(0, 22) // Take first 22 emojis
+    const occ = {}
+    const co = {}
+    
+    // Initialize all base emojis with 0 occurrences (isolated nodes)
+    baseEmojis.forEach(emoji => {
+      occ[emoji] = 0
+    })
+    
+    setJSON(STORAGE_KEYS.COSMOJI_COUNTS, { occurrence: occ, cooccurrence: co })
+  }
+}
+
 export function seedIfEmpty() {
   const existing = getJSON(STORAGE_KEYS.HAIKUS, null)
   if (!existing) {
@@ -46,6 +65,9 @@ export function seedIfEmpty() {
     const seeded = samples.map(s => ({ id: generateId(), likes: 0, createdAt: Date.now(), ...s }))
     setJSON(STORAGE_KEYS.HAIKUS, seeded)
   }
+  
+  // Initialize base emojis for the mission (22 emojis, no connections initially)
+  initializeBaseEmojis()
   // Seed Onimoji feed if empty (triads only, tags optional)
   if (!getJSON(STORAGE_KEYS.ONIMOJIS, null)) {
     const samplesOnimoji = [
@@ -161,8 +183,9 @@ export function computeEmojiStats() {
     // ignore merge errors
   }
 
-  // Ensure all catalog emojis exist in occurrences with zero counts
-  for (const e of EMOJI_LIST) {
+  // Ensure all base mission emojis exist in occurrences (including isolated ones)
+  const baseEmojis = EMOJI_LIST.slice(0, 22) // Only the 22 base emojis for this mission
+  for (const e of baseEmojis) {
     if (!occ.has(e)) occ.set(e, 0)
   }
 
