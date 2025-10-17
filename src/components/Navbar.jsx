@@ -3,11 +3,10 @@ import { motion } from 'framer-motion'
 import { resetAppStorage } from '../utils/storage.js'
 
 const navItems = [
-  { to: '/', label: '🏠 Home', ariaLabel: 'Accueil' },
-  { to: '/navette', label: '🚀 Navette', ariaLabel: 'Navette Cosmoniris' },
-  { to: '/cosmoji', label: '✨ Cosmoji', ariaLabel: 'Cosmoji' },
-  { to: '/lune', label: '🌙 Lune', ariaLabel: 'Lune actuelle' },
+  { to: '/cosmoji', label: '✨ Cosmoji', ariaLabel: 'Hublot Cosmoji - Cœur de la mission' },
+  { to: '/lune', label: '🌙 Ma Lune', ariaLabel: 'Ma lune actuelle' },
   { to: '/community', label: '💖 Communauté', ariaLabel: 'Communauté' },
+  { to: '/', label: '🏠 Home', ariaLabel: 'Accueil' },
 ]
 
 export default function Navbar() {

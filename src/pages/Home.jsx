@@ -159,11 +159,11 @@ export default function Home() {
           className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-4"
         >
           <Link 
-            to="/voyage/inuit" 
+            to="/cosmoji" 
             className="group relative rounded-2xl bg-gradient-to-r from-midnight-400 to-midnight-500 text-white px-8 py-4 hover:shadow-aurora transition-all duration-300 overflow-hidden"
           >
             <span className="relative z-10 flex items-center gap-2 font-medium">
-              {user ? '🚀 Continuer mon voyage' : '🚀 Commencer le voyage Inuit'}
+              {user ? '✨ Entrer dans le hublot' : '✨ Commencer la mission Inuit'}
             </span>
             <div className="absolute inset-0 bg-gradient-to-r from-midnight-300 to-midnight-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
           </Link>

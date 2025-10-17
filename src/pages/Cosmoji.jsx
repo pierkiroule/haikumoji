@@ -48,24 +48,27 @@ export default function Cosmoji() {
 
   return (
     <div className="space-y-6">
-      {/* En-tête explicatif */}
+      {/* En-tête du hublot Cosmoji */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="rounded-2xl glass-strong border border-white/20 shadow-card p-6"
+        className="rounded-2xl glass-strong border border-white/20 shadow-card p-6 relative overflow-hidden"
       >
-        <div className="flex items-center gap-3 mb-3">
-          <CosmojiEmblem size={32} />
-          <div>
-            <h1 className="text-2xl font-bold text-white">Explorer le Cosmoji</h1>
-            <p className="text-slate-300 text-sm">Visualisation des tendances et associations d'émojis</p>
+        <div className="absolute top-0 right-0 text-8xl opacity-10">🌌</div>
+        <div className="relative z-10">
+          <div className="flex items-center gap-3 mb-3">
+            <CosmojiEmblem size={32} />
+            <div>
+              <h1 className="text-2xl font-bold text-white">Hublot Cosmoji</h1>
+              <p className="text-slate-300 text-sm">Le cœur de votre mission - Sélectionnez 3 émojis pour générer votre énergie onirique</p>
+            </div>
           </div>
-        </div>
-        <div className="rounded-xl bg-white/10 border border-white/20 p-4">
-          <p className="text-slate-200 text-sm leading-relaxed">
-            💡 <strong>Mode exploration :</strong> Cette page vous permet de visualiser les connexions entre émojis de la communauté. 
-            Vous pouvez aussi sélectionner 3 émojis pour rencontrer directement un gardien.
-          </p>
+          <div className="rounded-xl bg-white/10 border border-white/20 p-4">
+            <p className="text-slate-200 text-sm leading-relaxed">
+              🌟 <strong>Réseau collectif :</strong> Ce hublot affiche le réseau d'émojis partagé par tous les voyageurs de la mission Inuit. 
+              Sélectionnez 3 émojis pour créer votre triangle d'énergie et rencontrer votre gardien chamanique.
+            </p>
+          </div>
         </div>
       </motion.div>
 
