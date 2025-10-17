@@ -1,35 +1,28 @@
 /**
  * Voyage Loader - Chargement dynamique des données de voyage
  * Permet de charger facilement les fichiers JSON des lunes
+ *
+ * Désormais, les lunes sont découvertes automatiquement via import.meta.glob
+ * sur le motif "src/data/voyages/[voyage]/luneX.json".
  */
 
-// Import de toutes les lunes Inuit
-import lune1 from '../data/voyages/inuit/lune1.json'
-import lune2 from '../data/voyages/inuit/lune2.json'
-import lune3 from '../data/voyages/inuit/lune3.json'
-// TODO: Ajouter lune4.json à lune12.json quand créées
+// Découverte de toutes les lunes pour tous les voyages
+const LUNE_MODULES = import.meta.glob('../data/voyages/**/lune*.json', {
+  eager: true,
+})
 
-/**
- * Map des lunes Inuit
- */
-const lunesInuit = {
-  1: lune1,
-  2: lune2,
-  3: lune3,
-  // 4: lune4,
-  // 5: lune5,
-  // ...
-  // 12: lune12,
-}
-
-/**
- * Map des voyages disponibles
- */
-const VOYAGES = {
-  inuit: lunesInuit,
-  // berbere: lunesBerbere, // Futur
-  // druidique: lunesDruidique, // Futur
-}
+// Construit la map { voyageId: { [luneNumber]: data } }
+const VOYAGES = Object.entries(LUNE_MODULES).reduce((acc, [path, mod]) => {
+  // Exemple de path: '../data/voyages/inuit/lune3.json'
+  const match = path.match(/\/voyages\/([^/]+)\/lune(\d+)\.json$/)
+  if (!match) return acc
+  const voyageId = match[1]
+  const luneNumber = Number(match[2])
+  const data = (mod && mod.default) || mod
+  if (!acc[voyageId]) acc[voyageId] = {}
+  acc[voyageId][luneNumber] = data
+  return acc
+}, /** @type {Record<string, Record<number, any>>} */ ({}))
 
 /**
  * Récupère les données d'une lune spécifique pour un voyage

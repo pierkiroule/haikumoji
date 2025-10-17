@@ -3,12 +3,12 @@
  * Permet de gérer les métadonnées et paramètres de chaque voyage
  *
  * Désormais, les voyages sont découverts automatiquement en scannant
- * "src/data/voyages/*/voyage.config.json". Ajouter un nouveau dossier
+ * le motif "src/data/voyages/[voyage]/voyage.config.json". Ajouter un nouveau dossier
  * avec ce fichier suffit à enregistrer un voyage.
  */
 
 /**
- * Découverte automatique des voyages présents dans src/data/voyages/*/voyage.config.json
+ * Découverte automatique des voyages présents dans src/data/voyages/[voyage]/voyage.config.json
  */
 const CONFIG_MODULES = import.meta.glob('../data/voyages/**/voyage.config.json', {
   eager: true,
