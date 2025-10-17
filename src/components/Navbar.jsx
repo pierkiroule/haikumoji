@@ -1,15 +1,22 @@
-import { NavLink } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
-import { resetAppStorage } from '../utils/storage.js'
+import { resetAppStorage, getMoonIndex } from '../utils/storage.js'
+import { navigateToNextStep } from '../utils/useVoyageFlow.js'
 
 const navItems = [
-        { to: '/cosmoji', label: '✨ Cosmoji', ariaLabel: 'Radar Cosmoji - Constellation d\'émojis' },
-  { to: '/lune', label: '🌙 Ma Lune', ariaLabel: 'Ma lune actuelle' },
+  { to: '/dreamgarden', label: '🌱 Mon Jardin', ariaLabel: 'Mon jardin du rêve' },
   { to: '/community', label: '💖 Communauté', ariaLabel: 'Communauté' },
   { to: '/', label: '🏠 Home', ariaLabel: 'Accueil' },
 ]
 
 export default function Navbar() {
+  const navigate = useNavigate()
+  const moon = getMoonIndex()
+
+  const handleMaLune = () => {
+    navigateToNextStep(navigate)
+  }
+
   return (
     <motion.nav 
       initial={{ y: 100 }}
@@ -19,6 +26,20 @@ export default function Navbar() {
       style={{ paddingBottom: 'env(safe-area-inset-bottom)' }}
     >
       <div className="max-w-4xl mx-auto h-full flex items-center justify-around px-4 gap-1">
+        <button
+          onClick={handleMaLune}
+          className="relative text-sm transition-all duration-300 px-3 py-2 rounded-xl text-white font-semibold bg-gradient-to-r from-aurora-purple/30 to-aurora-blue/30 border border-white/20 hover:from-aurora-purple/40 hover:to-aurora-blue/40"
+          aria-label="Ma lune actuelle"
+        >
+          <motion.span
+            initial={{ scale: 0.9 }}
+            animate={{ scale: 1 }}
+            className="relative z-10"
+          >
+            🌙 Ma Lune ({moon}/12)
+          </motion.span>
+        </button>
+
         {navItems.map((item, index) => (
           <NavLink
             key={item.to}
@@ -38,7 +59,7 @@ export default function Navbar() {
                 <motion.span
                   initial={{ scale: 0.9 }}
                   animate={{ scale: 1 }}
-                  transition={{ delay: index * 0.05 }}
+                  transition={{ delay: (index + 1) * 0.05 }}
                   className="relative z-10"
                 >
                   {item.label}

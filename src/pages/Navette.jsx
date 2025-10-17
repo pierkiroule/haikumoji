@@ -9,6 +9,7 @@ import TagInputChips from '../components/TagInputChips.jsx'
 import OnimojiFeed from '../components/OnimojiFeed.jsx'
 import CosmojiBubbleModal from '../components/CosmojiBubbleModal.jsx'
 import { getAllEmojis } from '../utils/cosmojiLoader.js'
+import MoonProgressWidget from '../components/MoonProgressWidget.jsx'
 
 export default function Navette() {
   const [picked, setPicked] = useState([])
@@ -33,7 +34,7 @@ export default function Navette() {
     // Confirme le trio (persist + réseau) pour cohérence avec Cosmoji
     confirmTriplet(picked)
     setOpen(false)
-    navigate('/guardian')
+    navigate('/lune')
   }
 
   const emitOnimoji = () => {
@@ -45,10 +46,10 @@ export default function Navette() {
     } catch {}
   }
 
-  // Redirect to Cosmoji if no user
+  // Redirect to voyage/inuit if no user
   useEffect(() => {
     if (!user) {
-      navigate('/cosmoji')
+      navigate('/voyage/inuit')
     }
   }, [user, navigate])
 
@@ -63,9 +64,9 @@ export default function Navette() {
     {
       id: 'lune',
       icon: '🌙',
-      title: 'Créer votre haïku',
-      description: 'Votre trio d\'émojis générera un haïku unique inspiré par la sagesse inuite et la poésie onirique.',
-      tips: 'Vous pourrez regénérer le texte autant de fois que vous le souhaitez jusqu\'à trouver celui qui vous parle.'
+      title: 'Créer votre hypnoniris',
+      description: 'Votre trio d\'émojis générera un hypnoniris - un script onirique hypnotique pour l\'endormissement.',
+      tips: 'Le texte sera généré en fonction de vos émojis et de la lune actuelle.'
     },
     {
       id: 'guardian',
@@ -78,6 +79,8 @@ export default function Navette() {
 
   return (
     <div className="space-y-6">
+      <MoonProgressWidget />
+      
       {/* En-tête avec contexte */}
       <motion.section 
         initial={{ opacity: 0, y: 20 }}
