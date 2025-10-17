@@ -1,21 +1,32 @@
 /**
  * Voyage Config Loader - Chargement des configurations de voyage
  * Permet de gérer les métadonnées et paramètres de chaque voyage
+ *
+ * Désormais, les voyages sont découverts automatiquement en scannant
+ * le motif "src/data/voyages/[voyage]/voyage.config.json". Ajouter un nouveau dossier
+ * avec ce fichier suffit à enregistrer un voyage.
  */
-
-import voyageInuitConfig from '../data/voyages/inuit/voyage.config.json'
-// Import d'autres voyages quand disponibles
-// import voyageBerbereConfig from '../data/voyages/berbere/voyage.config.json'
-// import voyageDruidiqueConfig from '../data/voyages/druidique/voyage.config.json'
 
 /**
- * Map des configurations de voyage
+ * Découverte automatique des voyages présents dans src/data/voyages/[voyage]/voyage.config.json
  */
-const VOYAGE_CONFIGS = {
-  inuit: voyageInuitConfig,
-  // berbere: voyageBerbereConfig,
-  // druidique: voyageDruidiqueConfig,
-}
+const CONFIG_MODULES = import.meta.glob('../data/voyages/**/voyage.config.json', {
+  eager: true,
+})
+
+/**
+ * Map des configurations de voyage (clé = id du dossier, valeur = JSON)
+ */
+const VOYAGE_CONFIGS = Object.fromEntries(
+  Object.entries(CONFIG_MODULES)
+    .map(([path, mod]) => {
+      const match = path.match(/\/voyages\/([^/]+)\/voyage\.config\.json$/)
+      const id = match ? match[1] : null
+      const data = (mod && mod.default) || mod
+      return id && data ? [id, data] : null
+    })
+    .filter(Boolean)
+)
 
 /**
  * Récupère la configuration d'un voyage

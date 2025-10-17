@@ -3,7 +3,8 @@ import { useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { getMoonIndex, nextMoon, getSelectedTriplet, saveDream, seedIfEmpty, getUser } from '../utils/storage.js'
 import corpus from '../data/corpus.json'
-import inuitLunes from '../data/inuit_lunes.json'
+import { getLuneData } from '../utils/voyageLoader.js'
+import { getCurrentVoyage } from '../utils/voyageConfig.js'
 
 function generateDreamText(selected, c) {
   const pick = (arr) => arr[Math.floor(Math.random() * arr.length)]
@@ -36,7 +37,14 @@ export default function Lune() {
     }
   }, [])
 
-  const meta = useMemo(() => inuitLunes[String(moon)] || { titre: `Lune ${moon}`, ressource: '' }, [moon])
+  const meta = useMemo(() => {
+    const v = getCurrentVoyage()
+    const lune = getLuneData(v, moon)
+    if (lune) {
+      return { titre: lune?.gardien?.titre || `Lune ${moon}`, ressource: lune?.ressources_culturelles?.explication || '' }
+    }
+    return { titre: `Lune ${moon}`, ressource: '' }
+  }, [moon])
 
   const handleSave = () => {
     const user = getUser()

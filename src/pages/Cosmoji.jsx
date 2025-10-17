@@ -6,9 +6,8 @@ import CosmojiEmblem from '../components/CosmojiEmblem.jsx'
 import EmojiNetwork from '../components/EmojiNetwork.jsx'
 import AuroraOverlay from '../components/AuroraOverlay.jsx'
 import SelectionPanel from '../components/SelectionPanel.jsx'
-import guardians from '../data/guardiansInuit.json'
-import cosmojiData from '../data/cosmojiData.json'
 import { computeEmojiStats, seedIfEmpty, setSelectedTriplet, getMoonIndex } from '../utils/storage.js'
+import { getEmojiMetadata } from '../utils/cosmojiLoader.js'
 
 export default function Cosmoji() {
   const [open, setOpen] = useState(false)
@@ -138,8 +137,8 @@ export default function Cosmoji() {
             maxLinks={200}
             glow
             getNodeColor={(id, sel) => {
-              const node = cosmojiData.nodes.find(n => n.id === id)
-              if (!node) return undefined
+              const meta = getEmojiMetadata(id)
+              if (!meta) return undefined
               const palette = {
                 air: { base: '#22d3ee', dark: '#0891b2' },
                 water: { base: '#60a5fa', dark: '#2563eb' },
@@ -150,7 +149,7 @@ export default function Cosmoji() {
                 light: { base: '#f5d0fe', dark: '#e879f9' },
                 animal: { base: '#fca5a5', dark: '#ef4444' },
               }
-              const col = palette[node.element] || { base: '#0ea5e9', dark: '#0284c7' }
+              const col = palette[meta.element] || { base: '#0ea5e9', dark: '#0284c7' }
               return {
                 fill: sel ? col.base : '#0ea5e9',
                 stroke: sel ? col.dark : '#0ea5e9',

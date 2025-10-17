@@ -1,9 +1,34 @@
 /**
- * Cosmoji Loader - Chargement des émojis depuis JSON
- * Permet de gérer facilement la liste des émojis disponibles
+ * Cosmoji Loader - Chargement des émojis et graphes depuis JSON
+ * Permet d'adapter la liste d'émojis par mission (voyage) avec fallback global.
  */
 
-import emojiData from '../data/cosmoji/emojis.json'
+import globalEmojis from '../data/cosmoji/emojis.json'
+import globalGraph from '../data/cosmojiData.json'
+import { getCurrentVoyage } from './voyageConfig.js'
+
+// Découverte optionnelle des jeux d'émojis et graphes par mission
+const MISSION_EMOJI_MODULES = import.meta.glob('../data/voyages/**/emojis.json', { eager: true })
+const MISSION_GRAPH_MODULES = import.meta.glob('../data/voyages/**/cosmojiData.json', { eager: true })
+
+function resolveMissionModule(modulesMap, filename) {
+  try {
+    const voyageId = getCurrentVoyage()
+    const target = Object.keys(modulesMap).find(p => p.endsWith(`/voyages/${voyageId}/${filename}`))
+    const mod = target ? modulesMap[target] : null
+    return (mod && mod.default) || mod || null
+  } catch {
+    return null
+  }
+}
+
+function getEmojiDataset() {
+  return resolveMissionModule(MISSION_EMOJI_MODULES, 'emojis.json') || globalEmojis
+}
+
+export function getCosmojiGraph() {
+  return resolveMissionModule(MISSION_GRAPH_MODULES, 'cosmojiData.json') || globalGraph
+}
 
 /**
  * Récupère tous les émojis (format simple array)
@@ -11,7 +36,8 @@ import emojiData from '../data/cosmoji/emojis.json'
  */
 export function getAllEmojis() {
   const emojis = []
-  const categories = emojiData.categories
+  const dataset = getEmojiDataset()
+  const categories = dataset.categories
   
   for (const categoryKey in categories) {
     const category = categories[categoryKey]
@@ -31,7 +57,8 @@ export function getAllEmojis() {
  */
 export function getAllEmojisWithMetadata() {
   const emojis = []
-  const categories = emojiData.categories
+  const dataset = getEmojiDataset()
+  const categories = dataset.categories
   
   for (const categoryKey in categories) {
     const category = categories[categoryKey]
@@ -58,7 +85,8 @@ export function getAllEmojisWithMetadata() {
  * @returns {Array<Object>} - Émojis de cette catégorie
  */
 export function getEmojisByCategory(categoryId) {
-  const category = emojiData.categories[categoryId]
+  const dataset = getEmojiDataset()
+  const category = dataset.categories[categoryId]
   return category?.emojis || []
 }
 
@@ -78,7 +106,8 @@ export function getEmojisByElement(element) {
  * @returns {Object|null} - Infos de l'élément (label, color, description)
  */
 export function getElementInfo(element) {
-  return emojiData.elements[element] || null
+  const dataset = getEmojiDataset()
+  return dataset.elements[element] || null
 }
 
 /**
@@ -86,7 +115,8 @@ export function getElementInfo(element) {
  * @returns {Object} - Map des catégories
  */
 export function getAllCategories() {
-  return emojiData.categories
+  const dataset = getEmojiDataset()
+  return dataset.categories
 }
 
 /**
@@ -94,7 +124,8 @@ export function getAllCategories() {
  * @returns {Object} - Map des éléments avec leurs infos
  */
 export function getAllElements() {
-  return emojiData.elements
+  const dataset = getEmojiDataset()
+  return dataset.elements
 }
 
 /**
