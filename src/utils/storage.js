@@ -567,3 +567,59 @@ export function suggestTags(query, limit = 8) {
   }
   return [...startsWith, ...contains].slice(0, limit)
 }
+
+// ---- Cosmoji Stats (pour visualisation réseau collectif) ----
+export function getCosmicStats() {
+  const occurrences = new Map()
+  const cooccurrences = new Map()
+  
+  // Collecter tous les triangles depuis les étoiles finalisées
+  const stars = getStars()
+  const triangles = []
+  
+  stars.forEach(star => {
+    if (star.participants) {
+      star.participants.forEach(p => {
+        if (Array.isArray(p.triangle) && p.triangle.length === 3) {
+          triangles.push(p.triangle)
+        }
+      })
+    }
+  })
+  
+  // Calculer occurrences et co-occurrences
+  triangles.forEach(triangle => {
+    // Occurrences
+    triangle.forEach(emoji => {
+      occurrences.set(emoji, (occurrences.get(emoji) || 0) + 1)
+    })
+    
+    // Co-occurrences (paires)
+    for (let i = 0; i < triangle.length; i++) {
+      for (let j = i + 1; j < triangle.length; j++) {
+        const key = [triangle[i], triangle[j]].sort().join('|')
+        cooccurrences.set(key, (cooccurrences.get(key) || 0) + 1)
+      }
+    }
+  })
+  
+  // Convertir en arrays triés
+  const occArray = Array.from(occurrences.entries())
+    .map(([emoji, count]) => ({ emoji, count }))
+    .sort((a, b) => b.count - a.count)
+    
+  const cooccArray = Array.from(cooccurrences.entries())
+    .map(([key, count]) => {
+      const [source, target] = key.split('|')
+      return { source, target, count }
+    })
+    .sort((a, b) => b.count - a.count)
+  
+  return {
+    occurrences: occArray,
+    cooccurrences: cooccArray,
+    totalTriangles: triangles.length,
+    totalParticipants: stars.reduce((sum, s) => sum + (s.participants?.length || 0), 0),
+    totalStars: stars.length
+  }
+}
