@@ -1,7 +1,7 @@
-# Onimoji Voyages - Agence de Voyages Spatio-Temporels Oniriques
+# Onimoji - Rituel Quotidien de Santé Onirique
 
 ## Overview
-Onimoji Voyages est une agence de voyages spatio-temporels qui emmène les utilisateurs explorer les cultures oniriques du monde entier. À travers des voyages initiatiques en 12 étapes, les voyageurs rencontrent 12 guides ancestraux de chaque culture, découvrent des pratiques mill\u00e9naires et enrichissent leur santé onirique.
+Onimoji est une application de rituel quotidien qui aide les utilisateurs à cultiver leur santé onirique en créant une résonance entre l'inspiration poétique du jour et les rêves de la nuit. Cueillez votre triangle emoji quotidien, amorcez une phrase poétique, et tissez des étoiles oniriques collaboratives avec la communauté.
 
 ## Technology Stack
 - **Frontend Framework**: React 18
@@ -25,39 +25,40 @@ src/
 ```
 
 ## Key Features
-- **Multi-Voyages Culturels**: 3 voyages disponibles (Inuit débloqué, Berbère et Celtique à venir)
-- **12 Guides par Voyage**: Chaque culture propose 12 gardiens ancestraux à rencontrer progressivement
-- **Progression par Lunes**: Système de 12 étapes débloquant les guides au fur et à mesure
-- **Enseignements Ancestraux**: Chaque guide transmet une sagesse, une pratique et un enseignement
-- **Tirage Triangle Sacré**: Sélection de 3 émojis liés aux symboles du guide actuel
-- **Cosmoji Hublot**: Visualisation du réseau collectif via graphe D3.js
+- **Rituel Quotidien**: Cueillez votre triangle emoji du jour et amorcez une phrase poétique
+- **Triangle Partageable**: 3 émojis qui résonnent avec votre état présent
+- **Phrase d'Amorce**: Point de départ pour tisser des étoiles oniriques
+- **Étoiles Collaboratives**: Superposez vos triangles et textes pour co-créer des étoiles
+  - Ciel étoilé interactif avec étoiles cliquables
+  - Enrichissement progressif par ajout de contributions
+  - Cycle de vie: création → maturation → explosion → réincarnation en emoji inédit
+- **Observatoire Cosmoji**: Visualisation du réseau collectif via graphe D3.js
   - Hublot circulaire montrant les émojis et leurs connexions
   - Occurrences = taille des nœuds, co-occurrences = épaisseur des liens
-  - Statistiques du voyage collectif (étoiles, voyageurs, triangles)
-- **Forum Cadavre Exquis**: Système de co-création d'étoiles oniriques collaboratives
-  - Ciel étoilé interactif avec étoiles cliquables
-  - Enrichissement progressif par ajout de triangles et textes
-  - Implosion en microcosmoji (10+ contributions) créant de nouveaux émojis
+  - Statistiques du réseau collectif (étoiles, voyageurs, triangles)
+- **Esprit du Cosmoji (IA)**: Intelligence artificielle bienveillante qui:
+  - Repère les étoiles riches, denses et cohérentes
+  - Génère des PDFs illustrés pour les contributeurs
+  - Stocke dans l'atlas personnel
+  - Gère la réincarnation des étoiles en nouveaux emojis
 - **Design Minimaliste**: Interface épurée, fluide et poétique
 
 ## User Journey
-Flow progressif en 12 étapes :
-1. **Accueil** - Découvrir les voyages disponibles (Inuit débloqué, Berbère et Celtique à venir)
-2. **Choisir un voyage** - Sélectionner une culture onirique à explorer
-3. **Rencontrer le guide actuel** - Découvrir le gardien de la lune en cours (1-12)
-4. **Recevoir l'enseignement** - Apprendre une pratique onirique ancestrale
-5. **Tirer ses émojis** - Sélectionner 3 émojis sacrés liés au guide
-6. **Compléter l'étape** - Valider la lune et passer au guide suivant
-7. **Explorer le Cosmoji** - Visualiser le réseau collectif des émojis
-8. **Forum** - Co-créer des étoiles Onimoji (système cadavre exquis onirique)
+Flow quotidien simple et puissant :
+1. **Accueil** - Découvrir le rituel quotidien
+2. **Cueillir Triangle** - Sélectionner 3 émojis qui résonnent avec soi
+3. **Amorcer Phrase** - Écrire une phrase poétique inspirante
+4. **Tisser Étoiles** - Contribuer aux étoiles oniriques collaboratives
+5. **Observer Cosmoji** - Visualiser le réseau vivant d'énergie onirique
+6. **Recevoir PDFs** - L'IA offre des textes illustrés pour les étoiles riches
+7. **Nouveau Jour** - Recommencer le rituel avec un nouveau triangle
 
 ## Navigation System
-Navigation simplifiée avec 5 pages principales :
-- **🏠 Accueil** - Agence de voyages et sélection des voyages
-- **❄️ Voyage** - Page du voyage en cours avec les 12 guides progressifs
-- **🔮 Tirage** - Sélection des 3 émojis sacrés
-- **🔭 Cosmoji** - Hublot de visualisation du réseau collectif
-- **⭐ Forum** - Communauté et co-création d'étoiles Onimoji (cadavre exquis)
+Navigation minimaliste avec 4 pages principales :
+- **🏠 Accueil** - Rituel quotidien (triangle + phrase d'amorce)
+- **🔮 Tirage** - Cueillir les 3 émojis du jour
+- **⭐ Étoiles** - Ciel collaboratif de co-création
+- **🔭 Cosmoji** - Observatoire du réseau collectif vivant
 
 ## Development
 - Port: 5000 (frontend)
@@ -69,32 +70,29 @@ Navigation simplifiée avec 5 pages principales :
 
 ## Data Architecture
 - Storage local pour :
-  - Triangle sélectionné (3 émojis)
-  - Réponses aux énigmes
-  - Scripts oniriques individuels (dreams)
-  - Collaborations en cours (invitations, participants)
-  - Étoiles Onimoji finalisées (stars)
-  - User profile (nom, id)
+  - **Ritual Sessions**: Triangle + phrase d'amorce quotidienne (date, triangle, seedPhrase)
+  - **Stars**: Étoiles collaboratives (contributions, status, lifecycle)
+  - **Cosmoji Counts**: Statistiques réseau (occurrences, co-occurrences)
+  - **User Profile**: Nom, ID
+  - **Atlas PDFs** (à venir): Métadonnées des PDFs générés par l'IA
 
 ## Recent Changes (Oct 2025)
-### 🌌 Pivot majeur : Agence de Voyages Spatio-Temporels Oniriques
-- ✅ **Nouveau concept** : Agence de voyages vers des univers oniriques culturels
-- ✅ **Retour du système 12 lunes** : Progression en 12 étapes par voyage
-- ✅ **3 Voyages** : Inuit (disponible), Berbère (à venir), Celtique (à venir)
-- ✅ **12 Guides Inuits** : Gardiens ancestraux avec enseignements, pratiques et sagesses
-  - Nanook, Sila, Sedna, Kaila, Amarok, Aningan, Pinga, Tulugaq, Kiviuq, Torngarsuk, Nuliajuk, Anirniq
-- ✅ **Page d'accueil refaite** : Présentation de l'agence et des voyages disponibles
-- ✅ **Page Voyage Inuit** : 
-  - Visualisation du guide actuel avec son histoire et son enseignement
-  - Barre de progression des 12 lunes
-  - Timeline cliquable des 12 guides (débloqués progressivement)
-  - Modal de détail pour chaque guide rencontré
-- ✅ **Forum Cadavre Exquis** : Ciel étoilé avec enrichissement progressif
-  - Création d'étoiles avec amorce du guide
-  - Enrichissement libre par triangles + textes successifs
-  - Concept microcosmoji (implosion à 10+ contributions)
-- ✅ **Page Cosmoji** : Hublot de visualisation du réseau collectif
-- ✅ **Navigation simplifiée** : 5 pages principales
+### 🌙 Simplification radicale : Rituel Quotidien de Santé Onirique
+- ✅ **Nouveau concept** : Rituel quotidien simple et puissant
+- ✅ **Nettoyage legacy** : Suppression voyages, 12 lunes, guides, énigmes
+- ✅ **Page d'accueil réinventée** : Hub du rituel quotidien
+  - Cueillez votre triangle emoji du jour
+  - Amorcez une phrase poétique inspirante
+  - Visualisez votre rituel (triangle + amorce)
+  - CTA vers Étoiles et Tirage
+- ✅ **Storage adapté** : Modèle ritualSession quotidien
+  - getRitualSessions(), saveRitualSession(), getTodayRitual()
+  - Date-based sessions avec triangle + seedPhrase
+- ✅ **Routes simplifiées** : /, /tirage, /etoiles, /cosmoji
+- ✅ **Navigation épurée** : 4 onglets principaux
+- ⏳ **À venir** : IA Esprit du Cosmoji (scoring étoiles, génération PDF)
+- ⏳ **À venir** : Atlas personnel (bibliothèque PDFs)
+- ⏳ **À venir** : Réincarnation emoji (étoile → nouvel emoji)
 
 ## Setup History
 - Configured Vite for Replit environment (port 5000, host 0.0.0.0, allowedHosts: true)
@@ -110,11 +108,11 @@ Navigation simplifiée avec 5 pages principales :
 - Focus on dream health and collective co-creation
 
 ## Philosophy
-Onimoji Voyages valorise :
+Onimoji valorise :
 - **La santé onirique** : Prendre soin de ses rêves comme de sa santé physique
-- **La diversité culturelle** : Chaque culture a ses propres sagesses oniriques millénaires
-- **La transmission vivante** : Rencontrer des guides qui enseignent des pratiques authentiques
-- **La progression initiatique** : Avancer pas à pas à travers 12 étapes symboliques
-- **La co-création** : Enrichir collectivement les étoiles oniriques (cadavre exquis)
-- **La simplicité** : Interface épurée, fluide, poétique
-- **L'exploration culturelle** : Voyager dans différents univers oniriques du monde
+- **La décentration** : Se libérer de l'injonction quantité/qualité de sommeil
+- **La résonance** : Créer un pont quotidien entre poétique du jour et onirique de nuit
+- **La simplicité radicale** : "Au plus simple fluide joli" - rituel minimaliste et puissant
+- **La co-création** : Tisser collectivement les étoiles oniriques
+- **L'IA bienveillante** : Esprit du Cosmoji qui enrichit sans imposer
+- **Le cycle de vie** : Création → maturation → explosion → réincarnation

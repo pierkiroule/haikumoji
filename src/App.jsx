@@ -5,12 +5,8 @@ import Layout from './components/Layout.jsx'
 
 const Home = lazy(() => import('./pages/HomeSimple.jsx'))
 const Tirage = lazy(() => import('./pages/TirageSimple.jsx'))
-const Enigmes = lazy(() => import('./pages/Enigmes.jsx'))
-const Initiation = lazy(() => import('./pages/Initiation.jsx'))
 const Forum = lazy(() => import('./pages/Forum.jsx'))
 const Cosmoji = lazy(() => import('./pages/Cosmoji.jsx'))
-const Profile = lazy(() => import('./pages/Profile.jsx'))
-const VoyageInuit = lazy(() => import('./pages/VoyageInuit.jsx'))
 
 export default function App() {
   return (
@@ -19,13 +15,9 @@ export default function App() {
         <Suspense fallback={<Fallback /> }>
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/voyage/:voyageId" element={<VoyageInuit />} />
             <Route path="/tirage" element={<Tirage />} />
-            <Route path="/enigmes" element={<Enigmes />} />
-            <Route path="/initiation" element={<Initiation />} />
-            <Route path="/forum" element={<Forum />} />
+            <Route path="/etoiles" element={<Forum />} />
             <Route path="/cosmoji" element={<Cosmoji />} />
-            <Route path="/profile" element={<Profile />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </Suspense>

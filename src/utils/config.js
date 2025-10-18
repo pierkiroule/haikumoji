@@ -7,14 +7,13 @@ export const STORAGE_KEYS = {
   LIKED_IDS: 'haikumoji_liked_ids',
   DRAFT: 'haikumoji_draft',
   DREAMS: 'haikumoji_dreams',
-  MOON_INDEX: 'haikumoji_moon_index',
   SELECTED_TRIPLET: 'haikumoji_selected_triplet',
-  STAR_SEEDS: 'haikumoji_star_seeds',
   COSMOJI_COUNTS: 'haikumoji_cosmoji_counts',
-  CURRENT_VOYAGE: 'haikumoji_current_voyage',
   // New: Onimoji feed (triads) and tag catalog
   ONIMOJIS: 'haikumoji_onimojis',
   TAGS: 'haikumoji_tags',
+  // Ritual sessions (daily triangle + seed phrase)
+  RITUAL_SESSIONS: 'onimoji_ritual_sessions',
 }
 
 export const THEME_OF_WEEK = {

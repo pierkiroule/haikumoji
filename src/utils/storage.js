@@ -100,12 +100,6 @@ export function seedIfEmpty() {
   if (!getJSON(STORAGE_KEYS.DREAMS, null)) {
     setJSON(STORAGE_KEYS.DREAMS, [])
   }
-  if (typeof getJSON(STORAGE_KEYS.MOON_INDEX, null) !== 'number') {
-    setJSON(STORAGE_KEYS.MOON_INDEX, 1)
-  }
-  if (!getJSON(STORAGE_KEYS.STAR_SEEDS, null)) {
-    setJSON(STORAGE_KEYS.STAR_SEEDS, [])
-  }
   if (!getJSON(STORAGE_KEYS.COSMOJI_COUNTS, null)) {
     setJSON(STORAGE_KEYS.COSMOJI_COUNTS, { occurrence: {}, cooccurrence: {} })
   }
@@ -240,7 +234,7 @@ export function likeHaiku(id) {
   return haikus
 }
 
-// ----- Dreams (rêves) & progression -----
+// ----- Dreams (rêves) -----
 export function getDreams() {
   return getJSON(STORAGE_KEYS.DREAMS, [])
 }
@@ -252,23 +246,7 @@ export function saveDream(dream) {
   return next[0]
 }
 
-export function getMoonIndex() {
-  const n = getJSON(STORAGE_KEYS.MOON_INDEX, 1)
-  if (typeof n !== 'number' || n < 1) return 1
-  if (n > 12) return 12
-  return n
-}
-
-export function setMoonIndex(n) {
-  const clamped = Math.max(1, Math.min(12, Number(n) || 1))
-  setJSON(STORAGE_KEYS.MOON_INDEX, clamped)
-  return clamped
-}
-
-export function nextMoon() {
-  return setMoonIndex(getMoonIndex() + 1)
-}
-
+// ----- Selected Triplet (Triangle) -----
 export function setSelectedTriplet(emojis) {
   const safe = Array.isArray(emojis) ? emojis.slice(0, 3) : []
   setJSON(STORAGE_KEYS.SELECTED_TRIPLET, safe)
@@ -288,26 +266,6 @@ export function confirmTriplet(emojis) {
   // Renforce les occurrences et cooccurrences pour refléter immédiatement l'impact
   try { strengthenCosmojiCounts(safe) } catch {}
   return safe
-}
-
-// ---- Star seeds & guardians progression ----
-export function getStarSeeds() {
-  return getJSON(STORAGE_KEYS.STAR_SEEDS, [])
-}
-
-export function addStarSeed({ moon, guardianId, emojis, element }) {
-  const seeds = getStarSeeds()
-  const entry = {
-    id: generateId(),
-    moon: Math.max(1, Math.min(12, Number(moon) || getMoonIndex())),
-    guardianId: guardianId || null,
-    emojis: Array.isArray(emojis) ? emojis.slice(0, 3) : [],
-    element: element || null,
-    createdAt: Date.now(),
-  }
-  const next = [entry, ...seeds]
-  setJSON(STORAGE_KEYS.STAR_SEEDS, next)
-  return entry
 }
 
 export function getUser() {
@@ -775,4 +733,40 @@ export function initializeDemoData(force = false) {
   ]
   
   setJSON(STAR_STORAGE_KEY, demoStars)
+}
+
+// ---- Ritual Sessions (Daily Triangle + Seed Phrase) ----
+export function getRitualSessions() {
+  return getJSON(STORAGE_KEYS.RITUAL_SESSIONS, [])
+}
+
+export function saveRitualSession({ triangle, seedPhrase, date }) {
+  const sessions = getRitualSessions()
+  const today = date || new Date().toISOString().split('T')[0]
+  
+  // Remove existing session for today if any
+  const filtered = sessions.filter(s => s.date !== today)
+  
+  const newSession = {
+    id: generateId(),
+    date: today,
+    triangle: Array.isArray(triangle) ? triangle.slice(0, 3) : [],
+    seedPhrase: seedPhrase || '',
+    createdAt: Date.now()
+  }
+  
+  const next = [newSession, ...filtered]
+  setJSON(STORAGE_KEYS.RITUAL_SESSIONS, next)
+  return newSession
+}
+
+export function getTodayRitual() {
+  const today = new Date().toISOString().split('T')[0]
+  const sessions = getRitualSessions()
+  return sessions.find(s => s.date === today) || null
+}
+
+export function getRitualHistory(limit = 30) {
+  const sessions = getRitualSessions()
+  return sessions.slice(0, limit)
 }
