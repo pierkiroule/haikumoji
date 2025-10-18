@@ -29,6 +29,11 @@ src/
 - **Énigmes QCM**: L'esprit pose 3 questions pour comprendre l'utilisateur
 - **Initiation du Guide**: Félicitations + enseignement sur la culture onirique + script personnalisé
 - **Script Onirique Court**: Texte apaisant généré selon les réponses et le triangle
+- **Cosmoji Hublot**: Visualisation du réseau collectif via graphe D3.js
+  - Hublot circulaire montrant les émojis et leurs connexions
+  - Occurrences = taille des nœuds, co-occurrences = épaisseur des liens
+  - Statistiques du voyage collectif (étoiles, voyageurs, triangles)
+  - Indicateurs des émojis les plus tissés et constellations majeures
 - **Étoiles Onimoji**: Système de co-création collaborative où plusieurs users superposent leurs triangles
   - **2 users** = Étoile à 6 branches (2 triangles superposés)
   - **3 users** = Étoile à 9 branches (3 triangles superposés)
@@ -51,9 +56,10 @@ Flow linéaire simple :
    - Finaliser l'étoile pour la partager au forum
 
 ## Navigation System
-Navigation simplifiée avec 3 pages principales :
+Navigation simplifiée avec 4 pages principales :
 - **🏠 Accueil** - Page d'introduction
 - **🔮 Tirage** - Sélection des émojis
+- **🔭 Cosmoji** - Hublot de visualisation du réseau collectif
 - **⭐ Forum** - Communauté et co-création d'étoiles Onimoji
 
 ## Development
@@ -83,9 +89,14 @@ Navigation simplifiée avec 3 pages principales :
   - Visualisation géométrique : étoiles (2-4 users) ou cercle (5+ users)
   - Composant OnimojiStar avec animations Framer Motion
   - Gestion des collaborations, invitations, et finalisation
+- ✅ **Page Cosmoji** : Hublot de visualisation du réseau collectif
+  - Graphe D3.js force-directed avec émojis et connexions
+  - Composant NetworkGraph interactif (drag & drop, boundary force)
+  - Statistiques du voyage (étoiles, voyageurs, triangles tissés)
+  - Vue des émojis les plus populaires et constellations majeures
 - ✅ **Page TirageSimple** : Grille d'émojis interactive (sans D3)
 - ✅ **Design minimaliste** : Interface épurée, fluide, zen
-- ✅ **Navigation simplifiée** : 3 pages principales uniquement
+- ✅ **Navigation simplifiée** : 4 pages principales
 
 ## Setup History
 - Configured Vite for Replit environment (port 5000, host 0.0.0.0, allowedHosts: true)
