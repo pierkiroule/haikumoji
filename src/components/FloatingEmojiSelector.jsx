@@ -215,7 +215,7 @@ function TriangleFormation({ positions }) {
           </linearGradient>
           
           <filter id="glow">
-            <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+            <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
             <feMerge>
               <feMergeNode in="coloredBlur"/>
               <feMergeNode in="SourceGraphic"/>
@@ -223,6 +223,23 @@ function TriangleFormation({ positions }) {
           </filter>
         </defs>
 
+        {/* Remplissage semi-transparent du triangle */}
+        <motion.polygon
+          initial={{
+            points: `${positions[0].x},${positions[0].y} ${positions[1].x},${positions[1].y} ${positions[2].x},${positions[2].y}`
+          }}
+          animate={{
+            points: `${targetPositions[0].x},${targetPositions[0].y} ${targetPositions[1].x},${targetPositions[1].y} ${targetPositions[2].x},${targetPositions[2].y}`
+          }}
+          transition={{
+            duration: 1,
+            ease: "easeInOut"
+          }}
+          fill="url(#lineGradient)"
+          fillOpacity="0.1"
+        />
+
+        {/* Les 3 côtés du triangle */}
         {[0, 1, 2].map((i) => {
           const j = (i + 1) % 3
           return (
@@ -242,11 +259,13 @@ function TriangleFormation({ positions }) {
               }}
               transition={{
                 duration: 1,
-                ease: "easeInOut"
+                ease: "easeInOut",
+                delay: i * 0.1
               }}
               stroke="url(#lineGradient)"
-              strokeWidth="2"
+              strokeWidth="3"
               filter="url(#glow)"
+              strokeLinecap="round"
             />
           )
         })}
