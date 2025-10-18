@@ -6,7 +6,7 @@ import { incrementKdomojiStat } from '../utils/kdomojiManager.js'
 import { useKdomoji } from '../components/KdomojiProvider.jsx'
 import FloatingEmojiSelector from '../components/FloatingEmojiSelector.jsx'
 
-// Liste des émojis populaires pour le tirage
+// Liste des émojis pour tisser le triangle stellaire
 const EMOJIS = [
   '🌙', '⭐', '✨', '🔮', '🌟', '💫',
   '🦉', '🐺', '🦌', '🐋', '🦅', '🐻',
@@ -57,12 +57,12 @@ export default function TirageSimple() {
         className="text-center space-y-4"
       >
         <div className="text-6xl mb-4">🔮</div>
-        <h1 className="text-3xl md:text-4xl font-bold text-white">
-          Tirage du Triangle Onirique
+        <h1 className="text-3xl md:text-4xl font-display font-light text-white">
+          Tissage du Triangle Stellaire
         </h1>
-        <p className="text-slate-300 max-w-2xl mx-auto leading-relaxed">
+        <p className="text-slate-300 max-w-2xl mx-auto leading-relaxed font-light">
           Les émojis flottent dans le cercle sacré. 
-          Sélectionnez 3 qui résonnent avec vous pour former votre triangle et éveiller l'esprit.
+          Tissez votre réseau en sélectionnant 3 émojis qui résonnent avec vous.
         </p>
       </motion.div>
 

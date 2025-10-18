@@ -4,7 +4,7 @@ import { resetAppStorage } from '../utils/storage.js'
 
 const navItems = [
   { to: '/', label: '🏠 Accueil', ariaLabel: 'Accueil' },
-  { to: '/tirage', label: '🔮 Tirage', ariaLabel: 'Cueillir triangle' },
+  { to: '/tirage', label: '🔮 Tissage', ariaLabel: 'Tisser triangle stellaire' },
   { to: '/etoiles', label: '⭐ Étoiles', ariaLabel: 'Étoiles collaboratives' },
   { to: '/cosmoji', label: '🔭 Cosmoji', ariaLabel: 'Observatoire Cosmoji' },
 ]

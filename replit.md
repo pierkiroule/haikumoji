@@ -15,10 +15,10 @@ Onimoji est une application de rituel quotidien qui aide les utilisateurs à cul
 ## Project Structure
 ```
 src/
-├── components/     # Reusable UI components (NavbarSimple, RadarCosmoji, OnimojiTriad, particles)
-├── pages/         # Route pages (HomeSimple, Tirage, Enigmes, Initiation, Forum)
-├── utils/         # Utilities (storage, cosmoji stats)
-├── data/          # JSON data files for cosmoji
+├── components/     # Reusable UI components (NavbarSimple, RadarCosmoji, FloatingEmojiSelector, particles)
+├── pages/         # Route pages (HomeSimple, TirageSimple, Forum, Etoiles)
+├── utils/         # Utilities (storage, cosmoji stats, kdomoji manager)
+├── data/          # JSON data files for cosmoji, spirits
 ├── App.jsx        # Main app with routing
 ├── main.jsx       # Entry point
 └── index.css      # Global styles
@@ -46,7 +46,7 @@ src/
 ## User Journey
 Flow quotidien simple et puissant :
 1. **Accueil** - Découvrir le rituel quotidien
-2. **Cueillir Triangle** - Sélectionner 3 émojis qui résonnent avec soi
+2. **Tisser Triangle** - Sélectionner 3 émojis qui résonnent pour former un réseau stellaire
 3. **Amorcer Phrase** - Écrire une phrase poétique inspirante
 4. **Tisser Étoiles** - Contribuer aux étoiles oniriques collaboratives
 5. **Observer Cosmoji** - Visualiser le réseau vivant d'énergie onirique
@@ -56,7 +56,7 @@ Flow quotidien simple et puissant :
 ## Navigation System
 Navigation minimaliste avec 4 pages principales :
 - **🏠 Accueil** - Rituel quotidien (triangle + phrase d'amorce)
-- **🔮 Tirage** - Cueillir les 3 émojis du jour
+- **🔮 Tissage** - Tisser son triangle stellaire (3 émojis)
 - **⭐ Étoiles** - Ciel collaboratif de co-création
 - **🔭 Cosmoji** - Observatoire du réseau collectif vivant
 
@@ -81,10 +81,10 @@ Navigation minimaliste avec 4 pages principales :
 - ✅ **Nouveau concept** : Rituel quotidien simple et puissant
 - ✅ **Nettoyage legacy** : Suppression voyages, 12 lunes, guides, énigmes, /profile
 - ✅ **Page d'accueil réinventée** : Hub du rituel quotidien
-  - Cueillez votre triangle emoji du jour (disposition triangle : 1 en haut, 2 en bas)
+  - Tissez votre triangle stellaire du jour (disposition triangle : 1 en haut, 2 en bas)
   - Amorcez une phrase poétique inspirante
   - Visualisez votre rituel (triangle + amorce)
-  - CTA vers Étoiles et Tirage
+  - CTA vers Étoiles et Tissage
 - ✅ **Storage adapté** : Modèle ritualSession quotidien
   - getRitualSessions(), saveRitualSession(), getTodayRitual()
   - Date-based sessions avec triangle + seedPhrase

@@ -231,7 +231,7 @@ export default function HomeSimple() {
               to="/tirage"
               className="block w-full rounded-xl glass border border-white/20 text-white px-6 py-3 font-semibold text-center hover:border-white/40 transition-all"
             >
-              🔮 Cueillir un nouveau triangle
+              🔮 Tisser un nouveau triangle
             </Link>
           </div>
         </motion.div>
@@ -244,18 +244,18 @@ export default function HomeSimple() {
         >
           <div className="text-6xl">🔮✨</div>
           <div className="space-y-2">
-            <h3 className="text-2xl font-bold text-white">
+            <h3 className="text-2xl font-display font-light text-white">
               Commencez votre rituel
             </h3>
-            <p className="text-slate-300 max-w-lg mx-auto">
-              Cueillez votre premier triangle emoji pour entamer votre voyage onirique.
+            <p className="text-slate-300 max-w-lg mx-auto font-light">
+              Tissez votre premier triangle stellaire pour entamer votre voyage onirique.
             </p>
           </div>
           <Link
             to="/tirage"
             className="inline-block rounded-2xl bg-gradient-to-r from-cyan-500 to-purple-500 text-white px-8 py-4 font-semibold shadow-lg hover:shadow-xl transition-all"
           >
-            ✨ Cueillir mon Onimoji du jour
+            ✨ Tisser mon Onimoji du jour
           </Link>
         </motion.div>
       )}
@@ -281,8 +281,8 @@ export default function HomeSimple() {
           >
             <div className="text-5xl group-hover:scale-110 transition-transform">🔮</div>
             <h4 className="font-semibold text-white text-lg">Rituel Quotidien</h4>
-            <p className="text-sm text-slate-300">
-              Cueillez votre triangle emoji et amorcez une phrase poétique inspirante
+            <p className="text-sm text-slate-300 font-light">
+              Tissez votre triangle stellaire et amorcez une phrase poétique inspirante
             </p>
           </Link>
 
