@@ -60,13 +60,13 @@ export default function HomeSimple() {
         </motion.div>
 
         <div className="space-y-6">
-          <h1 className="text-4xl md:text-5xl font-bold text-white">
+          <h1 className="text-5xl md:text-6xl font-display font-light text-white tracking-wide">
             Onimoji
           </h1>
-          <p className="text-xl text-cyan-300 font-medium">
+          <p className="text-xl text-cyan-300 font-light">
             Prendre soin de sa santé onirique et de celle des autres
           </p>
-          <div className="text-base md:text-lg text-slate-300 max-w-3xl mx-auto leading-relaxed space-y-4">
+          <div className="text-base md:text-lg text-slate-300 max-w-3xl mx-auto leading-relaxed space-y-4 font-light">
             <p>
               Rêver, c'est respirer l'invisible.<br/>
               Chaque nuit, notre monde intérieur se tisse de symboles, d'émotions et de mémoire.

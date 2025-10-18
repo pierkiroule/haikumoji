@@ -6,6 +6,10 @@ export default {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        'sans': ['Lora', 'serif'],
+        'display': ['Cormorant Garamond', 'serif'],
+      },
       boxShadow: {
         glow: '0 0 40px rgba(59,130,246,0.35)',
         'glow-lg': '0 0 60px rgba(59,130,246,0.5), 0 0 20px rgba(59,130,246,0.3)',
