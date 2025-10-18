@@ -135,14 +135,20 @@ Navigation minimaliste avec 4 pages principales :
   - Sélection interactive par click (jusqu'à 3 émojis)
 - ✅ **Formation Triangle Réseau** :
   - Animation transition positions initiales → triangle équilatéral
-  - Fils lumineux avec gradient purple/blue et effet glow
+  - 3 côtés complètement fermés avec gradient purple/blue et effet glow
+  - Polygon semi-transparent pour remplissage du triangle
   - Émojis non sélectionnés disparaissent progressivement
 - ✅ **Orb Hypnotique Central** :
-  - Apparition au centre du triangle après formation
+  - Positionné au centre géométrique exact du triangle (300, 293.33)
+  - Intégré via foreignObject dans le SVG
   - Animation pulse + rotation continue
   - Cercles concentriques expansifs (effet Stargate)
   - Symbolise l'accès à l'esprit guide
-- ✅ **UX fluide** : Flottement → Sélection → Triangle → Orb → Actions
+- ✅ **Validation manuelle** : 
+  - Pas de fermeture automatique
+  - Bouton "Valider ce triangle ✧" pour contrôle utilisateur
+  - Option reset disponible
+- ✅ **Logo mis à jour** : 🌙•°
 
 - ⏳ **À venir** : IA Esprit du Cosmoji (scoring étoiles, génération PDF)
 - ⏳ **À venir** : Atlas personnel (bibliothèque PDFs + Kdomojis reçus)

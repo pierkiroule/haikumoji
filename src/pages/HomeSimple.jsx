@@ -55,7 +55,7 @@ export default function HomeSimple() {
           }}
           className="text-7xl mb-4"
         >
-          🌙✨💫
+          🌙•°
         </motion.div>
 
         <div className="space-y-6">
