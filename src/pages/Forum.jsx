@@ -10,6 +10,7 @@ import {
   addContributionToStar,
   createNewStar
 } from '../utils/storage.js'
+import StarNetwork from '../components/StarNetwork.jsx'
 
 export default function Forum() {
   const [stars, setStars] = useState([])
@@ -177,18 +178,19 @@ function StarInSky({ star, isSelected, onClick }) {
   
   // Taille selon nombre de contributions
   const getSize = () => {
-    if (contributionCount >= 10) return 80 // Microcosmoji imminent
-    if (contributionCount >= 6) return 60
-    if (contributionCount >= 4) return 50
-    return 40
+    if (contributionCount >= 10) return 120
+    if (contributionCount >= 6) return 100
+    if (contributionCount >= 4) return 80
+    if (contributionCount >= 2) return 70
+    return 60
   }
   
   // Couleur selon intensité
   const getGlow = () => {
-    if (contributionCount >= 10) return 'drop-shadow-[0_0_20px_rgba(255,100,255,0.8)]'
-    if (contributionCount >= 6) return 'drop-shadow-[0_0_15px_rgba(147,51,234,0.7)]'
-    if (contributionCount >= 4) return 'drop-shadow-[0_0_10px_rgba(59,130,246,0.6)]'
-    return 'drop-shadow-[0_0_8px_rgba(14,165,233,0.5)]'
+    if (contributionCount >= 10) return 'drop-shadow-[0_0_25px_rgba(255,100,255,0.9)]'
+    if (contributionCount >= 6) return 'drop-shadow-[0_0_20px_rgba(147,51,234,0.8)]'
+    if (contributionCount >= 4) return 'drop-shadow-[0_0_15px_rgba(59,130,246,0.7)]'
+    return 'drop-shadow-[0_0_10px_rgba(14,165,233,0.6)]'
   }
   
   const size = getSize()
@@ -198,28 +200,31 @@ function StarInSky({ star, isSelected, onClick }) {
     <motion.div
       initial={{ opacity: 0, scale: 0 }}
       animate={{ opacity: 1, scale: 1 }}
-      whileHover={{ scale: 1.2 }}
+      whileHover={{ scale: 1.15 }}
       className="absolute cursor-pointer"
       style={{
-        left: `${star.x || Math.random() * 80 + 10}px`,
-        top: `${star.y || Math.random() * 500 + 50}px`,
+        left: `${star.x || Math.random() * 70 + 15}%`,
+        top: `${star.y || Math.random() * 70 + 15}%`,
       }}
       onClick={onClick}
     >
       <div className={`relative ${glow} transition-all duration-300`}>
         <motion.div
           animate={{
-            rotate: isSelected ? 360 : 0,
-            scale: isSelected ? 1.3 : 1,
+            rotate: isSelected ? 180 : 0,
+            scale: isSelected ? 1.2 : 1,
           }}
-          transition={{ duration: 0.5 }}
-          style={{ fontSize: size }}
+          transition={{ duration: 0.6 }}
         >
-          {contributionCount >= 10 ? '🌟' : contributionCount >= 6 ? '⭐' : contributionCount >= 4 ? '✨' : '⭐'}
+          <StarNetwork 
+            contributions={star.contributions || []} 
+            size={size}
+            showEmojis={contributionCount <= 3}
+          />
         </motion.div>
         
         {/* Contribution count badge */}
-        <div className="absolute -top-1 -right-1 w-5 h-5 rounded-full bg-purple-500 text-white text-xs flex items-center justify-center font-bold">
+        <div className="absolute -top-2 -right-2 w-6 h-6 rounded-full bg-purple-500 text-white text-xs flex items-center justify-center font-bold shadow-lg">
           {contributionCount}
         </div>
       </div>

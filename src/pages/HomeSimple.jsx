@@ -54,9 +54,8 @@ export default function HomeSimple() {
             ease: "easeInOut"
           }}
           className="text-7xl mb-4"
-          style={{ transform: 'scaleX(-1)' }}
         >
-          🌙•°
+          🌘•°
         </motion.div>
 
         <div className="space-y-6">
