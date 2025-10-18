@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
-import { getSelectedTriplet, saveSelectedTriplet, seedIfEmpty, computeEmojiStats } from '../utils/storage.js'
+import { getSelectedTriplet, setSelectedTriplet, seedIfEmpty } from '../utils/storage.js'
 
 // Liste des émojis populaires pour le tirage
 const EMOJIS = [
@@ -9,7 +9,7 @@ const EMOJIS = [
   '🦉', '🐺', '🦌', '🐋', '🦅', '🐻',
   '❄️', '🌊', '🔥', '🌿', '🌸', '🍃',
   '🏔️', '🌲', '🌌', '☁️', '🌈', '💎',
-  '🎨', '🎭', '🎪', '🎯', '🎲', '🎪'
+  '🎨', '🎭', '🎪', '🎯', '🎲', '🎼'
 ]
 
 export default function TirageSimple() {
@@ -33,7 +33,7 @@ export default function TirageSimple() {
       } else if (prev.length < 3) {
         const newSelection = [...prev, emoji]
         if (newSelection.length === 3) {
-          saveSelectedTriplet(newSelection)
+          setSelectedTriplet(newSelection)
           setTimeout(() => setShowTriangle(true), 300)
         }
         return newSelection
