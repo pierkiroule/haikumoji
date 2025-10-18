@@ -186,19 +186,19 @@ function TriangleFormation({ positions }) {
   const [showOrb, setShowOrb] = useState(false)
 
   useEffect(() => {
-    setTimeout(() => setShowOrb(true), 1000)
+    setTimeout(() => setShowOrb(true), 1200)
   }, [])
 
   if (positions.length !== 3) return null
-
-  const centerX = (positions[0].x + positions[1].x + positions[2].x) / 3
-  const centerY = (positions[0].y + positions[1].y + positions[2].y) / 3
 
   const targetPositions = [
     { x: 300, y: 200 },
     { x: 220, y: 340 },
     { x: 380, y: 340 }
   ]
+
+  const centerX = (targetPositions[0].x + targetPositions[1].x + targetPositions[2].x) / 3
+  const centerY = (targetPositions[0].y + targetPositions[1].y + targetPositions[2].y) / 3
 
   return (
     <motion.div
@@ -296,29 +296,33 @@ function TriangleFormation({ positions }) {
             </text>
           </motion.g>
         ))}
-      </svg>
 
-      <AnimatePresence>
-        {showOrb && (
-          <motion.div
-            initial={{ opacity: 0, scale: 0 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
-            style={{
-              marginTop: '10px'
-            }}
-          >
-            <HypnoticOrbCenter />
-          </motion.div>
-        )}
-      </AnimatePresence>
+        {/* Orb au centre du triangle */}
+        <AnimatePresence>
+          {showOrb && (
+            <motion.g
+              initial={{ opacity: 0, scale: 0 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.8, ease: "easeOut" }}
+            >
+              <foreignObject
+                x={centerX - 50}
+                y={centerY - 50}
+                width="100"
+                height="100"
+              >
+                <HypnoticOrbCenter />
+              </foreignObject>
+            </motion.g>
+          )}
+        </AnimatePresence>
+      </svg>
 
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 1.5 }}
-        className="absolute bottom-4 left-1/2 -translate-x-1/2 text-center space-y-2"
+        className="absolute bottom-4 left-1/2 -translate-x-1/2 text-center space-y-3"
       >
         <div className="text-purple-300 font-medium">
           ✨ Votre triangle onirique est formé

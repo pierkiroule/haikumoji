@@ -34,10 +34,6 @@ export default function TirageSimple() {
     setSelected(selection)
     setSelectedTriplet(selection)
     
-    setTimeout(() => {
-      setShowSelector(false)
-    }, 3000)
-    
     const newKdomojis = incrementKdomojiStat('trianglesCueilli')
     newKdomojis.forEach(k => showKdomoji(k))
   }
@@ -90,11 +86,35 @@ export default function TirageSimple() {
 
       {/* Actions après sélection */}
       <AnimatePresence>
-        {!showSelector && selected.length === 3 && (
+        {selected.length === 3 && showSelector && (
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
+            transition={{ delay: 2 }}
+            className="flex flex-col gap-4 items-center mt-8"
+          >
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={() => setShowSelector(false)}
+              className="rounded-2xl bg-gradient-to-r from-purple-500 to-blue-500 text-white px-8 py-4 font-semibold text-lg shadow-lg hover:shadow-xl transition-all duration-300"
+            >
+              Valider ce triangle ✧
+            </motion.button>
+            <button
+              onClick={handleReset}
+              className="text-slate-400 hover:text-slate-300 text-sm"
+            >
+              Choisir d'autres émojis
+            </button>
+          </motion.div>
+        )}
+        
+        {!showSelector && selected.length === 3 && (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
             className="flex flex-col gap-4 items-center"
           >
             <motion.button
