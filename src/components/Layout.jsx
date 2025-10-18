@@ -1,10 +1,12 @@
 import { motion } from 'framer-motion'
 import Starfield from './Starfield.jsx'
+import NavbarSimple from './NavbarSimple.jsx'
 
 export default function Layout({ children }) {
   return (
     <div className="min-h-screen bg-transparent relative">
       <Starfield />
+      <NavbarSimple />
       
       {/* Ambient gradient overlays */}
       <div className="fixed inset-0 pointer-events-none -z-10">

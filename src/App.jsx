@@ -3,16 +3,12 @@ import { Suspense, lazy } from 'react'
 import { motion } from 'framer-motion'
 import Layout from './components/Layout.jsx'
 
-const Home = lazy(() => import('./pages/Home.jsx'))
-const Create = lazy(() => import('./pages/Create.jsx'))
-const Community = lazy(() => import('./pages/Community.jsx'))
-const Cosmoji = lazy(() => import('./pages/Cosmoji.jsx'))
-const Pantheon = lazy(() => import('./pages/Pantheon.jsx'))
-const Guardian = lazy(() => import('./pages/Guardian.jsx'))
+const Home = lazy(() => import('./pages/HomeSimple.jsx'))
+const Tirage = lazy(() => import('./pages/Tirage.jsx'))
+const Enigmes = lazy(() => import('./pages/Enigmes.jsx'))
+const Initiation = lazy(() => import('./pages/Initiation.jsx'))
+const Forum = lazy(() => import('./pages/Forum.jsx'))
 const Profile = lazy(() => import('./pages/Profile.jsx'))
-const Navette = lazy(() => import('./pages/Navette.jsx'))
-const Lune = lazy(() => import('./pages/Lune.jsx'))
-const VoyageInuit = lazy(() => import('./pages/VoyageInuit.jsx'))
 
 export default function App() {
   return (
@@ -21,14 +17,10 @@ export default function App() {
         <Suspense fallback={<Fallback /> }>
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/navette" element={<Navette />} />
-            <Route path="/voyage/inuit" element={<VoyageInuit />} />
-            <Route path="/lune" element={<Lune />} />
-            <Route path="/create" element={<Create />} />
-            <Route path="/community" element={<Community />} />
-            <Route path="/cosmoji" element={<Cosmoji />} />
-          <Route path="/guardian" element={<Guardian />} />
-            <Route path="/pantheon" element={<Pantheon />} />
+            <Route path="/tirage" element={<Tirage />} />
+            <Route path="/enigmes" element={<Enigmes />} />
+            <Route path="/initiation" element={<Initiation />} />
+            <Route path="/forum" element={<Forum />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
