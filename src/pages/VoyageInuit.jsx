@@ -1,16 +1,22 @@
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { GUIDES_INUITS, getGuideByNumber } from '../data/guidesInuits.js'
 import { getUser, saveUser, getMoonIndex, setMoonIndex } from '../utils/storage.js'
 
 export default function VoyageInuit() {
+  const { voyageId } = useParams()
   const [currentMoon, setCurrentMoon] = useState(1)
   const [selectedGuide, setSelectedGuide] = useState(null)
   const [user, setUser] = useState(null)
   const navigate = useNavigate()
 
   useEffect(() => {
+    if (voyageId !== 'inuit') {
+      navigate('/')
+      return
+    }
+    
     let u = getUser()
     if (!u) {
       u = saveUser({ id: 'user-' + Date.now(), name: 'Voyageur Anonyme' })
@@ -19,7 +25,7 @@ export default function VoyageInuit() {
     
     const moon = getMoonIndex()
     setCurrentMoon(moon)
-  }, [])
+  }, [voyageId, navigate])
 
   const currentGuide = getGuideByNumber(currentMoon)
   const unlockedGuides = GUIDES_INUITS.filter(g => g.number <= currentMoon)
