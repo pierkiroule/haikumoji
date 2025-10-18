@@ -344,6 +344,64 @@ export function saveStar(star) {
   return newStar
 }
 
+export function updateStar(starId, updates) {
+  const stars = getStars()
+  const updated = stars.map(s => s.id === starId ? { ...s, ...updates } : s)
+  setJSON(STAR_STORAGE_KEY, updated)
+  return updated.find(s => s.id === starId)
+}
+
+export function addContributionToStar(starId, userId, userName, triangle, text) {
+  const stars = getStars()
+  const star = stars.find(s => s.id === starId)
+  if (!star) return null
+  
+  const newContribution = {
+    userId,
+    userName,
+    triangle,
+    text,
+    timestamp: Date.now()
+  }
+  
+  const updatedContributions = [...(star.contributions || []), newContribution]
+  const updated = stars.map(s => 
+    s.id === starId 
+      ? { ...s, contributions: updatedContributions }
+      : s
+  )
+  
+  setJSON(STAR_STORAGE_KEY, updated)
+  return updated.find(s => s.id === starId)
+}
+
+export function createNewStar(creatorId, creatorName, triangle, title, seedText) {
+  const stars = getStars()
+  
+  const newStar = {
+    id: generateId(),
+    title: title || 'Nouvelle Étoile',
+    seedText: seedText || '',
+    contributions: [
+      {
+        userId: creatorId,
+        userName: creatorName,
+        triangle,
+        text: seedText,
+        timestamp: Date.now()
+      }
+    ],
+    status: 'open',
+    createdAt: Date.now(),
+    x: Math.random() * 600 + 50,
+    y: Math.random() * 500 + 50
+  }
+  
+  const next = [newStar, ...stars]
+  setJSON(STAR_STORAGE_KEY, next)
+  return newStar
+}
+
 export function getCollaborations() {
   return getJSON(COLLAB_INVITES_KEY, [])
 }
@@ -578,10 +636,10 @@ export function getCosmicStats() {
   const triangles = []
   
   stars.forEach(star => {
-    if (star.participants) {
-      star.participants.forEach(p => {
-        if (Array.isArray(p.triangle) && p.triangle.length === 3) {
-          triangles.push(p.triangle)
+    if (star.contributions && Array.isArray(star.contributions)) {
+      star.contributions.forEach(c => {
+        if (Array.isArray(c.triangle) && c.triangle.length === 3) {
+          triangles.push(c.triangle)
         }
       })
     }
@@ -619,7 +677,102 @@ export function getCosmicStats() {
     occurrences: occArray,
     cooccurrences: cooccArray,
     totalTriangles: triangles.length,
-    totalParticipants: stars.reduce((sum, s) => sum + (s.participants?.length || 0), 0),
+    totalParticipants: stars.reduce((sum, s) => sum + (s.contributions?.length || 0), 0),
     totalStars: stars.length
   }
+}
+
+// ---- Données de démo pour le forum ----
+export function initializeDemoData(force = false) {
+  const existingStars = getStars()
+  if (existingStars.length > 0 && !force) return // Déjà initialisé
+  
+  const demoUsers = [
+    { id: 'demo_luna', name: 'Luna' },
+    { id: 'demo_soleil', name: 'Soleil' },
+    { id: 'demo_océane', name: 'Océane' },
+    { id: 'demo_vent', name: 'Vent' },
+    { id: 'demo_aurore', name: 'Aurore' },
+    { id: 'demo_glacier', name: 'Glacier' }
+  ]
+  
+  const demoStars = [
+    {
+      id: generateId(),
+      title: 'Rêve de Glace',
+      seedText: 'Dans le silence glacé, une baleine chante...',
+      contributions: [
+        {
+          userId: 'demo_luna',
+          userName: 'Luna',
+          triangle: ['❄️', '🌌', '🐋'],
+          text: 'Dans le silence glacé, une baleine chante sous les aurores boréales. Ses mélodies résonnent dans le cristal de glace.',
+          timestamp: Date.now() - 7200000
+        },
+        {
+          userId: 'demo_soleil',
+          userName: 'Soleil',
+          triangle: ['💫', '🌊', '🧊'],
+          text: 'Les vagues gelées portent des étoiles filantes. Chaque cristal contient un rêve endormi qui attend le printemps.',
+          timestamp: Date.now() - 3600000
+        }
+      ],
+      status: 'open',
+      createdAt: Date.now() - 7200000,
+      x: 150,
+      y: 120
+    },
+    {
+      id: generateId(),
+      title: 'Voyage Lunaire',
+      seedText: 'Sous la pleine lune, les marées murmurent...',
+      contributions: [
+        {
+          userId: 'demo_océane',
+          userName: 'Océane',
+          triangle: ['🌙', '🐚', '🌊'],
+          text: 'Sous la pleine lune, les marées murmurent des secrets anciens. Les coquillages gardent la mémoire des rêves océaniques.',
+          timestamp: Date.now() - 5400000
+        },
+        {
+          userId: 'demo_vent',
+          userName: 'Vent',
+          triangle: ['🌬️', '☁️', '🪶'],
+          text: 'Le vent danse avec les nuages, portant des plumes d\'argent. Chaque souffle trace un nouveau chemin onirique.',
+          timestamp: Date.now() - 1800000
+        }
+      ],
+      status: 'open',
+      createdAt: Date.now() - 5400000,
+      x: 450,
+      y: 180
+    },
+    {
+      id: generateId(),
+      title: 'Aurore Céleste',
+      seedText: 'Les étoiles tissent des constellations inédites...',
+      contributions: [
+        {
+          userId: 'demo_aurore',
+          userName: 'Aurore',
+          triangle: ['🌠', '💫', '⭐'],
+          text: 'Les étoiles tissent des constellations inédites dans le velours nocturne. Chaque constellation raconte un rêve collectif.',
+          timestamp: Date.now() - 10800000
+        },
+        {
+          userId: 'demo_glacier',
+          userName: 'Glacier',
+          triangle: ['🌌', '🌑', '🌕'],
+          text: 'Entre la nouvelle lune et la pleine lune, le cosmos respire. Les cycles lunaires bercent nos voyages oniriques.',
+          timestamp: Date.now() - 900000
+        }
+      ],
+      status: 'open',
+      createdAt: Date.now() - 10800000,
+      x: 280,
+      y: 350
+    }
+  ]
+  
+  setJSON(STAR_STORAGE_KEY, demoStars)
 }

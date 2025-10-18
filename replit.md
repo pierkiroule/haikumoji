@@ -1,7 +1,7 @@
-# Onimoji - Voyage Onirique Minimaliste
+# Onimoji Voyages - Agence de Voyages Spatio-Temporels Oniriques
 
 ## Overview
-Onimoji est une application poétique et thérapeutique qui guide l'utilisateur à travers un voyage onirique simplifié. Les utilisateurs tirent un triangle d'émojis du Cosmoji, rencontrent un esprit qui pose des énigmes, puis reçoivent une initiation et un script onirique personnalisé pour prendre soin de leur santé onirique.
+Onimoji Voyages est une agence de voyages spatio-temporels qui emmène les utilisateurs explorer les cultures oniriques du monde entier. À travers des voyages initiatiques en 12 étapes, les voyageurs rencontrent 12 guides ancestraux de chaque culture, découvrent des pratiques mill\u00e9naires et enrichissent leur santé onirique.
 
 ## Technology Stack
 - **Frontend Framework**: React 18
@@ -25,42 +25,39 @@ src/
 ```
 
 ## Key Features
-- **Tirage Triangle Sacré**: Sélection de 3 émojis dans une grille interactive avec animation vibrante/dansante
-- **Énigmes QCM**: L'esprit pose 3 questions pour comprendre l'utilisateur
-- **Initiation du Guide**: Félicitations + enseignement sur la culture onirique + script personnalisé
-- **Script Onirique Court**: Texte apaisant généré selon les réponses et le triangle
+- **Multi-Voyages Culturels**: 3 voyages disponibles (Inuit débloqué, Berbère et Celtique à venir)
+- **12 Guides par Voyage**: Chaque culture propose 12 gardiens ancestraux à rencontrer progressivement
+- **Progression par Lunes**: Système de 12 étapes débloquant les guides au fur et à mesure
+- **Enseignements Ancestraux**: Chaque guide transmet une sagesse, une pratique et un enseignement
+- **Tirage Triangle Sacré**: Sélection de 3 émojis liés aux symboles du guide actuel
 - **Cosmoji Hublot**: Visualisation du réseau collectif via graphe D3.js
   - Hublot circulaire montrant les émojis et leurs connexions
   - Occurrences = taille des nœuds, co-occurrences = épaisseur des liens
   - Statistiques du voyage collectif (étoiles, voyageurs, triangles)
-  - Indicateurs des émojis les plus tissés et constellations majeures
-- **Étoiles Onimoji**: Système de co-création collaborative où plusieurs users superposent leurs triangles
-  - **2 users** = Étoile à 6 branches (2 triangles superposés)
-  - **3 users** = Étoile à 9 branches (3 triangles superposés)
-  - **4 users** = Étoile à 12 branches (4 triangles superposés)
-  - **5+ users** = Cercle Sacré (cercle d'émojis)
-- **Co-création de textes**: Les participants tissent ensemble des scripts oniriques collaboratifs
-- **Design Minimaliste**: Interface épurée, fluide et jolie
+- **Forum Cadavre Exquis**: Système de co-création d'étoiles oniriques collaboratives
+  - Ciel étoilé interactif avec étoiles cliquables
+  - Enrichissement progressif par ajout de triangles et textes
+  - Implosion en microcosmoji (10+ contributions) créant de nouveaux émojis
+- **Design Minimaliste**: Interface épurée, fluide et poétique
 
 ## User Journey
-Flow linéaire simple :
-1. **Accueil** - Présentation du concept
-2. **Tirage** - Sélection de 3 émojis → Triangle vibre et danse
-3. **Énigmes** - Répondre à 3 QCM de l'esprit
-4. **Initiation** - Message du guide + script onirique personnalisé
-5. **Forum** - Co-création d'étoiles Onimoji avec d'autres voyageurs
-   - Créer une collaboration
-   - Inviter d'autres users (ou accepter des invitations)
-   - Superposer les triangles → visualisation géométrique
-   - Tisser ensemble un script onirique collaboratif
-   - Finaliser l'étoile pour la partager au forum
+Flow progressif en 12 étapes :
+1. **Accueil** - Découvrir les voyages disponibles (Inuit débloqué, Berbère et Celtique à venir)
+2. **Choisir un voyage** - Sélectionner une culture onirique à explorer
+3. **Rencontrer le guide actuel** - Découvrir le gardien de la lune en cours (1-12)
+4. **Recevoir l'enseignement** - Apprendre une pratique onirique ancestrale
+5. **Tirer ses émojis** - Sélectionner 3 émojis sacrés liés au guide
+6. **Compléter l'étape** - Valider la lune et passer au guide suivant
+7. **Explorer le Cosmoji** - Visualiser le réseau collectif des émojis
+8. **Forum** - Co-créer des étoiles Onimoji (système cadavre exquis onirique)
 
 ## Navigation System
-Navigation simplifiée avec 4 pages principales :
-- **🏠 Accueil** - Page d'introduction
-- **🔮 Tirage** - Sélection des émojis
+Navigation simplifiée avec 5 pages principales :
+- **🏠 Accueil** - Agence de voyages et sélection des voyages
+- **❄️ Voyage** - Page du voyage en cours avec les 12 guides progressifs
+- **🔮 Tirage** - Sélection des 3 émojis sacrés
 - **🔭 Cosmoji** - Hublot de visualisation du réseau collectif
-- **⭐ Forum** - Communauté et co-création d'étoiles Onimoji
+- **⭐ Forum** - Communauté et co-création d'étoiles Onimoji (cadavre exquis)
 
 ## Development
 - Port: 5000 (frontend)
@@ -80,23 +77,24 @@ Navigation simplifiée avec 4 pages principales :
   - User profile (nom, id)
 
 ## Recent Changes (Oct 2025)
-- ✅ **Simplification majeure** : Suppression du système 12 lunes
-- ✅ **Nouveau flow** : Tirage → Énigmes → Initiation → Forum
-- ✅ **Animation triangle** : Triangle sacré qui vibre et danse (Framer Motion + SVG)
-- ✅ **Système d'énigmes** : 3 QCM de l'esprit avec progression visuelle
-- ✅ **Page Initiation** : Guide qui félicite et enseigne la culture onirique
-- ✅ **Étoiles Onimoji** : Système de co-création collaborative multi-users
-  - Visualisation géométrique : étoiles (2-4 users) ou cercle (5+ users)
-  - Composant OnimojiStar avec animations Framer Motion
-  - Gestion des collaborations, invitations, et finalisation
+### 🌌 Pivot majeur : Agence de Voyages Spatio-Temporels Oniriques
+- ✅ **Nouveau concept** : Agence de voyages vers des univers oniriques culturels
+- ✅ **Retour du système 12 lunes** : Progression en 12 étapes par voyage
+- ✅ **3 Voyages** : Inuit (disponible), Berbère (à venir), Celtique (à venir)
+- ✅ **12 Guides Inuits** : Gardiens ancestraux avec enseignements, pratiques et sagesses
+  - Nanook, Sila, Sedna, Kaila, Amarok, Aningan, Pinga, Tulugaq, Kiviuq, Torngarsuk, Nuliajuk, Anirniq
+- ✅ **Page d'accueil refaite** : Présentation de l'agence et des voyages disponibles
+- ✅ **Page Voyage Inuit** : 
+  - Visualisation du guide actuel avec son histoire et son enseignement
+  - Barre de progression des 12 lunes
+  - Timeline cliquable des 12 guides (débloqués progressivement)
+  - Modal de détail pour chaque guide rencontré
+- ✅ **Forum Cadavre Exquis** : Ciel étoilé avec enrichissement progressif
+  - Création d'étoiles avec amorce du guide
+  - Enrichissement libre par triangles + textes successifs
+  - Concept microcosmoji (implosion à 10+ contributions)
 - ✅ **Page Cosmoji** : Hublot de visualisation du réseau collectif
-  - Graphe D3.js force-directed avec émojis et connexions
-  - Composant NetworkGraph interactif (drag & drop, boundary force)
-  - Statistiques du voyage (étoiles, voyageurs, triangles tissés)
-  - Vue des émojis les plus populaires et constellations majeures
-- ✅ **Page TirageSimple** : Grille d'émojis interactive (sans D3)
-- ✅ **Design minimaliste** : Interface épurée, fluide, zen
-- ✅ **Navigation simplifiée** : 4 pages principales
+- ✅ **Navigation simplifiée** : 5 pages principales
 
 ## Setup History
 - Configured Vite for Replit environment (port 5000, host 0.0.0.0, allowedHosts: true)
@@ -112,9 +110,11 @@ Navigation simplifiée avec 4 pages principales :
 - Focus on dream health and collective co-creation
 
 ## Philosophy
-Onimoji valorise :
+Onimoji Voyages valorise :
 - **La santé onirique** : Prendre soin de ses rêves comme de sa santé physique
-- **La co-création** : Enrichir collectivement les scripts oniriques
-- **La simplicité** : Interface minimaliste, flow linéaire
-- **La poésie** : Textes apaisants, métaphores douces
-- **L'initiation** : Transmettre la culture onirique avec bienveillance
+- **La diversité culturelle** : Chaque culture a ses propres sagesses oniriques millénaires
+- **La transmission vivante** : Rencontrer des guides qui enseignent des pratiques authentiques
+- **La progression initiatique** : Avancer pas à pas à travers 12 étapes symboliques
+- **La co-création** : Enrichir collectivement les étoiles oniriques (cadavre exquis)
+- **La simplicité** : Interface épurée, fluide, poétique
+- **L'exploration culturelle** : Voyager dans différents univers oniriques du monde

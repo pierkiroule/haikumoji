@@ -10,6 +10,7 @@ const Initiation = lazy(() => import('./pages/Initiation.jsx'))
 const Forum = lazy(() => import('./pages/Forum.jsx'))
 const Cosmoji = lazy(() => import('./pages/Cosmoji.jsx'))
 const Profile = lazy(() => import('./pages/Profile.jsx'))
+const VoyageInuit = lazy(() => import('./pages/VoyageInuit.jsx'))
 
 export default function App() {
   return (
@@ -18,6 +19,7 @@ export default function App() {
         <Suspense fallback={<Fallback /> }>
           <Routes>
             <Route path="/" element={<Home />} />
+            <Route path="/voyage/:voyageId" element={<VoyageInuit />} />
             <Route path="/tirage" element={<Tirage />} />
             <Route path="/enigmes" element={<Enigmes />} />
             <Route path="/initiation" element={<Initiation />} />
