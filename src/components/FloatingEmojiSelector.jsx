@@ -239,37 +239,7 @@ function TriangleFormation({ positions }) {
           fillOpacity="0.1"
         />
 
-        {/* Les 3 côtés du triangle */}
-        {[0, 1, 2].map((i) => {
-          const j = (i + 1) % 3
-          return (
-            <motion.line
-              key={`line-${i}`}
-              initial={{
-                x1: positions[i].x,
-                y1: positions[i].y,
-                x2: positions[i].x,
-                y2: positions[i].y
-              }}
-              animate={{
-                x1: targetPositions[i].x,
-                y1: targetPositions[i].y,
-                x2: targetPositions[j].x,
-                y2: targetPositions[j].y
-              }}
-              transition={{
-                duration: 1,
-                ease: "easeInOut",
-                delay: i * 0.1
-              }}
-              stroke="url(#lineGradient)"
-              strokeWidth="3"
-              filter="url(#glow)"
-              strokeLinecap="round"
-            />
-          )
-        })}
-
+        {/* Les bulles emoji (rendues d'abord) */}
         {positions.map((pos, i) => (
           <motion.g
             key={i}
@@ -296,6 +266,39 @@ function TriangleFormation({ positions }) {
             </text>
           </motion.g>
         ))}
+
+        {/* Les 3 côtés du triangle (rendus PAR-DESSUS les bulles) */}
+        {[0, 1, 2].map((i) => {
+          const j = (i + 1) % 3
+          return (
+            <motion.line
+              key={`line-${i}`}
+              initial={{
+                x1: positions[i].x,
+                y1: positions[i].y,
+                x2: positions[i].x,
+                y2: positions[i].y,
+                opacity: 0
+              }}
+              animate={{
+                x1: targetPositions[i].x,
+                y1: targetPositions[i].y,
+                x2: targetPositions[j].x,
+                y2: targetPositions[j].y,
+                opacity: 1
+              }}
+              transition={{
+                duration: 1,
+                ease: "easeInOut",
+                delay: 0.8 + i * 0.15
+              }}
+              stroke="url(#lineGradient)"
+              strokeWidth="4"
+              filter="url(#glow)"
+              strokeLinecap="round"
+            />
+          )
+        })}
 
         {/* Orb au centre du triangle */}
         <AnimatePresence>
