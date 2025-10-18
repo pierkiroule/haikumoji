@@ -25,11 +25,16 @@ src/
 ```
 
 ## Key Features
-- **Tirage Triangle Sacré**: Sélection de 3 émojis dans le radar Cosmoji avec animation vibrante/dansante
+- **Tirage Triangle Sacré**: Sélection de 3 émojis dans une grille interactive avec animation vibrante/dansante
 - **Énigmes QCM**: L'esprit pose 3 questions pour comprendre l'utilisateur
 - **Initiation du Guide**: Félicitations + enseignement sur la culture onirique + script personnalisé
 - **Script Onirique Court**: Texte apaisant généré selon les réponses et le triangle
-- **Forum Co-Création**: Partage des onimojis et enrichissement collaboratif par la communauté
+- **Étoiles Onimoji**: Système de co-création collaborative où plusieurs users superposent leurs triangles
+  - **2 users** = Étoile à 6 branches (2 triangles superposés)
+  - **3 users** = Étoile à 9 branches (3 triangles superposés)
+  - **4 users** = Étoile à 12 branches (4 triangles superposés)
+  - **5+ users** = Cercle Sacré (cercle d'émojis)
+- **Co-création de textes**: Les participants tissent ensemble des scripts oniriques collaboratifs
 - **Design Minimaliste**: Interface épurée, fluide et jolie
 
 ## User Journey
@@ -38,13 +43,18 @@ Flow linéaire simple :
 2. **Tirage** - Sélection de 3 émojis → Triangle vibre et danse
 3. **Énigmes** - Répondre à 3 QCM de l'esprit
 4. **Initiation** - Message du guide + script onirique personnalisé
-5. **Forum** - Partage et co-création collective
+5. **Forum** - Co-création d'étoiles Onimoji avec d'autres voyageurs
+   - Créer une collaboration
+   - Inviter d'autres users (ou accepter des invitations)
+   - Superposer les triangles → visualisation géométrique
+   - Tisser ensemble un script onirique collaboratif
+   - Finaliser l'étoile pour la partager au forum
 
 ## Navigation System
 Navigation simplifiée avec 3 pages principales :
 - **🏠 Accueil** - Page d'introduction
 - **🔮 Tirage** - Sélection des émojis
-- **💬 Forum** - Communauté et co-création
+- **⭐ Forum** - Communauté et co-création d'étoiles Onimoji
 
 ## Development
 - Port: 5000 (frontend)
@@ -55,12 +65,13 @@ Navigation simplifiée avec 3 pages principales :
   - `npm run preview` - Preview production build
 
 ## Data Architecture
-- Cosmoji stats (occurrences et paires) pour le radar D3
 - Storage local pour :
   - Triangle sélectionné (3 émojis)
   - Réponses aux énigmes
-  - Scripts oniriques (dreams)
-  - Enrichissements collaboratifs (forum)
+  - Scripts oniriques individuels (dreams)
+  - Collaborations en cours (invitations, participants)
+  - Étoiles Onimoji finalisées (stars)
+  - User profile (nom, id)
 
 ## Recent Changes (Oct 2025)
 - ✅ **Simplification majeure** : Suppression du système 12 lunes
@@ -68,7 +79,11 @@ Navigation simplifiée avec 3 pages principales :
 - ✅ **Animation triangle** : Triangle sacré qui vibre et danse (Framer Motion + SVG)
 - ✅ **Système d'énigmes** : 3 QCM de l'esprit avec progression visuelle
 - ✅ **Page Initiation** : Guide qui félicite et enseigne la culture onirique
-- ✅ **Forum co-création** : Système d'enrichissement collaboratif des onimojis
+- ✅ **Étoiles Onimoji** : Système de co-création collaborative multi-users
+  - Visualisation géométrique : étoiles (2-4 users) ou cercle (5+ users)
+  - Composant OnimojiStar avec animations Framer Motion
+  - Gestion des collaborations, invitations, et finalisation
+- ✅ **Page TirageSimple** : Grille d'émojis interactive (sans D3)
 - ✅ **Design minimaliste** : Interface épurée, fluide, zen
 - ✅ **Navigation simplifiée** : 3 pages principales uniquement
 

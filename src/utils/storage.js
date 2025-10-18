@@ -324,6 +324,96 @@ export function clearUser() {
   localStorage.removeItem(STORAGE_KEYS.USER)
 }
 
+// ----- Étoiles Onimoji (Co-création collaborative) -----
+const STAR_STORAGE_KEY = 'onimoji_stars'
+const COLLAB_INVITES_KEY = 'onimoji_collaborations'
+
+export function getStars() {
+  return getJSON(STAR_STORAGE_KEY, [])
+}
+
+export function saveStar(star) {
+  const stars = getStars()
+  const newStar = {
+    id: generateId(),
+    ...star,
+    timestamp: Date.now()
+  }
+  const next = [newStar, ...stars]
+  setJSON(STAR_STORAGE_KEY, next)
+  return newStar
+}
+
+export function getCollaborations() {
+  return getJSON(COLLAB_INVITES_KEY, [])
+}
+
+export function createCollaboration(hostId, hostName, hostTriangle) {
+  const collabs = getCollaborations()
+  const newCollab = {
+    id: generateId(),
+    hostId,
+    hostName,
+    hostTriangle,
+    participants: [{ id: hostId, name: hostName, triangle: hostTriangle }],
+    invites: [],
+    status: 'open',
+    createdAt: Date.now()
+  }
+  const next = [...collabs, newCollab]
+  setJSON(COLLAB_INVITES_KEY, next)
+  return newCollab
+}
+
+export function inviteToCollaboration(collabId, userId, userName) {
+  const collabs = getCollaborations()
+  const updated = collabs.map(c => {
+    if (c.id === collabId && !c.invites.find(i => i.id === userId)) {
+      return {
+        ...c,
+        invites: [...c.invites, { id: userId, name: userName, status: 'pending' }]
+      }
+    }
+    return c
+  })
+  setJSON(COLLAB_INVITES_KEY, updated)
+  return updated.find(c => c.id === collabId)
+}
+
+export function acceptCollaboration(collabId, userId, userName, userTriangle) {
+  const collabs = getCollaborations()
+  const updated = collabs.map(c => {
+    if (c.id === collabId) {
+      return {
+        ...c,
+        participants: [...c.participants, { id: userId, name: userName, triangle: userTriangle }],
+        invites: c.invites.map(i => i.id === userId ? { ...i, status: 'accepted' } : i)
+      }
+    }
+    return c
+  })
+  setJSON(COLLAB_INVITES_KEY, updated)
+  return updated.find(c => c.id === collabId)
+}
+
+export function finalizeCollaboration(collabId, text) {
+  const collabs = getCollaborations()
+  const collab = collabs.find(c => c.id === collabId)
+  if (!collab) return null
+
+  const star = saveStar({
+    participants: collab.participants,
+    emojis: collab.participants.flatMap(p => p.triangle),
+    text,
+    branchCount: collab.participants.length <= 4 ? collab.participants.length * 3 : 'circle'
+  })
+
+  const updated = collabs.map(c => c.id === collabId ? { ...c, status: 'finalized', starId: star.id } : c)
+  setJSON(COLLAB_INVITES_KEY, updated)
+  
+  return star
+}
+
 export function clearUserData() {
   const user = getUser()
   if (!user) {
