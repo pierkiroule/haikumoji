@@ -128,6 +128,22 @@ Navigation minimaliste avec 4 pages principales :
 - ✅ **KdomojiProvider global** : Queue de notifications, gestion viewed/received
 - ✅ **Modale détaillée** : Contexte culturel, description ressource
 
+### 🌀 Sélection Émojis Flottants - Cercle Sacré (Oct 18, 2025)
+- ✅ **FloatingEmojiSelector** : Simulation physique D3.js
+  - Émojis flottent dans un cercle sacré avec collisions réalistes
+  - Forces: répulsion mutuelle, collision, attraction centre, rebond bords
+  - Sélection interactive par click (jusqu'à 3 émojis)
+- ✅ **Formation Triangle Réseau** :
+  - Animation transition positions initiales → triangle équilatéral
+  - Fils lumineux avec gradient purple/blue et effet glow
+  - Émojis non sélectionnés disparaissent progressivement
+- ✅ **Orb Hypnotique Central** :
+  - Apparition au centre du triangle après formation
+  - Animation pulse + rotation continue
+  - Cercles concentriques expansifs (effet Stargate)
+  - Symbolise l'accès à l'esprit guide
+- ✅ **UX fluide** : Flottement → Sélection → Triangle → Orb → Actions
+
 - ⏳ **À venir** : IA Esprit du Cosmoji (scoring étoiles, génération PDF)
 - ⏳ **À venir** : Atlas personnel (bibliothèque PDFs + Kdomojis reçus)
 - ⏳ **À venir** : Réincarnation emoji (étoile → nouvel emoji)
