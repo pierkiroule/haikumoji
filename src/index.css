@@ -100,23 +100,14 @@ body {
   background: white;
   border-radius: 50%;
   box-shadow: 
-    100px 150px white, 
     200px 80px white, 
     350px 200px white,
-    450px 120px white,
     550px 180px white,
-    120px 300px rgba(255,255,255,0.8),
-    320px 250px rgba(255,255,255,0.8),
-    480px 400px rgba(255,255,255,0.8),
-    600px 350px rgba(255,255,255,0.8),
-    180px 450px rgba(255,255,255,0.6),
-    380px 480px rgba(255,255,255,0.6),
-    520px 500px rgba(255,255,255,0.6),
-    650px 520px rgba(255,255,255,0.6),
-    50px 100px rgba(255,255,255,0.5),
-    150px 220px rgba(255,255,255,0.5),
-    280px 350px rgba(255,255,255,0.5),
-    420px 290px rgba(255,255,255,0.5);
+    320px 250px rgba(255,255,255,0.7),
+    600px 350px rgba(255,255,255,0.7),
+    180px 450px rgba(255,255,255,0.5),
+    520px 500px rgba(255,255,255,0.5),
+    150px 220px rgba(255,255,255,0.4);
 }
 
 .starfield::after {
