@@ -118,36 +118,138 @@ export default function HomeSimple() {
             <div className="text-sm text-purple-300 font-semibold">
               ✨ Votre Onimoji du jour
             </div>
-            {/* Disposition en réseau triangle : 1 emoji en haut, 2 en bas */}
-            <div className="flex flex-col items-center gap-4 py-4">
-              {/* Emoji du haut */}
-              <motion.div
-                initial={{ scale: 0, rotate: -180 }}
-                animate={{ scale: 1, rotate: 0 }}
-                transition={{ delay: 0.5, type: "spring" }}
-                className="w-20 h-20 rounded-2xl bg-white/5 border border-white/20 flex items-center justify-center text-4xl"
-              >
-                {triangle[0]}
-              </motion.div>
-              {/* Deux emojis du bas */}
-              <div className="flex gap-8">
-                <motion.div
-                  initial={{ scale: 0, rotate: -180 }}
-                  animate={{ scale: 1, rotate: 0 }}
-                  transition={{ delay: 0.6, type: "spring" }}
-                  className="w-20 h-20 rounded-2xl bg-white/5 border border-white/20 flex items-center justify-center text-4xl"
+            {/* Triangle avec bulles reliées */}
+            <div className="flex justify-center py-6">
+              <svg width="300" height="260" viewBox="0 0 300 260" className="max-w-full">
+                <defs>
+                  <linearGradient id="lineGradientHome" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stopColor="#a78bfa" stopOpacity="0.6" />
+                    <stop offset="50%" stopColor="#60a5fa" stopOpacity="0.6" />
+                    <stop offset="100%" stopColor="#a78bfa" stopOpacity="0.6" />
+                  </linearGradient>
+                  <filter id="glowHome">
+                    <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+                    <feMerge>
+                      <feMergeNode in="coloredBlur"/>
+                      <feMergeNode in="SourceGraphic"/>
+                    </feMerge>
+                  </filter>
+                </defs>
+
+                {/* Les 3 lignes du triangle */}
+                <motion.line
+                  initial={{ pathLength: 0, opacity: 0 }}
+                  animate={{ pathLength: 1, opacity: 1 }}
+                  transition={{ delay: 0.5, duration: 0.8 }}
+                  x1="150" y1="40" x2="80" y2="180"
+                  stroke="url(#lineGradientHome)"
+                  strokeWidth="2"
+                  filter="url(#glowHome)"
+                  strokeLinecap="round"
+                />
+                <motion.line
+                  initial={{ pathLength: 0, opacity: 0 }}
+                  animate={{ pathLength: 1, opacity: 1 }}
+                  transition={{ delay: 0.6, duration: 0.8 }}
+                  x1="80" y1="180" x2="220" y2="180"
+                  stroke="url(#lineGradientHome)"
+                  strokeWidth="2"
+                  filter="url(#glowHome)"
+                  strokeLinecap="round"
+                />
+                <motion.line
+                  initial={{ pathLength: 0, opacity: 0 }}
+                  animate={{ pathLength: 1, opacity: 1 }}
+                  transition={{ delay: 0.7, duration: 0.8 }}
+                  x1="220" y1="180" x2="150" y2="40"
+                  stroke="url(#lineGradientHome)"
+                  strokeWidth="2"
+                  filter="url(#glowHome)"
+                  strokeLinecap="round"
+                />
+
+                {/* Remplissage semi-transparent */}
+                <motion.polygon
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 0.1 }}
+                  transition={{ delay: 0.8, duration: 0.5 }}
+                  points="150,40 80,180 220,180"
+                  fill="url(#lineGradientHome)"
+                />
+
+                {/* Les 3 bulles emoji */}
+                {/* Bulle haut */}
+                <motion.g
+                  initial={{ scale: 0, opacity: 0 }}
+                  animate={{ scale: 1, opacity: 1 }}
+                  transition={{ delay: 0.5, type: "spring", stiffness: 200 }}
                 >
-                  {triangle[1]}
-                </motion.div>
-                <motion.div
-                  initial={{ scale: 0, rotate: -180 }}
-                  animate={{ scale: 1, rotate: 0 }}
-                  transition={{ delay: 0.7, type: "spring" }}
-                  className="w-20 h-20 rounded-2xl bg-white/5 border border-white/20 flex items-center justify-center text-4xl"
+                  <circle
+                    cx="150" cy="40"
+                    r="32"
+                    fill="rgba(139, 92, 246, 0.2)"
+                    stroke="#a78bfa"
+                    strokeWidth="2"
+                    filter="url(#glowHome)"
+                  />
+                  <text
+                    x="150" y="40"
+                    textAnchor="middle"
+                    dominantBaseline="middle"
+                    fontSize="28"
+                  >
+                    {triangle[0]}
+                  </text>
+                </motion.g>
+
+                {/* Bulle bas gauche */}
+                <motion.g
+                  initial={{ scale: 0, opacity: 0 }}
+                  animate={{ scale: 1, opacity: 1 }}
+                  transition={{ delay: 0.6, type: "spring", stiffness: 200 }}
                 >
-                  {triangle[2]}
-                </motion.div>
-              </div>
+                  <circle
+                    cx="80" cy="180"
+                    r="32"
+                    fill="rgba(139, 92, 246, 0.2)"
+                    stroke="#a78bfa"
+                    strokeWidth="2"
+                    filter="url(#glowHome)"
+                  />
+                  <text
+                    x="80" y="180"
+                    textAnchor="middle"
+                    dominantBaseline="middle"
+                    fontSize="28"
+                  >
+                    {triangle[1]}
+                  </text>
+                </motion.g>
+
+                {/* Bulle bas droite */}
+                <motion.g
+                  initial={{ scale: 0, opacity: 0 }}
+                  animate={{ scale: 1, opacity: 1 }}
+                  transition={{ delay: 0.7, type: "spring", stiffness: 200 }}
+                >
+                  <circle
+                    cx="220" cy="180"
+                    r="32"
+                    fill="rgba(139, 92, 246, 0.2)"
+                    stroke="#a78bfa"
+                    strokeWidth="2"
+                    filter="url(#glowHome)"
+                  />
+                  <text
+                    x="220" y="180"
+                    textAnchor="middle"
+                    dominantBaseline="middle"
+                    fontSize="28"
+                  >
+                    {triangle[2]}
+                  </text>
+                </motion.g>
+              </svg>
             </div>
           </div>
 
