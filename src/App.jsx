@@ -1,107 +1,72 @@
-import { Routes, Route, Link } from 'react-router-dom'
-import { Suspense, lazy } from 'react'
-import { motion } from 'framer-motion'
-import Layout from './components/Layout.jsx'
-import { KdomojiProvider } from './components/KdomojiProvider.jsx'
-
-const Home = lazy(() => import('./pages/HomeSimple.jsx'))
-const Tirage = lazy(() => import('./pages/TirageSimple.jsx'))
-const Forum = lazy(() => import('./pages/Forum.jsx'))
-const Cosmoji = lazy(() => import('./pages/Cosmoji.jsx'))
+import { NavLink, Route, Routes } from 'react-router-dom'
 
 export default function App() {
   return (
-    <KdomojiProvider>
-      <div className="min-h-screen text-slate-100 selection:bg-midnight-400 selection:text-white">
-        <Layout>
-          <Suspense fallback={<Fallback /> }>
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/tirage" element={<Tirage />} />
-              <Route path="/etoiles" element={<Forum />} />
-              <Route path="/cosmoji" element={<Cosmoji />} />
-              <Route path="*" element={<NotFound />} />
-            </Routes>
-          </Suspense>
-        </Layout>
-      </div>
-    </KdomojiProvider>
+    <div className="min-h-screen text-slate-100 selection:bg-midnight-400 selection:text-white">
+      <Navbar />
+      <main className="max-w-4xl mx-auto px-4 py-16">
+        <Routes>
+          <Route path="/" element={<Accueil />} />
+          <Route path="/donner" element={<Donner />} />
+          <Route path="/recevoir" element={<Recevoir />} />
+          <Route path="/profil" element={<Profil />} />
+          <Route path="*" element={<Accueil />} />
+        </Routes>
+      </main>
+    </div>
   )
 }
 
-function NotFound() {
+function Navbar() {
+  const linkBase =
+    'px-4 py-2 rounded-full transition-colors text-sm font-medium'
+  const active = 'bg-midnight-400 text-white'
+  const idle = 'hover:bg-white/10'
   return (
-    <motion.div 
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      className="min-h-[60vh] flex flex-col items-center justify-center gap-6 text-center"
-    >
-      <motion.div
-        initial={{ scale: 0 }}
-        animate={{ scale: 1 }}
-        transition={{ delay: 0.2, type: "spring", stiffness: 200 }}
-        className="text-8xl"
-      >
-        🌌
-      </motion.div>
-      <div className="space-y-3">
-        <h1 className="text-3xl font-bold bg-gradient-to-br from-white to-slate-300 bg-clip-text text-transparent">
-          Page non trouvée
-        </h1>
-        <p className="text-slate-400 max-w-md">
-          Cette page semble s'être perdue dans les étoiles...
-        </p>
-      </div>
-      <Link 
-        to="/"
-        className="group inline-flex items-center gap-2 rounded-2xl bg-gradient-to-r from-midnight-400 to-midnight-500 text-white px-8 py-4 hover:shadow-aurora transition-all duration-300 font-medium"
-      >
-        Retour à l'accueil
-        <span className="group-hover:translate-x-1 transition-transform duration-300">→</span>
-      </Link>
-    </motion.div>
+    <header className="sticky top-0 z-10 glass-strong border-b border-white/10">
+      <nav className="max-w-4xl mx-auto flex items-center gap-2 px-4 py-3">
+        <div className="font-display tracking-wide text-lg">Minimal</div>
+        <div className="ml-auto flex items-center gap-2">
+          <NavLink to="/" end className={({ isActive }) => `${linkBase} ${isActive ? active : idle}`}>Accueil</NavLink>
+          <NavLink to="/donner" className={({ isActive }) => `${linkBase} ${isActive ? active : idle}`}>Donner</NavLink>
+          <NavLink to="/recevoir" className={({ isActive }) => `${linkBase} ${isActive ? active : idle}`}>Recevoir</NavLink>
+          <NavLink to="/profil" className={({ isActive }) => `${linkBase} ${isActive ? active : idle}`}>Profil</NavLink>
+        </div>
+      </nav>
+    </header>
   )
 }
 
-function Fallback() {
+function Section({ title, children }) {
   return (
-    <motion.div 
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      className="min-h-[60vh] flex flex-col items-center justify-center gap-4"
-    >
-      <motion.div
-        animate={{ 
-          rotate: 360,
-          scale: [1, 1.2, 1]
-        }}
-        transition={{ 
-          rotate: { duration: 2, repeat: Infinity, ease: "linear" },
-          scale: { duration: 1.5, repeat: Infinity, ease: "easeInOut" }
-        }}
-        className="text-6xl"
-      >
-        ✨
-      </motion.div>
-      <div className="text-slate-400 font-medium">Chargement…</div>
-      <div className="flex gap-2">
-        {[0, 1, 2].map((i) => (
-          <motion.div
-            key={i}
-            className="w-2 h-2 rounded-full bg-midnight-400"
-            animate={{ 
-              y: [0, -12, 0],
-              opacity: [0.3, 1, 0.3]
-            }}
-            transition={{ 
-              duration: 1.2, 
-              repeat: Infinity, 
-              delay: i * 0.2,
-              ease: "easeInOut"
-            }}
-          />
-        ))}
-      </div>
-    </motion.div>
+    <section className="space-y-4">
+      <h1 className="text-3xl font-semibold">{title}</h1>
+      <p className="text-slate-400">{children}</p>
+    </section>
   )
+}
+
+function Accueil() {
+  return (
+    <section className="space-y-8 text-center">
+      <h1 className="text-4xl md:text-5xl font-display tracking-tight">
+        Un point de départ minimaliste
+      </h1>
+      <p className="text-slate-400 max-w-2xl mx-auto">
+        Une landing page simple avec un menu clair: Accueil, Donner, Recevoir, Profil.
+      </p>
+    </section>
+  )
+}
+
+function Donner() {
+  return <Section title="Donner">Partagez quelque chose de valeur.</Section>
+}
+
+function Recevoir() {
+  return <Section title="Recevoir">Découvrez ce que la communauté offre.</Section>
+}
+
+function Profil() {
+  return <Section title="Profil">Gérez votre espace personnel.</Section>
 }
