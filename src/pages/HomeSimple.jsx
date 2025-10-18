@@ -58,18 +58,39 @@ export default function HomeSimple() {
           🌙✨💫
         </motion.div>
 
-        <div className="space-y-4">
+        <div className="space-y-6">
           <h1 className="text-4xl md:text-5xl font-bold text-white">
             Onimoji
           </h1>
           <p className="text-xl text-cyan-300 font-medium">
-            Rituel quotidien de santé onirique
+            Prendre soin de sa santé onirique et de celle des autres
           </p>
-          <p className="text-lg text-slate-300 max-w-3xl mx-auto leading-relaxed">
-            Cueillez votre triangle poétique du jour pour tisser les étoiles oniriques de votre nuit. 
-            Décentrez-vous de l'injonction quantité/qualité de sommeil. 
-            Recentrez-vous sur la résonance entre poétique du jour et onirique de nuit.
-          </p>
+          <div className="text-base md:text-lg text-slate-300 max-w-3xl mx-auto leading-relaxed space-y-4">
+            <p>
+              Rêver, c'est respirer l'invisible.<br/>
+              Chaque nuit, notre monde intérieur se tisse de symboles, d'émotions et de mémoire.
+            </p>
+            <p>
+              Prendre soin de sa santé onirique,<br/>
+              c'est écouter ces mouvements discrets du sommeil<br/>
+              qui relient le corps, le cœur et le monde.
+            </p>
+            <p>
+              Mais c'est aussi préserver les cultures du rêve :<br/>
+              celles des peuples qui, depuis toujours,<br/>
+              honorent le rêve comme un langage du vivant,<br/>
+              un lien entre humains, nature et esprits.
+            </p>
+            <p className="text-cyan-200 font-medium">
+              Onimoji fait revivre cette tradition.<br/>
+              Un espace pour partager, explorer et réenchanter nos rêves,<br/>
+              ensemble.
+            </p>
+            <p className="text-slate-400 italic">
+              Parce qu'une société sans rêve s'éteint lentement.<br/>
+              Une humanité qui rêve ensemble se réaccorde. 🌙
+            </p>
+          </div>
         </div>
 
         {/* Date du jour */}
