@@ -5,6 +5,7 @@ import { resetAppStorage } from '../utils/storage.js'
 const navItems = [
   { to: '/', label: '🏠 Accueil', ariaLabel: 'Accueil' },
   { to: '/tirage', label: '🔮 Tirage', ariaLabel: 'Tirage triangle' },
+  { to: '/cosmoji', label: '🔭 Cosmoji', ariaLabel: 'Cosmoji hublot' },
   { to: '/forum', label: '💬 Forum', ariaLabel: 'Forum communauté' },
 ]
 

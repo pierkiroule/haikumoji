@@ -8,6 +8,7 @@ const Tirage = lazy(() => import('./pages/TirageSimple.jsx'))
 const Enigmes = lazy(() => import('./pages/Enigmes.jsx'))
 const Initiation = lazy(() => import('./pages/Initiation.jsx'))
 const Forum = lazy(() => import('./pages/Forum.jsx'))
+const Cosmoji = lazy(() => import('./pages/Cosmoji.jsx'))
 const Profile = lazy(() => import('./pages/Profile.jsx'))
 
 export default function App() {
@@ -21,6 +22,7 @@ export default function App() {
             <Route path="/enigmes" element={<Enigmes />} />
             <Route path="/initiation" element={<Initiation />} />
             <Route path="/forum" element={<Forum />} />
+            <Route path="/cosmoji" element={<Cosmoji />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
