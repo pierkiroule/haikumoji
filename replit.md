@@ -1,7 +1,7 @@
-# Onimoji - Voyage Onirique
+# Onimoji - Voyage Onirique Minimaliste
 
 ## Overview
-Onimoji (also known as Haikumoji) is a poetic and therapeutic web application that guides users through a metaphorical journey based on Inuit mythology. Users select emojis to generate hypnoniris (hypnotic oneiric scripts) and progress through 12 sacred "lunes" (moons) encountering guardians and receiving personalized regenerative texts.
+Onimoji est une application poétique et thérapeutique qui guide l'utilisateur à travers un voyage onirique simplifié. Les utilisateurs tirent un triangle d'émojis du Cosmoji, rencontrent un esprit qui pose des énigmes, puis reçoivent une initiation et un script onirique personnalisé pour prendre soin de leur santé onirique.
 
 ## Technology Stack
 - **Frontend Framework**: React 18
@@ -9,72 +9,71 @@ Onimoji (also known as Haikumoji) is a poetic and therapeutic web application th
 - **Routing**: React Router v6
 - **Styling**: Tailwind CSS 3 with custom themes
 - **Animations**: Framer Motion
-- **Data Visualization**: D3.js
+- **Data Visualization**: D3.js (pour le radar Cosmoji)
 - **Language**: JavaScript (ES modules)
 
 ## Project Structure
 ```
 src/
-├── components/     # Reusable UI components (Navbar, MoonProgressWidget, modals, particles)
-├── pages/         # Route pages (Home, VoyageInuit, Navette, Lune, Guardian, etc.)
-├── utils/         # Utilities (hypnoniris generator, voyage flow, storage, loaders)
-├── data/          # JSON data files for cosmoji, voyages, guardians, lunes
+├── components/     # Reusable UI components (NavbarSimple, RadarCosmoji, OnimojiTriad, particles)
+├── pages/         # Route pages (HomeSimple, Tirage, Enigmes, Initiation, Forum)
+├── utils/         # Utilities (storage, cosmoji stats)
+├── data/          # JSON data files for cosmoji
 ├── App.jsx        # Main app with routing
 ├── main.jsx       # Entry point
 └── index.css      # Global styles
 ```
 
 ## Key Features
-- **E-Learning Guided Flow**: Linear progression through 12 lunes with step-by-step guidance
-- **Emoji Selection**: Users select exactly 3 emojis from a radar/cosmoji interface
-- **Hypnoniris Generation**: AI-generated hypnotic oneiric scripts based on emojis, guardian, and element
-- **Guardian Encounters**: Progress through 12 sacred lunes with Inuit mythology guides (Sila, Sedna, Nanook...)
-- **Short Oneiric Scripts**: Personalized regenerative texts for meditation and sleep
-- **Progress Tracking**: Visual progress widget showing Lune X/12 with completion stepper
-- **Community Feed**: Share and discover onimoji creations
-- **Modular Voyage System**: JSON-based architecture for different cultural themes
+- **Tirage Triangle Sacré**: Sélection de 3 émojis dans le radar Cosmoji avec animation vibrante/dansante
+- **Énigmes QCM**: L'esprit pose 3 questions pour comprendre l'utilisateur
+- **Initiation du Guide**: Félicitations + enseignement sur la culture onirique + script personnalisé
+- **Script Onirique Court**: Texte apaisant généré selon les réponses et le triangle
+- **Forum Co-Création**: Partage des onimojis et enrichissement collaboratif par la communauté
+- **Design Minimaliste**: Interface épurée, fluide et jolie
 
 ## User Journey
-Each lune follows this guided flow:
-1. **Navette** - Select 3 emojis from the Cosmoji radar
-2. **Lune** - Generate hypnoniris (hypnotic script) based on emojis and guardian
-3. **Guardian** - Encounter the guardian, write sensations, receive short script
-4. **Collection** - Collect star seed, emojis enrich collective Cosmoji
-5. **Next Lune** - Progress to next moon (2/12, 3/12, etc.)
+Flow linéaire simple :
+1. **Accueil** - Présentation du concept
+2. **Tirage** - Sélection de 3 émojis → Triangle vibre et danse
+3. **Énigmes** - Répondre à 3 QCM de l'esprit
+4. **Initiation** - Message du guide + script onirique personnalisé
+5. **Forum** - Partage et co-création collective
 
 ## Navigation System
-- **Intelligent Routing**: Automatically redirects users to the correct step
-- **Ma Lune (X/12)**: Main navigation button that takes user to next step in journey
-- **Protected Routes**: Users must complete steps in order (no skipping)
-- **Progress Widget**: Always visible, shows current lune, progress %, and next step
+Navigation simplifiée avec 3 pages principales :
+- **🏠 Accueil** - Page d'introduction
+- **🔮 Tirage** - Sélection des émojis
+- **💬 Forum** - Communauté et co-création
 
 ## Development
 - Port: 5000 (frontend)
-- Dev server: Vite with HMR
+- Dev server: Vite with HMR, allowedHosts: true
 - Commands:
   - `npm run dev` - Start development server
   - `npm run build` - Build for production
   - `npm run preview` - Preview production build
 
 ## Data Architecture
-The app uses a modular JSON structure for voyages:
-- Each voyage has a `voyage.config.json` with metadata and guardians
-- Individual lunes are stored as separate JSON files
-- Hypnoniris generator with element-based themes and guardian voices
-- Template files available for creating new voyages
+- Cosmoji stats (occurrences et paires) pour le radar D3
+- Storage local pour :
+  - Triangle sélectionné (3 émojis)
+  - Réponses aux énigmes
+  - Scripts oniriques (dreams)
+  - Enrichissements collaboratifs (forum)
 
 ## Recent Changes (Oct 2025)
-- ✅ Transformed from haiku to hypnoniris generation
-- ✅ Implemented e-learning guided flow with progress tracking
-- ✅ Created MoonProgressWidget with visual stepper
-- ✅ Added intelligent navigation system (useVoyageFlow hook)
-- ✅ Simplified Navbar with "Ma Lune (X/12)" button
-- ✅ Enhanced Guardian page with 4-step encounter
-- ✅ Integrated short script generation for sleep
-- ✅ Fixed hypnoniris generation timing bug
+- ✅ **Simplification majeure** : Suppression du système 12 lunes
+- ✅ **Nouveau flow** : Tirage → Énigmes → Initiation → Forum
+- ✅ **Animation triangle** : Triangle sacré qui vibre et danse (Framer Motion + SVG)
+- ✅ **Système d'énigmes** : 3 QCM de l'esprit avec progression visuelle
+- ✅ **Page Initiation** : Guide qui félicite et enseigne la culture onirique
+- ✅ **Forum co-création** : Système d'enrichissement collaboratif des onimojis
+- ✅ **Design minimaliste** : Interface épurée, fluide, zen
+- ✅ **Navigation simplifiée** : 3 pages principales uniquement
 
 ## Setup History
-- Configured Vite for Replit environment (port 5000, host 0.0.0.0)
+- Configured Vite for Replit environment (port 5000, host 0.0.0.0, allowedHosts: true)
 - Set up HMR for WebSocket connections
 - Created .gitignore for Node.js/Vite projects
 - Configured deployment settings
@@ -82,5 +81,14 @@ The app uses a modular JSON structure for voyages:
 ## User Preferences
 - French language interface
 - Therapeutic and poetic tone
-- Emphasis on accessibility and inclusive design
-- Linear, guided e-learning experience
+- Minimalist, fluid, beautiful design ("au plus simple fluide joli")
+- Linear guided experience
+- Focus on dream health and collective co-creation
+
+## Philosophy
+Onimoji valorise :
+- **La santé onirique** : Prendre soin de ses rêves comme de sa santé physique
+- **La co-création** : Enrichir collectivement les scripts oniriques
+- **La simplicité** : Interface minimaliste, flow linéaire
+- **La poésie** : Textes apaisants, métaphores douces
+- **L'initiation** : Transmettre la culture onirique avec bienveillance

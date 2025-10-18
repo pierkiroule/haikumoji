@@ -4,7 +4,7 @@ import { motion } from 'framer-motion'
 import Layout from './components/Layout.jsx'
 
 const Home = lazy(() => import('./pages/HomeSimple.jsx'))
-const Tirage = lazy(() => import('./pages/Tirage.jsx'))
+const Tirage = lazy(() => import('./pages/TirageSimple.jsx'))
 const Enigmes = lazy(() => import('./pages/Enigmes.jsx'))
 const Initiation = lazy(() => import('./pages/Initiation.jsx'))
 const Forum = lazy(() => import('./pages/Forum.jsx'))

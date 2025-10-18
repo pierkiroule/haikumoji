@@ -85,7 +85,8 @@ export default function RadarCosmoji({
   // Resize observer
   useEffect(() => {
     const el = containerRef.current
-    if (!el) return
+    if (!el || typeof ResizeObserver === 'undefined') return
+    
     const ro = new ResizeObserver(entries => {
       for (const entry of entries) {
         const w = entry.contentRect.width

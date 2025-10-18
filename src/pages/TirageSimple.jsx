@@ -2,17 +2,23 @@ import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import { getSelectedTriplet, saveSelectedTriplet, seedIfEmpty, computeEmojiStats } from '../utils/storage.js'
-import RadarCosmoji from '../components/RadarCosmoji.jsx'
 
-export default function Tirage() {
+// Liste des émojis populaires pour le tirage
+const EMOJIS = [
+  '🌙', '⭐', '✨', '🔮', '🌟', '💫',
+  '🦉', '🐺', '🦌', '🐋', '🦅', '🐻',
+  '❄️', '🌊', '🔥', '🌿', '🌸', '🍃',
+  '🏔️', '🌲', '🌌', '☁️', '🌈', '💎',
+  '🎨', '🎭', '🎪', '🎯', '🎲', '🎪'
+]
+
+export default function TirageSimple() {
   const [selected, setSelected] = useState([])
-  const [stats, setStats] = useState(null)
   const [showTriangle, setShowTriangle] = useState(false)
   const navigate = useNavigate()
 
   useEffect(() => {
     seedIfEmpty()
-    setStats(computeEmojiStats())
     const saved = getSelectedTriplet()
     if (saved && saved.length === 3) {
       setSelected(saved)
@@ -55,8 +61,8 @@ export default function Tirage() {
           Tirage du Triangle Onirique
         </h1>
         <p className="text-slate-300 max-w-2xl mx-auto leading-relaxed">
-          Sélectionnez 3 émojis dans le Cosmoji. Ils formeront votre triangle sacré 
-          et réveilleront l'esprit qui vous guidera.
+          Sélectionnez 3 émojis qui résonnent avec vous. 
+          Ils formeront votre triangle sacré et réveilleront l'esprit.
         </p>
       </motion.div>
 
@@ -81,22 +87,44 @@ export default function Tirage() {
         ))}
       </motion.div>
 
-      {/* Radar Cosmoji */}
+      {/* Emoji Grid */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.2 }}
         className="rounded-2xl glass-strong border border-white/20 p-6 shadow-card"
       >
-        <RadarCosmoji
-          stats={stats}
-          selectable
-          selected={selected}
-          onToggle={handleToggle}
-          maxSelected={3}
-          glow
-          height={500}
-        />
+        <div className="grid grid-cols-6 gap-3">
+          {EMOJIS.map((emoji, i) => {
+            const isSelected = selected.includes(emoji)
+            const isDisabled = !isSelected && selected.length >= 3
+
+            return (
+              <motion.button
+                key={emoji}
+                initial={{ opacity: 0, scale: 0 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: i * 0.02 }}
+                whileHover={!isDisabled ? { scale: 1.2 } : {}}
+                whileTap={!isDisabled ? { scale: 0.9 } : {}}
+                onClick={() => !isDisabled && handleToggle(emoji)}
+                disabled={isDisabled}
+                className={`
+                  aspect-square rounded-xl flex items-center justify-center text-3xl
+                  transition-all duration-300
+                  ${isSelected 
+                    ? 'bg-gradient-to-br from-emerald-500 to-cyan-500 shadow-lg scale-110' 
+                    : isDisabled
+                    ? 'bg-white/5 opacity-30 cursor-not-allowed'
+                    : 'bg-white/10 hover:bg-white/20 cursor-pointer'
+                  }
+                `}
+              >
+                {emoji}
+              </motion.button>
+            )
+          })}
+        </div>
       </motion.div>
 
       {/* Triangle Dansant */}
