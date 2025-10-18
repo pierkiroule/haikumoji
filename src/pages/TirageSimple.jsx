@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import { getSelectedTriplet, setSelectedTriplet, seedIfEmpty } from '../utils/storage.js'
+import { incrementKdomojiStat } from '../utils/kdomojiManager.js'
+import { useKdomoji } from '../components/KdomojiProvider.jsx'
 
 // Liste des émojis populaires pour le tirage
 const EMOJIS = [
@@ -16,6 +18,7 @@ export default function TirageSimple() {
   const [selected, setSelected] = useState([])
   const [showTriangle, setShowTriangle] = useState(false)
   const navigate = useNavigate()
+  const { showKdomoji } = useKdomoji()
 
   useEffect(() => {
     seedIfEmpty()
@@ -35,6 +38,10 @@ export default function TirageSimple() {
         if (newSelection.length === 3) {
           setSelectedTriplet(newSelection)
           setTimeout(() => setShowTriangle(true), 300)
+          
+          // Trigger kdomoji pour le premier triangle
+          const newKdomojis = incrementKdomojiStat('trianglesCueilli')
+          newKdomojis.forEach(k => showKdomoji(k))
         }
         return newSelection
       }

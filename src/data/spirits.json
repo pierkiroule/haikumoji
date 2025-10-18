@@ -1,0 +1,132 @@
+[
+  {
+    "id": "qilak",
+    "name": "Qilak",
+    "culture": "Inuite",
+    "cultureDescription": "Gardien du ciel nocturne et des aurores boréales dans la tradition inuite du Nunavut",
+    "quote": "Le rêve est le fil qui tisse le monde du jour au monde de la nuit",
+    "presentation": "Je suis Qilak, esprit du ciel onirique inuit. Dans ma culture, les aurores boréales sont les esprits de nos ancêtres qui dansent dans le ciel. Je veille sur ceux qui honorent leurs rêves comme des portes vers la sagesse ancestrale.",
+    "ritual": "Avant de dormir, regardez le ciel étoilé (ou fermez les yeux et imaginez-le). Respirez lentement trois fois. Murmurez un mot qui résonne avec votre journée. Laissez ce mot devenir une étoile dans votre ciel intérieur.",
+    "quiz": [
+      {
+        "question": "Dans la culture inuite, que représentent les aurores boréales ?",
+        "options": ["Des esprits dansants", "Des reflets de glace", "Des lumières magiques"],
+        "correctIndex": 0
+      },
+      {
+        "question": "Quel est le lien entre rêve et réalité dans cette tradition ?",
+        "options": ["Ils sont séparés", "Ils sont tissés ensemble", "Le rêve n'existe pas"],
+        "correctIndex": 1
+      },
+      {
+        "question": "Comment honorer ses rêves selon Qilak ?",
+        "options": ["Les oublier au réveil", "Les voir comme sagesse", "Les ignorer"],
+        "correctIndex": 1
+      }
+    ]
+  },
+  {
+    "id": "anansi",
+    "name": "Anansi",
+    "culture": "Africaine (Akan)",
+    "cultureDescription": "L'araignée tisseuse de récits et gardienne des histoires oniriques d'Afrique de l'Ouest",
+    "quote": "Chaque rêve est un fil, ensemble nous tissons la toile du monde",
+    "presentation": "Je suis Anansi, l'araignée rusée et sage. Dans les traditions Akan, je tisse les histoires qui enseignent et transforment. Vos rêves sont des récits que nous co-créons, des fils précieux dans la grande toile cosmique.",
+    "ritual": "Avant de dormir, racontez-vous une mini-histoire de votre journée (1 phrase). Imaginez cette histoire comme un fil doré. Visualisez-la se tisser dans une toile lumineuse. Dormez en sachant que vos rêves enrichiront cette toile.",
+    "quiz": [
+      {
+        "question": "Que représente Anansi dans la culture Akan ?",
+        "options": ["Un guerrier", "Un tisserand d'histoires", "Un fermier"],
+        "correctIndex": 1
+      },
+      {
+        "question": "Les rêves selon Anansi sont... ?",
+        "options": ["Des fils de la toile cosmique", "Des illusions", "Des messages divins"],
+        "correctIndex": 0
+      },
+      {
+        "question": "Comment Anansi nous enseigne-t-il ?",
+        "options": ["Par la peur", "Par les récits et la ruse", "Par le silence"],
+        "correctIndex": 1
+      }
+    ]
+  },
+  {
+    "id": "morpheus",
+    "name": "Morpheus",
+    "culture": "Culture Pop (Matrix)",
+    "cultureDescription": "Guide onirique de la réalité virtuelle et des mondes parallèles",
+    "quote": "Pilule rouge ou bleue ? Le choix est de rêver consciemment ou de subir ses rêves",
+    "presentation": "Je suis Morpheus, gardien du seuil entre réalité et rêve. Dans l'univers de Matrix, j'enseigne que la réalité que nous percevons n'est qu'une construction. Vos rêves sont votre Matrix personnelle : apprenez à en devenir l'architecte.",
+    "ritual": "Au moment de dormir, posez-vous cette question : 'Suis-je prêt à explorer mes rêves consciemment ?' Visualisez une porte rouge qui s'ouvre. Imaginez que vous choisissez de la franchir. Endormez-vous avec cette intention d'exploration.",
+    "quiz": [
+      {
+        "question": "Que symbolise la pilule rouge dans Matrix ?",
+        "options": ["L'oubli", "La vérité et l'éveil", "Le sommeil"],
+        "correctIndex": 1
+      },
+      {
+        "question": "Selon Morpheus, nos rêves sont... ?",
+        "options": ["Notre Matrix personnelle", "Juste du hasard", "Inutiles"],
+        "correctIndex": 0
+      },
+      {
+        "question": "Comment devenir architecte de ses rêves ?",
+        "options": ["Ne pas dormir", "Exploration consciente", "Dormir plus"],
+        "correctIndex": 1
+      }
+    ]
+  },
+  {
+    "id": "sheherazade",
+    "name": "Shéhérazade",
+    "culture": "Perse/Arabe",
+    "cultureDescription": "Tisseuse des Mille et Une Nuits, gardienne des récits oniriques du Moyen-Orient",
+    "quote": "Une nuit, un rêve, mille vies possibles tissées dans l'obscurité",
+    "presentation": "Je suis Shéhérazade, conteuse des Mille et Une Nuits. J'ai survécu en tissant des récits infinis, nuit après nuit. Vos rêves sont comme mes histoires : chaque nuit offre un nouveau chapitre, une nouvelle aventure dans les palais de votre inconscient.",
+    "ritual": "Avant de dormir, imaginez que vous ouvrez un livre vierge. La première page est celle de votre nuit à venir. Murmurez : 'Cette nuit, j'écris un nouveau chapitre'. Laissez vos rêves remplir les pages. Au réveil, rappelez-vous un fragment.",
+    "quiz": [
+      {
+        "question": "Comment Shéhérazade a-t-elle survécu ?",
+        "options": ["Par la force", "En tissant des récits", "Par la magie"],
+        "correctIndex": 1
+      },
+      {
+        "question": "Les Mille et Une Nuits enseignent que... ?",
+        "options": ["Les rêves sont dangereux", "Chaque nuit est une aventure", "Il faut éviter de rêver"],
+        "correctIndex": 1
+      },
+      {
+        "question": "Vos rêves sont... ?",
+        "options": ["Des chapitres de votre vie onirique", "Sans importance", "À oublier"],
+        "correctIndex": 0
+      }
+    ]
+  },
+  {
+    "id": "link",
+    "name": "Link",
+    "culture": "Jeux Vidéo (Zelda)",
+    "cultureDescription": "Héros silencieux qui voyage entre mondes parallèles et îles oniriques",
+    "quote": "Chaque rêve est un donjon à explorer, chaque cauchemar un boss à vaincre",
+    "presentation": "Je suis Link, le héros silencieux. Dans 'Link's Awakening', j'ai découvert que toute une île n'était que le rêve d'un dieu-poisson. Vos rêves sont vos propres îles à explorer : mystères, trésors, et boss à affronter vous y attendent.",
+    "ritual": "Avant de dormir, imaginez que vous vous équipez pour une aventure. Choisissez mentalement 3 'objets' (courage, curiosité, calme). Visualisez-vous entrant dans un portail lumineux. Dites : 'Que l'aventure commence'. Explorez vos rêves comme un donjon.",
+    "quiz": [
+      {
+        "question": "Dans Link's Awakening, l'île est... ?",
+        "options": ["Réelle", "Un rêve", "Une illusion magique"],
+        "correctIndex": 1
+      },
+      {
+        "question": "Les cauchemars selon Link sont... ?",
+        "options": ["À fuir", "Des boss à vaincre", "Impossibles"],
+        "correctIndex": 1
+      },
+      {
+        "question": "Explorer ses rêves c'est comme... ?",
+        "options": ["Partir en aventure", "Perdre son temps", "Avoir peur"],
+        "correctIndex": 0
+      }
+    ]
+  }
+]

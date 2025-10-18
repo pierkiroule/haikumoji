@@ -1,0 +1,98 @@
+[
+  {
+    "id": "inuit_dream_song",
+    "title": "Chant de Rêve Inuit",
+    "emoji": "🎵",
+    "message": "Le Cosmoji vous offre ce chant traditionnel inuit pour accompagner vos nuits",
+    "resourceType": "audio",
+    "resourceTitle": "Aya - Chant de Rêve du Nunavut",
+    "resourceDescription": "Un chant traditionnel inuit qui invoque les esprits des rêves et guide le voyageur onirique vers des visions paisibles",
+    "culturalContext": "Dans la culture inuite, les chants (pisiq) sont des ponts entre les mondes. Ce chant était chanté avant le sommeil pour honorer Sila, l'esprit du ciel nocturne.",
+    "trigger": "first_triangle",
+    "rarity": "common"
+  },
+  {
+    "id": "african_dream_cloth",
+    "title": "Tissu de Rêve Akan",
+    "emoji": "🕸️",
+    "message": "Le Cosmoji tisse pour vous ce motif sacré d'Anansi",
+    "resourceType": "visual",
+    "resourceTitle": "Kente - Le Tissu des Rêves",
+    "resourceDescription": "Motif kente traditionnel qui représente la toile d'Anansi tissant les rêves du monde. Chaque couleur porte une sagesse onirique.",
+    "culturalContext": "Le kente est un tissu royal akan. Ce motif spécifique, appelé 'Toile d'Anansi', était porté par les gardiens des récits oniriques pour se protéger des cauchemars.",
+    "trigger": "first_star_contribution",
+    "rarity": "rare"
+  },
+  {
+    "id": "matrix_lucid_code",
+    "title": "Code du Rêve Lucide",
+    "emoji": "💊",
+    "message": "Le Cosmoji déverrouille pour vous le code de la lucidité onirique",
+    "resourceType": "technique",
+    "resourceTitle": "Reality Check Matrix",
+    "resourceDescription": "Technique de vérification de réalité inspirée de Matrix : regardez vos mains 5 fois par jour et demandez-vous 'Suis-je en train de rêver ?'. En rêve, vos mains auront une apparence étrange.",
+    "culturalContext": "Dans les années 2000, le film Matrix a popularisé l'idée du rêve lucide comme éveil dans la simulation. Cette technique combine sagesse ancestrale (yoga du rêve tibétain) et pop culture.",
+    "trigger": "three_ritual_sessions",
+    "rarity": "epic"
+  },
+  {
+    "id": "persian_night_poem",
+    "title": "Poème des Mille et Une Nuits",
+    "emoji": "📖",
+    "message": "Shéhérazade vous offre ce fragment des Mille et Une Nuits",
+    "resourceType": "text",
+    "resourceTitle": "Le Conte du Rêveur Éveillé",
+    "resourceDescription": "'Il était une fois un rêveur qui ne savait plus s'il rêvait sa vie ou vivait son rêve. Alors il cessa de chercher la différence et embrassa les deux royaumes comme un seul.'",
+    "culturalContext": "Ce fragment provient d'un conte perdu des Mille et Une Nuits, retrouvé dans un manuscrit du XIIe siècle. Il enseigne la non-dualité entre veille et sommeil.",
+    "trigger": "five_stars_created",
+    "rarity": "legendary"
+  },
+  {
+    "id": "zelda_dream_shield",
+    "title": "Bouclier Onirique de Link",
+    "emoji": "🛡️",
+    "message": "Le héros silencieux vous confie ce bouclier contre les cauchemars",
+    "resourceType": "technique",
+    "resourceTitle": "Protection du Héros",
+    "resourceDescription": "Avant de dormir, visualisez un bouclier doré autour de vous. Imaginez qu'il reflète les cauchemars et transforme les peurs en alliés. Vous êtes le héros de vos rêves.",
+    "culturalContext": "Dans Zelda, Link affronte ses peurs dans des donjons oniriques. Cette technique combine visualisation créative et empowerment du rêveur comme protagoniste actif.",
+    "trigger": "first_quiz_completed",
+    "rarity": "rare"
+  },
+  {
+    "id": "cosmoji_star_birth",
+    "title": "Naissance d'une Étoile",
+    "emoji": "⭐",
+    "message": "Une étoile est née de votre contribution ! Le Cosmoji célèbre votre co-création",
+    "resourceType": "achievement",
+    "resourceTitle": "Gardien Créateur d'Étoiles",
+    "resourceDescription": "Vous avez contribué à la naissance d'une étoile onirique collaborative. Votre phrase d'amorce fait maintenant partie du réseau vivant du Cosmoji.",
+    "culturalContext": "Dans la cosmologie onirique, chaque contribution enrichit le réseau collectif. Vous êtes désormais gardien d'une constellation naissante.",
+    "trigger": "star_contribution",
+    "rarity": "common"
+  },
+  {
+    "id": "dream_traveler_badge",
+    "title": "Insigne de Voyageur Onirique",
+    "emoji": "🧭",
+    "message": "Le Cosmoji reconnaît votre engagement : 7 rituels consécutifs !",
+    "resourceType": "achievement",
+    "resourceTitle": "Voyageur Assidu",
+    "resourceDescription": "Vous avez pratiqué le rituel quotidien pendant 7 jours d'affilée. Votre constance nourrit votre santé onirique et enrichit le réseau collectif.",
+    "culturalContext": "Dans de nombreuses traditions, 7 est un nombre sacré de transformation. 7 nuits de rituel marquent l'ancrage d'une nouvelle habitude onirique.",
+    "trigger": "seven_day_streak",
+    "rarity": "epic"
+  },
+  {
+    "id": "global_dream_weaver",
+    "title": "Tisserand Mondial de Rêves",
+    "emoji": "🌍",
+    "message": "Le Cosmoji honore votre rôle dans la préservation des cultures oniriques mondiales",
+    "resourceType": "achievement",
+    "resourceTitle": "Gardien Psychoculturel",
+    "resourceDescription": "Vous avez rencontré 5 esprits guides de cultures différentes. Vous tissez les fils entre les traditions oniriques du monde entier.",
+    "culturalContext": "Vous incarnez la mission d'Onimoji : préserver et célébrer la diversité des cultures oniriques. Vous êtes gardien de l'Onimoji psychoculturel.",
+    "trigger": "five_spirits_met",
+    "rarity": "legendary"
+  }
+]

@@ -2,6 +2,7 @@ import { Routes, Route, Link } from 'react-router-dom'
 import { Suspense, lazy } from 'react'
 import { motion } from 'framer-motion'
 import Layout from './components/Layout.jsx'
+import { KdomojiProvider } from './components/KdomojiProvider.jsx'
 
 const Home = lazy(() => import('./pages/HomeSimple.jsx'))
 const Tirage = lazy(() => import('./pages/TirageSimple.jsx'))
@@ -10,19 +11,21 @@ const Cosmoji = lazy(() => import('./pages/Cosmoji.jsx'))
 
 export default function App() {
   return (
-    <div className="min-h-screen text-slate-100 selection:bg-midnight-400 selection:text-white">
-      <Layout>
-        <Suspense fallback={<Fallback /> }>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/tirage" element={<Tirage />} />
-            <Route path="/etoiles" element={<Forum />} />
-            <Route path="/cosmoji" element={<Cosmoji />} />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </Suspense>
-      </Layout>
-    </div>
+    <KdomojiProvider>
+      <div className="min-h-screen text-slate-100 selection:bg-midnight-400 selection:text-white">
+        <Layout>
+          <Suspense fallback={<Fallback /> }>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/tirage" element={<Tirage />} />
+              <Route path="/etoiles" element={<Forum />} />
+              <Route path="/cosmoji" element={<Cosmoji />} />
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </Suspense>
+        </Layout>
+      </div>
+    </KdomojiProvider>
   )
 }
 

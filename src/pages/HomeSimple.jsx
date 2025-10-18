@@ -2,6 +2,8 @@ import { Link, useNavigate } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useState, useEffect } from 'react'
 import { getUser, getSelectedTriplet, saveRitualSession, getTodayRitual } from '../utils/storage.js'
+import SpiritModal from '../components/SpiritModal.jsx'
+import { selectSpiritForTriangle } from '../utils/spiritSelector.js'
 
 export default function HomeSimple() {
   const [user, setUser] = useState(null)
@@ -9,6 +11,8 @@ export default function HomeSimple() {
   const [seedPhrase, setSeedPhrase] = useState('')
   const [todayRitual, setTodayRitual] = useState(null)
   const [showSeedForm, setShowSeedForm] = useState(false)
+  const [showSpiritModal, setShowSpiritModal] = useState(false)
+  const [selectedSpirit, setSelectedSpirit] = useState(null)
   const navigate = useNavigate()
 
   useEffect(() => {
@@ -88,22 +92,40 @@ export default function HomeSimple() {
           transition={{ delay: 0.4 }}
           className="rounded-3xl glass-strong border border-purple-500/30 p-8 space-y-6"
         >
-          <div className="text-center space-y-2">
+          <div className="text-center space-y-4">
             <div className="text-sm text-purple-300 font-semibold">
               ✨ Votre Onimoji du jour
             </div>
-            <div className="flex justify-center gap-3">
-              {triangle.map((emoji, i) => (
+            {/* Disposition en réseau triangle : 1 emoji en haut, 2 en bas */}
+            <div className="flex flex-col items-center gap-4 py-4">
+              {/* Emoji du haut */}
+              <motion.div
+                initial={{ scale: 0, rotate: -180 }}
+                animate={{ scale: 1, rotate: 0 }}
+                transition={{ delay: 0.5, type: "spring" }}
+                className="w-20 h-20 rounded-2xl bg-white/5 border border-white/20 flex items-center justify-center text-4xl"
+              >
+                {triangle[0]}
+              </motion.div>
+              {/* Deux emojis du bas */}
+              <div className="flex gap-8">
                 <motion.div
-                  key={i}
                   initial={{ scale: 0, rotate: -180 }}
                   animate={{ scale: 1, rotate: 0 }}
-                  transition={{ delay: 0.5 + i * 0.1, type: "spring" }}
+                  transition={{ delay: 0.6, type: "spring" }}
                   className="w-20 h-20 rounded-2xl bg-white/5 border border-white/20 flex items-center justify-center text-4xl"
                 >
-                  {emoji}
+                  {triangle[1]}
                 </motion.div>
-              ))}
+                <motion.div
+                  initial={{ scale: 0, rotate: -180 }}
+                  animate={{ scale: 1, rotate: 0 }}
+                  transition={{ delay: 0.7, type: "spring" }}
+                  className="w-20 h-20 rounded-2xl bg-white/5 border border-white/20 flex items-center justify-center text-4xl"
+                >
+                  {triangle[2]}
+                </motion.div>
+              </div>
             </div>
           </div>
 
@@ -172,7 +194,17 @@ export default function HomeSimple() {
             )}
           </AnimatePresence>
 
-          <div className="pt-4 border-t border-white/10">
+          <div className="pt-4 border-t border-white/10 space-y-3">
+            <button
+              onClick={() => {
+                const spirit = selectSpiritForTriangle(triangle)
+                setSelectedSpirit(spirit)
+                setShowSpiritModal(true)
+              }}
+              className="block w-full rounded-xl bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-white px-6 py-3 font-semibold text-center hover:shadow-lg transition-all"
+            >
+              🌟 Rencontrer l'esprit onirique de votre Onimoji
+            </button>
             <Link
               to="/tirage"
               className="block w-full rounded-xl glass border border-white/20 text-white px-6 py-3 font-semibold text-center hover:border-white/40 transition-all"
@@ -302,6 +334,17 @@ export default function HomeSimple() {
           Bon rituel {user.name} 🌙
         </motion.p>
       )}
+
+      {/* Spirit Modal */}
+      <AnimatePresence>
+        {showSpiritModal && selectedSpirit && (
+          <SpiritModal
+            spirit={selectedSpirit}
+            triangle={triangle}
+            onClose={() => setShowSpiritModal(false)}
+          />
+        )}
+      </AnimatePresence>
     </div>
   )
 }
