@@ -51,11 +51,16 @@ export function KdomojiProvider({ children }) {
   }
 
   const showKdomoji = (kdomoji) => {
-    // Ajouter à la queue s'il n'est pas déjà présent
-    const exists = notificationQueue.find(k => k.id === kdomoji.id)
-    if (!exists && (!currentNotification || currentNotification.id !== kdomoji.id)) {
-      setNotificationQueue([...notificationQueue, kdomoji])
-    }
+    // Ajouter à la queue s'il n'est pas déjà présent (functional setter pour éviter race conditions)
+    setNotificationQueue(prev => {
+      const exists = prev.find(k => k.id === kdomoji.id)
+      const isCurrentlyShown = currentNotification && currentNotification.id === kdomoji.id
+      
+      if (!exists && !isCurrentlyShown) {
+        return [...prev, kdomoji]
+      }
+      return prev
+    })
   }
 
   const value = {
