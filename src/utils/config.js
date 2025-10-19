@@ -28,7 +28,8 @@ export const SUBSCRIPTION_PLANS = [
 ]
 
 export const MAX_AI_SUGGESTIONS = 5
-export const APP_URL = 'https://haikumoji.vercel.app'
+// Allow overriding canonical app URL via Vite env var on Vercel
+export const APP_URL = import.meta?.env?.VITE_APP_URL || 'https://haikumoji.vercel.app'
 
 // Emoji catalog now loaded from JSON file
 // Import with: import { getAllEmojis } from './cosmojiLoader.js'
