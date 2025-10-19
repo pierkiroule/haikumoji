@@ -103,8 +103,8 @@ export default function TagCatcher({ emojis = defaultEmojis, width = 700, height
     setMsg('✨ Ton étoile est tissée !')
     setStarFormed(true)
 
-    const W = W
-    const H = H
+    const W = responsive ? rw : width
+    const H = responsive ? rh : height
     const cx = W / 2
     const cy = H / 2
     const R = 120
