@@ -1,6 +1,7 @@
 import { NavLink, Route, Routes } from 'react-router-dom'
 import Mission from './pages/Mission.jsx'
 import TagCatcherPage from './pages/TagCatcherPage.jsx'
+import TagCatcher from './components/TagCatcher.jsx'
 
 export default function App() {
   return (
@@ -61,6 +62,10 @@ function Accueil() {
       <p className="text-slate-400 max-w-2xl mx-auto">
         Une landing page simple avec un menu clair: Accueil, Donner, Recevoir, Profil.
       </p>
+
+      <div className="rounded-3xl glass-strong border border-white/20 p-4 grid place-items-center">
+        <TagCatcher />
+      </div>
     </section>
   )
 }
