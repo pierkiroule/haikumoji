@@ -1,5 +1,6 @@
 import { NavLink, Route, Routes } from 'react-router-dom'
 import Mission from './pages/Mission.jsx'
+import TagCatcherPage from './pages/TagCatcherPage.jsx'
 
 export default function App() {
   return (
@@ -12,6 +13,7 @@ export default function App() {
           <Route path="/donner" element={<Donner />} />
           <Route path="/recevoir" element={<Recevoir />} />
           <Route path="/profil" element={<Profil />} />
+          <Route path="/tagcatcher" element={<TagCatcherPage />} />
           <Route path="*" element={<Accueil />} />
         </Routes>
       </main>
@@ -34,6 +36,7 @@ function Navbar() {
           <NavLink to="/donner" className={({ isActive }) => `${linkBase} ${isActive ? active : idle}`}>Donner</NavLink>
           <NavLink to="/recevoir" className={({ isActive }) => `${linkBase} ${isActive ? active : idle}`}>Recevoir</NavLink>
           <NavLink to="/profil" className={({ isActive }) => `${linkBase} ${isActive ? active : idle}`}>Profil</NavLink>
+          <NavLink to="/tagcatcher" className={({ isActive }) => `${linkBase} ${isActive ? active : idle}`}>TagCatcher</NavLink>
         </div>
       </nav>
     </header>
